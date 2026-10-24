@@ -40,6 +40,17 @@ def _build_ragged(spec, info: EngineResourceInfo, manager_cls, **kwargs):
     return manager_cls(device=info.device, dtype=dtype, config=config, **kwargs)
 
 
+def _build_dense_or_flashinfer(spec, info: EngineResourceInfo, dense_cls, flashinfer_cls):
+    from mstar.engine.resources.attn.dense import _fa3_unavailable_reason
+    from mstar.engine.resources.attn.ragged.dense import _warn_ragged_dense_fallback
+
+    reason = _fa3_unavailable_reason()
+    if reason is None:
+        return _build_ragged(spec, info, dense_cls)
+    _warn_ragged_dense_fallback(reason, RaggedAttnBackend.FLASHINFER)
+    return _build_ragged(spec, info, flashinfer_cls)
+
+
 class RaggedAttnManager(AttentionResource):
     prefix_skip_safe = True
 
@@ -48,6 +59,15 @@ class RaggedAttnManager(AttentionResource):
     @classmethod
     def build(cls, spec: RaggedAttentionSpec, info: EngineResourceInfo):
         backend = resolve_ragged_attn_backend(spec.config.backend, info.device)
+        if backend is RaggedAttnBackend.DENSE:
+            from mstar.engine.resources.attn.ragged.dense import DenseRaggedManager
+            from mstar.engine.resources.attn.ragged.flashinfer import (
+                FlashInferRaggedManager,
+            )
+
+            return _build_dense_or_flashinfer(
+                spec, info, DenseRaggedManager, FlashInferRaggedManager,
+            )
         if backend is RaggedAttnBackend.FLASHINFER:
             # Deferred so naming the spec does not load FlashInfer, and because
             # `flashinfer` imports this class back.
@@ -68,6 +88,15 @@ class RaggedCrossAttnManager(AttentionResource):
     @classmethod
     def build(cls, spec: RaggedCrossAttentionSpec, info: EngineResourceInfo):
         backend = resolve_ragged_attn_backend(spec.config.backend, info.device)
+        if backend is RaggedAttnBackend.DENSE:
+            from mstar.engine.resources.attn.ragged.dense import DenseRaggedCrossManager
+            from mstar.engine.resources.attn.ragged.flashinfer import (
+                FlashInferRaggedCrossManager,
+            )
+
+            return _build_dense_or_flashinfer(
+                spec, info, DenseRaggedCrossManager, FlashInferRaggedCrossManager,
+            )
         if backend is RaggedAttnBackend.FLASHINFER:
             from mstar.engine.resources.attn.ragged.flashinfer import (
                 FlashInferRaggedCrossManager,
