@@ -1,0 +1,1531 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Serving &#8212; M* v0.2.1 Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=4418a689" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="_static/documentation_options.js?v=c480a563"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=ccdb6887"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'serving';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Metrics reference" href="metrics.html" />
+    <link rel="prev" title="Quickstart" href="quickstart.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.2.1" />
+    <meta name="docbuild:last-update" content="Oct 24, 2026"/>
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">M* v0.2.1 Documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Serving</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metrics.html">Metrics reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clients.html">Using a Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation and Benchmarks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Supported Models</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api.html">API Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.api_server.html">mstar.api_server</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.api_server.auth.html">mstar.api_server.auth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.api_server.media_io.html">mstar.api_server.media_io</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.api_server.openai.html">mstar.api_server.openai</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.api_server.openai.protocol.html">mstar.api_server.openai.protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.api_server.openai.realtime_vad.html">mstar.api_server.openai.realtime_vad</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.api_server.openai.serving_chat.html">mstar.api_server.openai.serving_chat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.api_server.openai.serving_images.html">mstar.api_server.openai.serving_images</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.api_server.openai.serving_realtime.html">mstar.api_server.openai.serving_realtime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.api_server.openai.serving_speech.html">mstar.api_server.openai.serving_speech</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.api_server.openai.serving_videos.html">mstar.api_server.openai.serving_videos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.api_server.openai.speech_chunking.html">mstar.api_server.openai.speech_chunking</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.api_server.request_types.html">mstar.api_server.request_types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.api_server.rust_frontend.html">mstar.api_server.rust_frontend</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.communication.html">mstar.communication</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.arena.html">mstar.communication.arena</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.codec.html">mstar.communication.codec</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.communicator.html">mstar.communication.communicator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.event.html">mstar.communication.event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.rust_communicator.html">mstar.communication.rust_communicator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.tensor_store.html">mstar.communication.tensor_store</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.tensor_uuid.html">mstar.communication.tensor_uuid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.tensors.html">mstar.communication.tensors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.wire.html">mstar.communication.wire</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.conductor.html">mstar.conductor</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.conductor.request_info.html">mstar.conductor.request_info</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.engine.html">mstar.engine</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.engine.accelerator_graph_backend.html">mstar.engine.accelerator_graph_backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.engine.accelerator_graph_config.html">mstar.engine.accelerator_graph_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.engine.accelerator_graph_runner.html">mstar.engine.accelerator_graph_runner</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.engine.resources.html">mstar.engine.resources</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.attn.html">mstar.engine.resources.attn</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.base.html">mstar.engine.resources.base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.kv.html">mstar.engine.resources.kv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.position.html">mstar.engine.resources.position</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.recurrent.html">mstar.engine.resources.recurrent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.rms_norm.html">mstar.engine.resources.rms_norm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.runner.html">mstar.engine.resources.runner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.sampler.html">mstar.engine.resources.sampler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.spec.html">mstar.engine.resources.spec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.step.html">mstar.engine.resources.step</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.engine.windowing.html">mstar.engine.windowing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.graph.html">mstar.graph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.graph.base.html">mstar.graph.base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.graph.graph_io.html">mstar.graph.graph_io</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.graph.loop_indices.html">mstar.graph.loop_indices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.graph.special_destinations.html">mstar.graph.special_destinations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.model.html">mstar.model</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.audio_watermark.html">mstar.model.audio_watermark</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.chatterbox.html">mstar.model.chatterbox</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.chatterbox.config.html">mstar.model.chatterbox.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.cosmos3.html">mstar.model.cosmos3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.cosmos3.components.html">mstar.model.cosmos3.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.cosmos3.config.html">mstar.model.cosmos3.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.cosmos3.constants.html">mstar.model.cosmos3.constants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.cosmos3.loader.html">mstar.model.cosmos3.loader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.cosmos3.sessions.html">mstar.model.cosmos3.sessions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.cosmos3.submodules.html">mstar.model.cosmos3.submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.cosmos3.tests.html">mstar.model.cosmos3.tests</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.flux2_klein.html">mstar.model.flux2_klein</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.flux2_klein.components.html">mstar.model.flux2_klein.components</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.higgs_audio.html">mstar.model.higgs_audio</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.higgs_audio.components.html">mstar.model.higgs_audio.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.higgs_audio.config.html">mstar.model.higgs_audio.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.kokoro.html">mstar.model.kokoro</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.kokoro.config.html">mstar.model.kokoro.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.kokoro.g2p.html">mstar.model.kokoro.g2p</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.kokoro.voices.html">mstar.model.kokoro.voices</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.lingbot_world.html">mstar.model.lingbot_world</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.lingbot_world.components.html">mstar.model.lingbot_world.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.lingbot_world.config.html">mstar.model.lingbot_world.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.ltx2_5.html">mstar.model.ltx2_5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.ltx2_5.components.html">mstar.model.ltx2_5.components</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.media_limits.html">mstar.model.media_limits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.multimodal.html">mstar.model.multimodal</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.nemotron_duplex.html">mstar.model.nemotron_duplex</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.nemotron_duplex.components.html">mstar.model.nemotron_duplex.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.nemotron_duplex.config.html">mstar.model.nemotron_duplex.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.nemotron_duplex.realtime_api.html">mstar.model.nemotron_duplex.realtime_api</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.nemotron_duplex.submodules.html">mstar.model.nemotron_duplex.submodules</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.omnilingual_asr.html">mstar.model.omnilingual_asr</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.omnilingual_asr.audio.html">mstar.model.omnilingual_asr.audio</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.omnilingual_asr.components.html">mstar.model.omnilingual_asr.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.omnilingual_asr.config.html">mstar.model.omnilingual_asr.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.omnilingual_asr.tokenizer.html">mstar.model.omnilingual_asr.tokenizer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.omnilingual_asr.weight_loader.html">mstar.model.omnilingual_asr.weight_loader</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.omnivoice.html">mstar.model.omnivoice</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.omnivoice.components.html">mstar.model.omnivoice.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.omnivoice.config.html">mstar.model.omnivoice.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.omnivoice.submodules.html">mstar.model.omnivoice.submodules</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.orpheus.html">mstar.model.orpheus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.orpheus.components.html">mstar.model.orpheus.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.orpheus.config.html">mstar.model.orpheus.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.pi05.html">mstar.model.pi05</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.pi05.components.html">mstar.model.pi05.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.pi05.config.html">mstar.model.pi05.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.pi05.kernels.html">mstar.model.pi05.kernels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.qwen3_5.html">mstar.model.qwen3_5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.qwen3_5.components.html">mstar.model.qwen3_5.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.qwen3_5.config.html">mstar.model.qwen3_5.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.qwen3_5.video.html">mstar.model.qwen3_5.video</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.submodule_base.html">mstar.model.submodule_base</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.vjepa2.html">mstar.model.vjepa2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.vjepa2.components.html">mstar.model.vjepa2.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.vjepa2.config.html">mstar.model.vjepa2.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.wan22.html">mstar.model.wan22</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.wan22.config.html">mstar.model.wan22.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.waypoint.html">mstar.model.waypoint</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.waypoint.checkpoint.html">mstar.model.waypoint.checkpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.waypoint.components.html">mstar.model.waypoint.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.waypoint.config.html">mstar.model.waypoint.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.waypoint.ring_geometry.html">mstar.model.waypoint.ring_geometry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.waypoint.submodules.html">mstar.model.waypoint.submodules</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.whisper.html">mstar.model.whisper</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.whisper.components.html">mstar.model.whisper.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.whisper.config.html">mstar.model.whisper.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.z_image.html">mstar.model.z_image</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.z_image.components.html">mstar.model.z_image.components</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.observability.html">mstar.observability</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.observability.catalog.html">mstar.observability.catalog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.observability.metrics.html">mstar.observability.metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.observability.recorders.html">mstar.observability.recorders</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.streaming.html">mstar.streaming</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.streaming.chunk_policy.html">mstar.streaming.chunk_policy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.streaming.stream_buffer.html">mstar.streaming.stream_buffer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.streaming.topology.html">mstar.streaming.topology</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.utils.html">mstar.utils</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.adarms_norm.html">mstar.utils.adarms_norm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.containers.html">mstar.utils.containers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.device.html">mstar.utils.device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.exitcode.html">mstar.utils.exitcode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.fast_tokenize.html">mstar.utils.fast_tokenize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.gc_freeze.html">mstar.utils.gc_freeze</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.generation_kwargs.html">mstar.utils.generation_kwargs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.h2d.html">mstar.utils.h2d</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.hf_snapshot.html">mstar.utils.hf_snapshot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.ipc_format.html">mstar.utils.ipc_format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.knobs.html">mstar.utils.knobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.logging_config.html">mstar.utils.logging_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.orphan.html">mstar.utils.orphan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.profiler.html">mstar.utils.profiler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.socket_prefix.html">mstar.utils.socket_prefix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.streams.html">mstar.utils.streams</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.worker.html">mstar.worker</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.batch_builder.html">mstar.worker.batch_builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.rid_table.html">mstar.worker.rid_table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.worker_metrics.html">mstar.worker.worker_metrics</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="environment_variables.html">Environment variables</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contributing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="adding_models.html">Adding a New Model</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/mstar-project/mstar" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mstar-project/mstar/blob/main/docs/serving.rst?plain=1" target="_blank"
+   class="btn btn-sm btn-source-file-button dropdown-item"
+   title="Show source"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="btn__text-container">Show source</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mstar-project/mstar/issues/new?title=Issue%20on%20page%20%2Fserving.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/serving.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Serving</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar-serve">mstar serve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">mstar-serve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#api-key">API key</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#config-files">Config files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-kwargs">model_kwargs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensor-transport">Tensor transport</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#request-profiling">Request profiling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics">Metrics</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="serving">
+<h1>Serving<a class="headerlink" href="#serving" title="Link to this heading">#</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">mstar</span></code> has two ways to start a server:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar</span> <span class="pre">serve</span> <span class="pre">&lt;model&gt;</span></code> — a one-command wrapper with sensible per-model defaults (most
+single-GPU; a few multi-GPU). Best for getting started and single-node runs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar-serve</span> <span class="pre">--config</span> <span class="pre">&lt;yaml&gt;</span></code> — the low-level entry point that takes an explicit
+config. Use it for custom layouts, disaggregation, and tensor parallelism.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">mstar</span> <span class="pre">serve</span></code> resolves a default config for the model, fills in the plumbing that
+<code class="docutils literal notranslate"><span class="pre">mstar-serve</span></code> needs (socket/upload dirs, a single-node-safe tensor protocol, the HF
+cache), and then delegates to it.</p>
+<section id="mstar-serve">
+<h2>mstar serve<a class="headerlink" href="#mstar-serve" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mstar<span class="w"> </span>serve<span class="w"> </span>&lt;model&gt;<span class="w"> </span><span class="o">[</span>options<span class="o">]</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;model&gt;</span></code> is one of <code class="docutils literal notranslate"><span class="pre">bagel</span></code>, <code class="docutils literal notranslate"><span class="pre">bagel_cfg_parallel</span></code>, <code class="docutils literal notranslate"><span class="pre">qwen3_omni</span></code>, <code class="docutils literal notranslate"><span class="pre">orpheus</span></code>,
+<code class="docutils literal notranslate"><span class="pre">pi05</span></code>, <code class="docutils literal notranslate"><span class="pre">vjepa2</span></code>, <code class="docutils literal notranslate"><span class="pre">vjepa2_ac</span></code> (or pass <code class="docutils literal notranslate"><span class="pre">--config</span></code> for any other deployment).</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 28.0%" />
+<col style="width: 24.0%" />
+<col style="width: 48.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--host</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code></p></td>
+<td><p>Bind address.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--port</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">8000</span></code></p></td>
+<td><p>HTTP port.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--api-key</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MSTAR_API_KEY</span></code>, else off</p></td>
+<td><p>Require <code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">Bearer</span> <span class="pre">&lt;key&gt;</span></code> on every route except <code class="docutils literal notranslate"><span class="pre">/health</span></code>
+and <code class="docutils literal notranslate"><span class="pre">/metrics</span></code> (see <a class="reference internal" href="#api-key"><span class="std std-ref">API key</span></a>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--gpus</span></code></p></td>
+<td><p>all visible</p></td>
+<td><p>Sets <code class="docutils literal notranslate"><span class="pre">CUDA_VISIBLE_DEVICES</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">0,1,2</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--config</span></code></p></td>
+<td><p>model default</p></td>
+<td><p>Override the resolved default config with a path to your own YAML.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--cache-dir</span></code></p></td>
+<td><p>HF default</p></td>
+<td><p>HuggingFace weight cache directory.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--tensor-comm-protocol</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SHM</span></code></p></td>
+<td><p>Tensor transport: <code class="docutils literal notranslate"><span class="pre">SHM</span></code> (safe single-node default), <code class="docutils literal notranslate"><span class="pre">TCP</span></code>, or <code class="docutils literal notranslate"><span class="pre">RDMA</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--socket-path-prefix</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/tmp/mstar_&lt;user&gt;_&lt;port&gt;/</span></code></p></td>
+<td><p>ZMQ IPC socket prefix; one per server, so servers on other ports do
+not share sockets.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--upload-dir</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/tmp/mstar_uploads_&lt;user&gt;/</span></code></p></td>
+<td><p>Temp directory for uploaded media.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--log-level</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">INFO</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">DEBUG</span></code> / <code class="docutils literal notranslate"><span class="pre">INFO</span></code> / <code class="docutils literal notranslate"><span class="pre">WARNING</span></code> / <code class="docutils literal notranslate"><span class="pre">ERROR</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--log-stats</span></code></p></td>
+<td><p>off</p></td>
+<td><p>Print a per-request profile when each request finishes (see
+<a class="reference internal" href="#request-profiling"><span class="std std-ref">Request profiling</span></a>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--log-stats-file</span></code></p></td>
+<td><p>stdout</p></td>
+<td><p>Append the per-request profiles to this file instead of stdout
+(implies <code class="docutils literal notranslate"><span class="pre">--log-stats</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--enable-metrics</span></code></p></td>
+<td><p>off</p></td>
+<td><p>Serve Prometheus metrics at <code class="docutils literal notranslate"><span class="pre">/metrics</span></code> (see <a class="reference internal" href="#serving-metrics"><span class="std std-ref">Metrics</span></a>).
+Needs <code class="docutils literal notranslate"><span class="pre">.[metrics]</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Each model maps to a default config (override with <code class="docutils literal notranslate"><span class="pre">--config</span></code>):</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 28.2%" />
+<col style="width: 56.4%" />
+<col style="width: 15.4%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Model</p></th>
+<th class="head"><p>Default config</p></th>
+<th class="head"><p>GPUs</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bagel</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">configs/bagel_single_gpu.yaml</span></code></p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bagel_cfg_parallel</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">configs/bagel_cfg_parallel.yaml</span></code></p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">orpheus</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">configs/orpheus_colocated.yaml</span></code></p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">qwen3_omni</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">configs/qwen3omni_2gpu.yaml</span></code></p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pi05</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">configs/pi05.yaml</span></code></p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">vjepa2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">configs/vjepa2.yaml</span></code></p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">vjepa2_ac</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">configs/vjepa2_ac.yaml</span></code></p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id1">
+<h2>mstar-serve<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mstar-serve<span class="w"> </span>--config<span class="w"> </span>configs/&lt;model&gt;.yaml<span class="w"> </span><span class="o">[</span>options<span class="o">]</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 28.0%" />
+<col style="width: 22.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--config</span></code> <em>(required)</em></p></td>
+<td><p>—</p></td>
+<td><p>Path to the YAML config.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--host</span></code> / <code class="docutils literal notranslate"><span class="pre">--port</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code> / <code class="docutils literal notranslate"><span class="pre">8000</span></code></p></td>
+<td><p>Bind address / HTTP port.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--api-key</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MSTAR_API_KEY</span></code>, else off</p></td>
+<td><p>Require <code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">Bearer</span> <span class="pre">&lt;key&gt;</span></code> on every route except <code class="docutils literal notranslate"><span class="pre">/health</span></code>
+and <code class="docutils literal notranslate"><span class="pre">/metrics</span></code> (see <a class="reference internal" href="#api-key"><span class="std std-ref">API key</span></a>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--tensor-comm-protocol</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RDMA</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RDMA</span></code>, <code class="docutils literal notranslate"><span class="pre">TCP</span></code>, or <code class="docutils literal notranslate"><span class="pre">SHM</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--cache-dir</span></code></p></td>
+<td><p>HF default</p></td>
+<td><p>HuggingFace weight cache directory.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--socket-path-prefix</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/tmp/mstar_&lt;user&gt;_&lt;port&gt;/</span></code></p></td>
+<td><p>ZMQ IPC socket prefix (shared with conductor/workers). The Dynamo
+worker (<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">mstar.integrations.dynamo</span></code>) has no HTTP port, so
+it defaults to a new directory per launch and removes it at exit.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--upload-dir</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/tmp/mstar_uploads</span></code></p></td>
+<td><p>Temp directory for uploaded media.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--timeout</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">600</span></code></p></td>
+<td><p>Per-request timeout (seconds).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--mooncake-port</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">8080</span></code></p></td>
+<td><p>Port for the Mooncake RDMA transfer engine.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--tcp-transfer-device</span></code></p></td>
+<td><p>(auto)</p></td>
+<td><p>Network device for TCP tensor transport.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--enable-nvtx</span></code></p></td>
+<td><p>off</p></td>
+<td><p>Emit NVTX markers for CUDA profiling. Disabled on XPU and CPU.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--log-stats</span></code></p></td>
+<td><p>off</p></td>
+<td><p>Print a per-request profile when each request finishes (see
+<a class="reference internal" href="#request-profiling"><span class="std std-ref">Request profiling</span></a>).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--log-stats-file</span></code></p></td>
+<td><p>stdout</p></td>
+<td><p>Append the per-request profiles to this file instead of stdout
+(implies <code class="docutils literal notranslate"><span class="pre">--log-stats</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--enable-metrics</span></code></p></td>
+<td><p>off</p></td>
+<td><p>Serve Prometheus metrics at <code class="docutils literal notranslate"><span class="pre">/metrics</span></code> (see <a class="reference internal" href="#serving-metrics"><span class="std std-ref">Metrics</span></a>).
+Needs <code class="docutils literal notranslate"><span class="pre">.[metrics]</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--log-level</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">INFO</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">DEBUG</span></code> / <code class="docutils literal notranslate"><span class="pre">INFO</span></code> / <code class="docutils literal notranslate"><span class="pre">WARNING</span></code> / <code class="docutils literal notranslate"><span class="pre">ERROR</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">mstar</span> <span class="pre">serve</span></code> defaults the tensor protocol to <code class="docutils literal notranslate"><span class="pre">SHM</span></code> (safe on a single node),
+whereas <code class="docutils literal notranslate"><span class="pre">mstar-serve</span></code> defaults to <code class="docutils literal notranslate"><span class="pre">RDMA</span></code>. On a single node without RDMA, pass
+<code class="docutils literal notranslate"><span class="pre">--tensor-comm-protocol</span> <span class="pre">SHM</span></code> to <code class="docutils literal notranslate"><span class="pre">mstar-serve</span></code>.</p>
+</div>
+</section>
+<section id="api-key">
+<span id="id2"></span><h2>API key<a class="headerlink" href="#api-key" title="Link to this heading">#</a></h2>
+<p>Both commands listen on all interfaces by default and accept requests from anyone who
+can reach the port. If no gateway in front of the server authenticates clients, set a
+key or bind <code class="docutils literal notranslate"><span class="pre">--host</span> <span class="pre">127.0.0.1</span></code>; the server logs a warning at startup while no key is
+set.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">MSTAR_API_KEY</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>openssl<span class="w"> </span>rand<span class="w"> </span>-hex<span class="w"> </span><span class="m">32</span><span class="k">)</span><span class="s2">"</span>
+mstar<span class="w"> </span>serve<span class="w"> </span>qwen3_omni<span class="w">            </span><span class="c1"># or: mstar-serve --config ... [--rust-frontend]</span>
+</pre></div>
+</div>
+<p>With a key set, every HTTP route except <code class="docutils literal notranslate"><span class="pre">/health</span></code> and <code class="docutils literal notranslate"><span class="pre">/metrics</span></code> (see
+<a class="reference internal" href="#serving-metrics"><span class="std std-ref">Metrics</span></a>) answers <code class="docutils literal notranslate"><span class="pre">401</span></code> unless the request carries
+<code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">Bearer</span> <span class="pre">&lt;key&gt;</span></code>, and WebSocket routes (<code class="docutils literal notranslate"><span class="pre">/v1/realtime</span></code>,
+<code class="docutils literal notranslate"><span class="pre">/generate/ws</span></code>) refuse the handshake without it. The check is one middleware over the
+whole app (FastAPI and the Rust frontend alike), and the comparison takes the same time
+however much of the key matches. CORS preflights still get their answer, since browsers
+send them without credentials. <code class="docutils literal notranslate"><span class="pre">--api-key</span></code> overrides the environment variable, but
+prefer the variable: a command-line flag is visible to every local user in the process
+list. An empty value turns the check off, so <code class="docutils literal notranslate"><span class="pre">--api-key</span> <span class="pre">&quot;&quot;</span></code> disables a key set in the
+environment, and so does a variable that expands to nothing (<code class="docutils literal notranslate"><span class="pre">--api-key</span> <span class="pre">&quot;$UNSET_VAR&quot;</span></code>).</p>
+<p>Clients send the key as their API key: <code class="docutils literal notranslate"><span class="pre">MStarClient(base_url,</span> <span class="pre">api_key=...)</span></code> (it reads
+<code class="docutils literal notranslate"><span class="pre">MSTAR_API_KEY</span></code> when not given one) or <code class="docutils literal notranslate"><span class="pre">OpenAI(base_url=...,</span> <span class="pre">api_key=...)</span></code>; see
+<a class="reference internal" href="clients.html"><span class="doc">Using a Server</span></a>. The standalone Nemotron realtime server
+(<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">mstar.model.nemotron_duplex.realtime_api</span></code>) takes the same flag and
+variable.</p>
+<p>Under NVIDIA Dynamo, Dynamo’s own frontend serves HTTP and does not forward
+<code class="docutils literal notranslate"><span class="pre">Authorization</span></code> to backends, so the M* worker cannot check a key there: authenticate at
+Dynamo’s frontend or a gateway in front of it.</p>
+</section>
+<section id="config-files">
+<h2>Config files<a class="headerlink" href="#config-files" title="Link to this heading">#</a></h2>
+<p>A config maps the model’s computation-graph nodes to physical GPU ranks. The keys:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 80.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">model</span></code></p></td>
+<td><p>Registry key of the model (see <a class="reference internal" href="models.html"><span class="doc">Supported Models</span></a>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">max_seq_len</span></code></p></td>
+<td><p>Maximum sequence length (sizes the KV cache).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">node_groups</span></code></p></td>
+<td><p>List of placements. Each entry assigns <code class="docutils literal notranslate"><span class="pre">node_names</span></code> to <code class="docutils literal notranslate"><span class="pre">ranks</span></code>, optionally
+scoped to specific <code class="docutils literal notranslate"><span class="pre">graph_walks</span></code> and/or sharded with <code class="docutils literal notranslate"><span class="pre">tp_size</span></code>. Each node of a
+walk must be placed by exactly one entry for that walk.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">resources</span></code></p></td>
+<td><p><em>(optional)</em> Per-resource overrides, keyed by the model’s resource names (see
+below).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">max_concurrent_requests</span></code></p></td>
+<td><p><em>(optional)</em> How many requests run at once. Requests past the cap wait in the
+conductor’s queue.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">gpu_memory_fraction</span></code></p></td>
+<td><p><em>(optional)</em> The share of its GPU each worker may hold once CUDA-graph capture is
+done, for workers that share a GPU (see below). Unset, capture plans against
+whatever is free.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">model_kwargs</span></code></p></td>
+<td><p><em>(optional)</em> Server-init model parameters (see below).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">speculation_mixes_walks</span></code></p></td>
+<td><p><em>(optional)</em> Per node, <code class="docutils literal notranslate"><span class="pre">true</span></code>/<code class="docutils literal notranslate"><span class="pre">false</span></code> for every walk of the node’s combined
+walks, or a mapping of walk -&gt; <code class="docutils literal notranslate"><span class="pre">true</span></code>/<code class="docutils literal notranslate"><span class="pre">false</span></code>. On for a walk, a speculation
+chain on it merges ready rows of the other walks of its combined walk, so
+decode steps take in new prompts as they arrive. Off (the default), a chain
+keeps to its own walk and yields to the others, and a step mixes walks only
+when the scheduler builds one fresh. Naming a node with no combined walk, or a
+walk outside its combined walks, fails loading.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">warmup_requests</span></code></p></td>
+<td><p><em>(optional)</em> Requests the server runs after the workers are ready and before it
+binds, so no client pays a shape’s first-request cost (torch.compile of a step,
+a cold cache). Each entry is a <code class="docutils literal notranslate"><span class="pre">/generate</span></code> request in yaml form: <code class="docutils literal notranslate"><span class="pre">text</span></code>,
+<code class="docutils literal notranslate"><span class="pre">output_modalities</span></code>, <code class="docutils literal notranslate"><span class="pre">model_kwargs</span></code>, and <code class="docutils literal notranslate"><span class="pre">files</span></code>, a list of media
+inputs in prompt order (text follows them). A file is a path or
+<code class="docutils literal notranslate"><span class="pre">hf://&lt;owner&gt;/&lt;repo&gt;/&lt;path&gt;</span></code> (a file in a model’s HF repo); its modality
+comes from the extension, or give <code class="docutils literal notranslate"><span class="pre">{path:</span> <span class="pre">...,</span> <span class="pre">modality:</span> <span class="pre">...}</span></code>.
+<code class="docutils literal notranslate"><span class="pre">repeat:</span> <span class="pre">N</span></code> sends <code class="docutils literal notranslate"><span class="pre">text</span></code> N times over, a long prompt for a path only
+long prompts take (a long-context prefill). A malformed or failing warmup
+is logged and skipped.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dist_timeout_s</span></code></p></td>
+<td><p><em>(optional)</em> Timeout in seconds for the NCCL world group and its parallel
+subgroups during weight load and warmup; serving keeps PyTorch’s default.
+Unset keeps PyTorch’s default throughout. Raise it only where weight load,
+JIT or CUDA-graph capture can exceed that default.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tp_allreduce</span></code></p></td>
+<td><p><em>(optional)</em> Small-message all-reduce path of every TP and SP group:
+<code class="docutils literal notranslate"><span class="pre">nccl</span></code> (default), <code class="docutils literal notranslate"><span class="pre">symm_oneshot</span></code> or <code class="docutils literal notranslate"><span class="pre">symm_multimem</span></code>; any other value
+fails at startup. The last two send
+contiguous bf16 and fp32 CUDA messages up to <code class="docutils literal notranslate"><span class="pre">tp_allreduce_max_kb</span></code> through
+torch symmetric memory: one-shot reads every peer’s buffer over NVLink and
+reduces locally, multimem uses NVLS multicast (NVSwitch and driver support).
+Larger messages stay on NCCL, and so does one-shot inside a
+<code class="docutils literal notranslate"><span class="pre">torch.compile</span></code>’d forward. Both are CUDA-graph capturable. Reduction order
+differs from NCCL’s, so bf16 results can differ at the last bit. Falls back
+to NCCL, with a warning, where symmetric memory cannot be set up on every
+rank of the group.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tp_allreduce_max_kb</span></code></p></td>
+<td><p><em>(optional)</em> Largest message, in KiB, the symmetric-memory path takes;
+larger ones go to NCCL. It is also the size of the buffer each group
+rendezvouses. Default 512.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tp_async_sched</span></code></p></td>
+<td><p><em>(optional)</em> Async scheduling for the parallel nodes: <code class="docutils literal notranslate"><span class="pre">true</span></code>, <code class="docutils literal notranslate"><span class="pre">false</span></code>
+(default) or a list of node names (see <code class="docutils literal notranslate"><span class="pre">MSTAR_TP_ASYNC_SCHED</span></code>, which
+overrides it).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Node names are model-specific — they are the node names appearing in the model’s graph
+walks (e.g. BAGEL’s <code class="docutils literal notranslate"><span class="pre">vit_encoder</span></code> / <code class="docutils literal notranslate"><span class="pre">vae_encoder</span></code> / <code class="docutils literal notranslate"><span class="pre">LLM</span></code>, Orpheus’s <code class="docutils literal notranslate"><span class="pre">LLM</span></code> /
+<code class="docutils literal notranslate"><span class="pre">snac_decoder</span></code>).</p>
+<p><strong>Resource overrides.</strong> A model declares the KV caches, attention backends, positions and
+samplers that its nodes need. Each declaration has a <code class="docutils literal notranslate"><span class="pre">resource_key</span></code>. A deployment tunes
+them by that name:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">resources</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">kv_cache</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">max_num_pages</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1024</span><span class="w">      </span><span class="c1"># also: page_size, max_seq_len, cpu_offload_pages,</span>
+<span class="w">                             </span><span class="c1"># prefix_cache, prefix_cache_salt, prefix_cache_tp</span>
+<span class="w">  </span><span class="nt">talker_attn</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">flashinfer_backend</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fa2</span><span class="w">  </span><span class="c1"># also: backend (flashinfer / dense)</span>
+<span class="w">  </span><span class="nt">vit_attn</span><span class="p">:</span><span class="w">                  </span><span class="c1"># a cacheless (ragged) attention resource</span>
+<span class="w">    </span><span class="nt">max_segments_per_request</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w">  </span><span class="c1"># also: max_tokens_per_request, flashinfer_backend</span>
+</pre></div>
+</div>
+<p>Use one block per resource. A model with two caches, such as Whisper’s decoder cache and
+its encoder context, can therefore size each one separately. If a block names a resource
+that the model does not declare, or sets a key that the resource does not accept, loading
+fails. A misspelled setting is never silently ignored. A top-level <code class="docutils literal notranslate"><span class="pre">kv_cache:</span></code> block is
+no longer read. It raises an error with a message describing the migration.</p>
+<p><code class="docutils literal notranslate"><span class="pre">prefix_cache:</span> <span class="pre">false</span></code> turns cross-request prefix reuse off for that cache, and
+<code class="docutils literal notranslate"><span class="pre">prefix_cache_salt</span></code> keeps two otherwise identical deployments off each other’s
+cached pages. A single request opts out by sending <code class="docutils literal notranslate"><span class="pre">prefix_cache=False</span></code>, which
+travels with its other <code class="docutils literal notranslate"><span class="pre">model_kwargs</span></code>. Above one rank the cache stays off unless
+<code class="docutils literal notranslate"><span class="pre">prefix_cache_tp:</span> <span class="pre">true</span></code> is set as well: rank 0 then decides each hit and the other
+ranks adopt it. <code class="docutils literal notranslate"><span class="pre">prefix_cache_tp</span></code> can’t be combined with <code class="docutils literal notranslate"><span class="pre">cpu_offload_pages</span></code>, and the
+cache’s nodes must run on one TP group, with no replicas and no walks placed on other
+ranks. Loading fails otherwise.</p>
+<p>A cached prompt no longer reserves its pages, so the pool no longer limits how many
+requests are admitted. It has to hold the decode of every request allowed to run at once,
+and a decode step that finds no free page holds its requests until they time out.
+<code class="docutils literal notranslate"><span class="pre">max_concurrent_requests</span></code> prevents that. It caps how many requests run at once, and the
+pool’s pages divided by the pages one request needs, prompt and output together, is a
+safe value. <code class="docutils literal notranslate"><span class="pre">cpu_offload_pages</span></code> lets a full pool move a request to the host. An offload
+frees only the device pages no other running request reads, though, so a request that
+shares most of its prompt frees little. Offload helps a pool that runs short now and then.
+It doesn’t replace the cap.</p>
+<p><strong>Single GPU.</strong> Everything on rank 0:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">"bagel"</span>
+<span class="nt">max_seq_len</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">32768</span>
+<span class="nt">node_groups</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">node_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">vit_encoder</span><span class="p p-Indicator">],</span><span class="nt"> ranks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">]}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">node_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">vae_encoder</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">vae_decoder</span><span class="p p-Indicator">],</span><span class="nt"> ranks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">]}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">node_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">LLM</span><span class="p p-Indicator">],</span><span class="nt"> ranks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">]}</span>
+</pre></div>
+</div>
+<p><strong>Several workers on one GPU.</strong> A worker is one process per rank, and by default rank
+<code class="docutils literal notranslate"><span class="pre">n</span></code> runs on device <code class="docutils literal notranslate"><span class="pre">n</span></code>. <code class="docutils literal notranslate"><span class="pre">rank_devices</span></code> maps ranks onto devices explicitly, so two
+node groups can run as separate workers on the same GPU: a heavy autoregressive node then
+never waits for a light node’s steps on its worker loop (a TTS talker and its codec):</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">node_groups</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">node_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Talker</span><span class="p p-Indicator">],</span><span class="nt"> ranks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">]}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">node_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Codec</span><span class="p p-Indicator">],</span><span class="nt"> ranks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1</span><span class="p p-Indicator">]}</span>
+<span class="nt">rank_devices</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">1</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">}</span>
+</pre></div>
+</div>
+<p>At start-up a worker sizes every CUDA-graph bucket of its nodes with a capture it throws
+away, then captures the cheapest buckets across all of them while its largest eager step
+still fits beside them; a bucket left out runs eagerly. Workers sharing a GPU see each
+other’s memory only as used, so the first to capture can take the other’s room. Set
+<code class="docutils literal notranslate"><span class="pre">gpu_memory_fraction</span></code> (<code class="docutils literal notranslate"><span class="pre">0.45</span></code> for two workers, say) to bound what each plans for. It
+counts PyTorch allocations, not the CUDA context or NCCL buffers, so leave room for those.</p>
+<p><strong>Disaggregation.</strong> The same node can live on different GPUs <em>per graph walk</em> — e.g.
+prefill, decode, and image generation on three GPUs:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">node_groups</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">node_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">LLM</span><span class="p p-Indicator">],</span><span class="nt"> ranks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">],</span><span class="nt"> graph_walks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">prefill_text</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">prefill_vit</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">prefill_vae</span><span class="p p-Indicator">]}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">node_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">LLM</span><span class="p p-Indicator">],</span><span class="nt"> ranks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1</span><span class="p p-Indicator">],</span><span class="nt"> graph_walks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">decode</span><span class="p p-Indicator">]}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">node_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">LLM</span><span class="p p-Indicator">],</span><span class="nt"> ranks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">2</span><span class="p p-Indicator">],</span><span class="nt"> graph_walks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">image_gen</span><span class="p p-Indicator">]}</span>
+</pre></div>
+</div>
+<p>Because placement is config-only, the <em>same</em> model code runs single-GPU or fully
+disaggregated. <code class="docutils literal notranslate"><span class="pre">configs/</span></code> ships several layouts per model (<code class="docutils literal notranslate"><span class="pre">*_single_gpu</span></code>,
+<code class="docutils literal notranslate"><span class="pre">*_colocated</span></code>, <code class="docutils literal notranslate"><span class="pre">*_pd_disaggregated</span></code>, <code class="docutils literal notranslate"><span class="pre">*_cfg_parallel</span></code>, …).</p>
+<p><strong>Tensor parallelism.</strong> Shard a node across GPUs with <code class="docutils literal notranslate"><span class="pre">tp_size</span></code> and that many <code class="docutils literal notranslate"><span class="pre">ranks</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">"orpheus"</span>
+<span class="nt">max_seq_len</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">131072</span>
+<span class="nt">node_groups</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">node_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">LLM</span><span class="p p-Indicator">],</span><span class="nt"> ranks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">],</span><span class="nt"> tp_size</span><span class="p">:</span><span class="w"> </span><span class="nv">2</span><span class="p p-Indicator">,</span><span class="nt"> graph_walks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">prefill</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">decode</span><span class="p p-Indicator">]}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">node_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">snac_decoder</span><span class="p p-Indicator">],</span><span class="nt"> ranks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">],</span><span class="nt"> graph_walks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">snac_chunk</span><span class="p p-Indicator">]}</span>
+</pre></div>
+</div>
+<p>A node must be declared TP-enabled by the model to be eligible for <code class="docutils literal notranslate"><span class="pre">tp_size</span> <span class="pre">&gt;</span> <span class="pre">1</span></code>; the
+weight loaders then shard parameters automatically, with no model-code changes. See
+<a class="reference internal" href="adding_models.html#tensor-parallelism"><span class="std std-ref">Tensor parallelism</span></a> in the model guide for the model-side
+details.</p>
+</section>
+<section id="model-kwargs">
+<h2>model_kwargs<a class="headerlink" href="#model-kwargs" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">model_kwargs</span></code> are model parameters fixed at server start (not per request) — they are
+baked into the model’s config dataclass and into CUDA-graph captures. For example, the
+Pi0.5 DROID variant fixes the action horizon:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">"pi05"</span>
+<span class="nt">max_seq_len</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2048</span>
+<span class="nt">model_kwargs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">action_horizon</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15</span>
+<span class="nt">node_groups</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">node_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">vit_encoder</span><span class="p p-Indicator">],</span><span class="nt"> ranks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">]}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">node_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">LLM</span><span class="p p-Indicator">],</span><span class="nt"> ranks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">]}</span>
+</pre></div>
+</div>
+<p>Per-request knobs (<code class="docutils literal notranslate"><span class="pre">temperature</span></code>, <code class="docutils literal notranslate"><span class="pre">voice</span></code>, <code class="docutils literal notranslate"><span class="pre">max_output_tokens</span></code>, …) are sent by the
+client instead — see <a class="reference internal" href="clients.html"><span class="doc">Using a Server</span></a>.</p>
+</section>
+<section id="tensor-transport">
+<span id="id3"></span><h2>Tensor transport<a class="headerlink" href="#tensor-transport" title="Link to this heading">#</a></h2>
+<p>Workers route tensors directly to one another using one of three transports, selected with
+<code class="docutils literal notranslate"><span class="pre">--tensor-comm-protocol</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">SHM</span></code> — shared memory; the safe default for single-node deployments.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TCP</span></code> — works anywhere; used for some multi-node setups.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RDMA</span></code> — lowest latency for multi-GPU / multi-node, via the Mooncake transfer engine
+(requires RDMA-capable networking).</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">TCP</span></code> and <code class="docutils literal notranslate"><span class="pre">RDMA</span></code> run Mooncake’s transfer engine, which does not authenticate its peers.
+Each worker’s engine picks its handshake and data ports at startup, so restrict by host: only
+the deployment’s own hosts should reach the workers. The model extras require
+<code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine</span></code> 0.3.13.post1
+or newer: earlier than 0.3.12.post1, any host that reaches the TCP data port can read or
+write the worker’s memory (CVE-2026-103764), and a worker warns at startup if it finds such a
+version. Two denial-of-service issues on the handshake port (CVE-2026-103760 and
+CVE-2026-103761) are still open in 0.3.13.post1.</p>
+</section>
+<section id="request-profiling">
+<span id="id4"></span><h2>Request profiling<a class="headerlink" href="#request-profiling" title="Link to this heading">#</a></h2>
+<p>Pass <code class="docutils literal notranslate"><span class="pre">--log-stats</span></code> (to either <code class="docutils literal notranslate"><span class="pre">mstar</span> <span class="pre">serve</span></code> or <code class="docutils literal notranslate"><span class="pre">mstar-serve</span></code>) to print a per-request
+profile when each request finishes. Add <code class="docutils literal notranslate"><span class="pre">--log-stats-file</span> <span class="pre">&lt;path&gt;</span></code> to append the profiles
+to a file instead of stdout (it implies <code class="docutils literal notranslate"><span class="pre">--log-stats</span></code>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mstar<span class="w"> </span>serve<span class="w"> </span>bagel<span class="w"> </span>--log-stats
+mstar-serve<span class="w"> </span>--config<span class="w"> </span>configs/orpheus_colocated.yaml<span class="w"> </span>--log-stats-file<span class="w"> </span>stats.txt
+</pre></div>
+</div>
+<p>The report has four sections (any that has no data is omitted):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>============================================================
+ Request profile: 3f9c1e2a-…
+============================================================
+ Inputs:
+   text         x1           72 B
+   image        x1        1.1 MiB
+ Outputs:
+   image        x1        1.1 MiB
+------------------------------------------------------------
+ Timeline:
+   recv → preprocess done                       62.6 ms
+   preprocess done → conductor ingest            2.3 ms
+   conductor ingest → first chunk              133.7 ms
+   first chunk → last chunk                    683.3 ms
+   last chunk → conductor done                   1.5 ms
+   conductor done → finish                       3.1 ms
+   total                                       886.5 ms
+------------------------------------------------------------
+ Graph timings (CPU, ms) — total over request (avg per exec):
+                                 all                 fwd                 pre               post*
+   LLM
+     decode     n=588      3277.9 (   5.57)    2858.0 (   4.86)     243.0 (   0.41)     176.9 (   0.30)
+     prefill    n=1          8.78 (   8.78)      4.24 (   4.24)      3.47 (   3.47)      1.06 (   1.06)
+   * post overlaps the next step / another in-flight batch under
+     speculative scheduling, so it is not necessarily additive.
+------------------------------------------------------------
+ Tensor transfer   size / transport-time / count:
+   rx (received over the wire), by source → dest:
+     worker_0 → worker_1
+       hidden                  106.7 MiB      78.7 ms  (x49)
+   tx (registered/written for send), by source:
+     worker_0
+       hidden                  106.7 MiB       0.90 ms  (x49)
+============================================================
+</pre></div>
+</div>
+<p><strong>Inputs / Outputs</strong> — per-modality count and byte size. Inputs are the <em>raw</em>
+client-supplied bytes (uploaded file sizes on disk, UTF-8 length of the prompt), not the
+much larger decoded tensors, so they line up with what was sent over the wire.</p>
+<p><strong>Timeline</strong> — wall-clock stage boundaries for the request as it flows
+<code class="docutils literal notranslate"><span class="pre">api</span> <span class="pre">server</span> <span class="pre">→</span> <span class="pre">conductor</span> <span class="pre">→</span> <span class="pre">workers</span> <span class="pre">→</span> <span class="pre">api</span> <span class="pre">server</span></code>. Stages are ordered by their actual
+timestamp, so a stage is never negative even when two checkpoints race (e.g. the API
+server’s <code class="docutils literal notranslate"><span class="pre">last</span> <span class="pre">chunk</span></code> and the conductor’s <code class="docutils literal notranslate"><span class="pre">done</span></code> can arrive in either order). All
+timestamps are <code class="docutils literal notranslate"><span class="pre">time.perf_counter()</span></code>; they are comparable across the api-server,
+conductor, and worker processes because those run on the <strong>same host</strong> (<code class="docutils literal notranslate"><span class="pre">perf_counter</span></code> is
+<code class="docutils literal notranslate"><span class="pre">CLOCK_MONOTONIC</span></code>, which is boot-relative and shared).
+This implementation will be updated when multi-node support is added.</p>
+<p><strong>Graph timings</strong> — CPU time per <code class="docutils literal notranslate"><span class="pre">(node,</span> <span class="pre">graph_walk)</span></code>, accumulated over the request.
+Each cell shows the <strong>total over the request</strong> and, in parentheses, the <strong>average per
+execution</strong> (<code class="docutils literal notranslate"><span class="pre">n</span></code> is the execution count, so e.g. one entry covers all <code class="docutils literal notranslate"><span class="pre">588</span></code> decode
+steps). The columns:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">all</span></code> — the full node execution (= <code class="docutils literal notranslate"><span class="pre">pre</span></code> + <code class="docutils literal notranslate"><span class="pre">fwd</span></code> + <code class="docutils literal notranslate"><span class="pre">post</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fwd</span></code> — the GPU forward region. Because execution is asynchronous and <em>not</em> synced
+(a sync would serialize the pipeline), this measures the CPU launch/enqueue span of the
+whole batch, not per-request GPU time.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pre</span></code> — input preparation / preprocessing before the launch.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">post</span></code> — CPU postprocess after the forward. Marked <code class="docutils literal notranslate"><span class="pre">post*</span></code> because under
+speculative scheduling it can overlap the next step’s forward or another in-flight
+batch, so it is <strong>not necessarily additive</strong>.</p></li>
+</ul>
+<p><strong>Tensor transfer</strong> — bytes moved between entities via the tensor transport
+(<a class="reference internal" href="#tensor-transport"><span class="std std-ref">above</span></a>). <code class="docutils literal notranslate"><span class="pre">rx</span></code> (received) is grouped by <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">→</span> <span class="pre">dest</span></code>; <code class="docutils literal notranslate"><span class="pre">tx</span></code>
+(sent) is grouped by source only — the sender registers/writes data without knowing a
+priori which worker will read it (and may register data that is never sent), so there is no
+per-destination breakdown. <code class="docutils literal notranslate"><span class="pre">size</span></code> is total bytes, the time is transport cost (the
+RDMA-read or SHM file-read time on <code class="docutils literal notranslate"><span class="pre">rx</span></code>; the registration / serialize-and-write time on
+<code class="docutils literal notranslate"><span class="pre">tx</span></code>), and <code class="docutils literal notranslate"><span class="pre">count</span></code> is the number of tensors.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Profiling is gated end-to-end on <code class="docutils literal notranslate"><span class="pre">--log-stats</span></code>: when it is off, the workers,
+conductor, and data worker skip the timing/transfer bookkeeping entirely.</p>
+</div>
+</section>
+<section id="metrics">
+<span id="serving-metrics"></span><h2>Metrics<a class="headerlink" href="#metrics" title="Link to this heading">#</a></h2>
+<p>Pass <code class="docutils literal notranslate"><span class="pre">--enable-metrics</span></code> (to either <code class="docutils literal notranslate"><span class="pre">mstar</span> <span class="pre">serve</span></code> or <code class="docutils literal notranslate"><span class="pre">mstar-serve</span></code>) to serve
+Prometheus metrics at <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/metrics</span></code>. It needs the <code class="docutils literal notranslate"><span class="pre">metrics</span></code> extra
+(<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">'mstar[metrics]'</span></code>); without it the server stops at startup with that
+hint. Off by default, and <code class="docutils literal notranslate"><span class="pre">/metrics</span></code> answers 404 then. Like <code class="docutils literal notranslate"><span class="pre">/health</span></code>, it needs no
+API key even when one is set, the usual convention for scrape endpoints. It exposes
+request counts, latencies and the model name (never prompts or outputs); if that
+matters for a deployment, keep the port on an internal network. With
+<code class="docutils literal notranslate"><span class="pre">--rust-frontend</span></code>, <code class="docutils literal notranslate"><span class="pre">mstar-server</span></code> serves the same text: it asks the API server for
+it over the bridge, so both frontends show the same names, and it answers <code class="docutils literal notranslate"><span class="pre">503</span></code> if the
+bridge does not reply within two seconds, as <code class="docutils literal notranslate"><span class="pre">/health</span></code> does.</p>
+<p><a class="reference internal" href="metrics.html"><span class="doc">Metrics reference</span></a> documents every family in one place, with a Prometheus and Grafana setup.</p>
+<p>Requests are counted when they leave the API server, from the first request after the
+warmup requests. Every family has a <code class="docutils literal notranslate"><span class="pre">model_name</span></code> label (the config’s <code class="docutils literal notranslate"><span class="pre">model</span></code>);
+<code class="docutils literal notranslate"><span class="pre">output_modalities</span></code> is the request’s output modalities, sorted and comma-joined
+(e.g. <code class="docutils literal notranslate"><span class="pre">audio,text</span></code>).</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar_requests_total{model_name,</span> <span class="pre">output_modalities,</span> <span class="pre">outcome}</span></code>: counter.
+<code class="docutils literal notranslate"><span class="pre">outcome</span></code> is <code class="docutils literal notranslate"><span class="pre">success</span></code> (the result went to the HTTP layer), <code class="docutils literal notranslate"><span class="pre">error</span></code> (the
+request failed in the engine, preprocessing or result delivery), <code class="docutils literal notranslate"><span class="pre">abort</span></code> (the client
+went away, or its finished result was dropped unread) or <code class="docutils literal notranslate"><span class="pre">timeout</span></code> (<code class="docutils literal notranslate"><span class="pre">--timeout</span></code>
+expired). Requests refused before they were submitted (a 400 for a bad form, a 409
+for a <code class="docutils literal notranslate"><span class="pre">request_id</span></code> in flight) are not counted here but in
+<code class="docutils literal notranslate"><span class="pre">mstar_http_refusals_total</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar_requests_in_flight{model_name}</span></code>: gauge, requests the API server holds
+(submitted and not yet returned, failed or aborted).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar_e2e_request_latency_seconds{model_name,</span> <span class="pre">output_modalities}</span></code>: histogram over
+successful requests, from submission (after the request body was read) to the result
+leaving the API server.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar_time_to_first_output_seconds{model_name,</span> <span class="pre">output_modalities}</span></code>: histogram over
+successful requests, from submission to the first result chunk of any modality
+reaching the API server. It is measured on the server, so it does not include the
+network to the client, and a non-streaming client sees nothing until the end.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar_http_refusals_total{model_name,</span> <span class="pre">route,</span> <span class="pre">status}</span></code>: counter, HTTP requests the
+frontend answered with a 4xx status without submitting them to the API server: <code class="docutils literal notranslate"><span class="pre">401</span></code>
+(missing or wrong API key), <code class="docutils literal notranslate"><span class="pre">413</span></code> (body over <code class="docutils literal notranslate"><span class="pre">MSTAR_MAX_BODY_MB</span></code>), <code class="docutils literal notranslate"><span class="pre">422</span></code> (body
+that fails validation), <code class="docutils literal notranslate"><span class="pre">400</span></code> (a bad form field or request), <code class="docutils literal notranslate"><span class="pre">409</span></code> (a
+<code class="docutils literal notranslate"><span class="pre">request_id</span></code> in flight), <code class="docutils literal notranslate"><span class="pre">404</span></code> (unknown route, or a model without the endpoint),
+<code class="docutils literal notranslate"><span class="pre">405</span></code> (wrong method), plus <code class="docutils literal notranslate"><span class="pre">503</span></code> when the Rust frontend’s
+<code class="docutils literal notranslate"><span class="pre">MSTAR_MAX_CONCURRENT_REQUESTS</span></code> cap turns a request away. <code class="docutils literal notranslate"><span class="pre">route</span></code> is the route’s
+path as declared (<code class="docutils literal notranslate"><span class="pre">/v1/chat/completions</span></code>), <code class="docutils literal notranslate"><span class="pre">unmatched</span></code> when no route matches.
+A request that was submitted and then failed counts once, as an <code class="docutils literal notranslate"><span class="pre">error</span></code> in
+<code class="docutils literal notranslate"><span class="pre">mstar_requests_total</span></code>, never here. WebSocket handshakes are not counted. With
+<code class="docutils literal notranslate"><span class="pre">--rust-frontend</span></code>, <code class="docutils literal notranslate"><span class="pre">mstar-server</span></code> keeps these counts and sends them with each
+<code class="docutils literal notranslate"><span class="pre">/metrics</span></code> request, so the API server exports them under the same name.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar_request_queue_seconds{model_name,</span> <span class="pre">output_modalities}</span></code>: histogram over
+successful requests, from the conductor taking the request in to admitting it for
+dispatch. Zero unless the request queued at <code class="docutils literal notranslate"><span class="pre">max_concurrent_requests</span></code>.</p></li>
+</ul>
+<p>While metrics are on, the conductor sends the API server a status message every second
+(nothing when they are off). These gauges show its latest one, so they can be up to a
+second old:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar_conductor_requests{model_name,</span> <span class="pre">state}</span></code>: requests the conductor holds.
+<code class="docutils literal notranslate"><span class="pre">state</span></code> is <code class="docutils literal notranslate"><span class="pre">waiting</span></code> (queued at <code class="docutils literal notranslate"><span class="pre">max_concurrent_requests</span></code>, not dispatched yet),
+<code class="docutils literal notranslate"><span class="pre">running</span></code> (dispatched to workers, not finished) or <code class="docutils literal notranslate"><span class="pre">draining</span></code> (completed, aborted
+or failed, and waiting for every reader to release its outputs before the workers free
+its state; it still counts toward <code class="docutils literal notranslate"><span class="pre">max_concurrent_requests</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar_component_in_flight{model_name,</span> <span class="pre">component}</span></code>: per graph node (the
+<code class="docutils literal notranslate"><span class="pre">node_names</span></code> of the config’s <code class="docutils literal notranslate"><span class="pre">node_groups</span></code>), running requests with a pass on that
+node that the conductor dispatched and has not heard back from. The conductor sees
+whole passes, so a node running a request’s decode loop counts it once for the loop.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar_conductor_status_age_seconds{model_name}</span></code>: seconds since the API server
+received the last status message, or since metrics were enabled before the first one.
+More than a few seconds means the conductor stopped reporting.</p></li>
+</ul>
+<p>The engine workers also send the conductor their own metrics every second, which it
+adds to its status message, so these can be up to two seconds old. <code class="docutils literal notranslate"><span class="pre">component</span></code> is the
+graph node; a node with replicas on several workers shows their sum, and the ranks of a
+tensor or sequence parallel instance count once (the instance’s first rank reports).
+The histograms and counters count from the first request after the warmup requests, as
+the API server’s do (the gauges show the current state), so read them with <code class="docutils literal notranslate"><span class="pre">rate()</span></code>
+or <code class="docutils literal notranslate"><span class="pre">increase()</span></code>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar_kv_pages_used{model_name,</span> <span class="pre">component,</span> <span class="pre">resource}</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mstar_kv_pages_total{model_name,</span> <span class="pre">component,</span> <span class="pre">resource}</span></code>: pages of each paged KV
+cache (<code class="docutils literal notranslate"><span class="pre">resource</span></code> is its key in the model, since a node can have several, e.g.
+Whisper’s decoder self and cross attention caches). Used counts every page off the
+free list, including the pages the prefix cache keeps; a cache two nodes of one
+worker share shows under each node.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar_kv_pages_cached{model_name,</span> <span class="pre">component,</span> <span class="pre">resource}</span></code>: pages the prefix cache
+names. Some may also be in use by running requests; the cache frees the others when a
+request needs the room.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar_step_seconds{model_name,</span> <span class="pre">component,</span> <span class="pre">graph_walk}</span></code>: histogram over engine
+steps that ran a forward. A step counts from when the worker hands it to its GPU
+thread, or from the end of the previous step if that was later, to the end of its
+postprocess (outputs on the host, stop check, routing). Overlapping steps are not
+counted twice: in steady state this is the interval between step completions, and
+<code class="docutils literal notranslate"><span class="pre">rate(..._sum)</span></code> is the share of time the worker had a step running.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar_batch_size{model_name,</span> <span class="pre">component,</span> <span class="pre">graph_walk}</span></code>: histogram, rows the step’s
+forward ran.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar_prefix_cache_query_tokens_total{model_name,</span> <span class="pre">component}</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mstar_prefix_cache_hit_tokens_total{model_name,</span> <span class="pre">component}</span></code>: counters, prompt
+tokens looked up in the prefix cache (once per request, its whole keyed prompt) and
+tokens found there. Only models that key their prompts for prefix reuse (BAGEL and
+Orpheus) count, and above one rank only with <code class="docutils literal notranslate"><span class="pre">prefix_cache_tp</span></code> set.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar_component_pending_steps{model_name,</span> <span class="pre">component}</span></code>: gauge, requests whose next
+step on the node is ready (its inputs arrived) and not running: waiting for room in a
+step or for the worker to pick the node.</p></li>
+</ul>
+<p>Tensor transfers between graph nodes (<a class="reference internal" href="#tensor-transport"><span class="std std-ref">tensor transport</span></a>) are
+counted by the reader, once per edge read: the tensors of one graph edge that one worker
+read from one producer. The workers send them with the engine metrics above, and the
+API server adds the results its data worker read:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar_transfer_bytes_total{model_name,</span> <span class="pre">src,</span> <span class="pre">dst,</span> <span class="pre">transport}</span></code>: counter, tensor bytes
+read over the edge.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar_transfers_total{model_name,</span> <span class="pre">src,</span> <span class="pre">dst,</span> <span class="pre">transport}</span></code>: counter, tensors read over
+the edge.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar_transfer_seconds{model_name,</span> <span class="pre">src,</span> <span class="pre">dst,</span> <span class="pre">transport}</span></code>: histogram, one observation
+per edge read: the reader’s time to read that edge’s tensors, which is the SHM file
+read and copy, the copy out of the SHM arena, or the RDMA or TCP read. A GPU reader of
+the arena only issues its host-to-device copies in that time; they finish
+asynchronously. The producer’s own work (serializing, staging into the arena,
+registering memory) is not included; it is the <code class="docutils literal notranslate"><span class="pre">tx</span></code> time of
+<a class="reference internal" href="#request-profiling"><span class="std std-ref">request profiling</span></a>.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">src</span></code> is the graph node that produced the tensors and <code class="docutils literal notranslate"><span class="pre">dst</span></code> the node that reads them.
+An edge the conductor joined from several producers (one input name produced in several
+walks or nodes) is one read per producing node, with its read time split between them by
+bytes.
+<code class="docutils literal notranslate"><span class="pre">api_server</span></code> stands for the request’s inputs (as <code class="docutils literal notranslate"><span class="pre">src</span></code>) and its results (as <code class="docutils literal notranslate"><span class="pre">dst</span></code>),
+which the API server’s data worker sends and reads. <code class="docutils literal notranslate"><span class="pre">transport</span></code> is the protocol:
+<code class="docutils literal notranslate"><span class="pre">SHM</span></code> (per-tensor files or the arena, see <code class="docutils literal notranslate"><span class="pre">MSTAR_SHM_ARENA</span></code>), <code class="docutils literal notranslate"><span class="pre">TCP</span></code> or <code class="docutils literal notranslate"><span class="pre">RDMA</span></code>. The
+Python and Rust runtimes and communicators (<code class="docutils literal notranslate"><span class="pre">MSTAR_RUST_GRAPH</span></code>, <code class="docutils literal notranslate"><span class="pre">MSTAR_RUST_ZMQ</span></code>)
+report the same series. A tensor already on the reader (one it made, or one it read once
+for two of its nodes) moves nothing and is not counted. With tensor parallelism every
+rank counts its own read, of its slice or of the whole tensor when the edge is
+replicated, so an edge two ranks read is two reads. Like the data worker, the workers
+count from the first request after the warmup requests.</p>
+<p>Where a successful request’s time went, from the timestamps every request already
+carries (same <code class="docutils literal notranslate"><span class="pre">model_name</span></code> and <code class="docutils literal notranslate"><span class="pre">output_modalities</span></code> labels; the conductor’s
+timestamps are compared with the API server’s, which assumes both run on one host, as
+they do today):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar_request_preprocess_seconds</span></code>: histogram, from submission to the data worker
+handing the preprocessed request to the conductor, including its wait in the data
+worker’s queue.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar_request_engine_seconds</span></code>: histogram, from the conductor dispatching the
+request to the workers (after any admission wait) to the conductor finishing it.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar_request_delivery_seconds</span></code>: histogram, from the conductor finishing the
+request to the result leaving the API server (the last chunks’ postprocessing and
+transfer, and the client handler picking it up).</p></li>
+</ul>
+<p>Output, per output modality (<code class="docutils literal notranslate"><span class="pre">modality</span></code> is the chunk’s modality, e.g. <code class="docutils literal notranslate"><span class="pre">audio</span></code>):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar_output_chunks_total{model_name,</span> <span class="pre">modality}</span></code> and
+<code class="docutils literal notranslate"><span class="pre">mstar_output_bytes_total{model_name,</span> <span class="pre">modality}</span></code>: counters of the result chunks (and
+their bytes) that reached the API server, for every request whatever its outcome;
+error chunks are not counted.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar_output_audio_seconds_total{model_name}</span></code>: counter, seconds of audio in those
+chunks (16-bit PCM at the chunk’s sample rate and channel count).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar_time_to_first_chunk_seconds{model_name,</span> <span class="pre">modality}</span></code>: histogram over
+successful requests, from submission to the first chunk of each output modality
+reaching the API server (time to first audio, first image, first video frame).</p></li>
+</ul>
+<p>The data worker (a thread in the API server that loads each request’s media and runs
+the model’s prompt processing, preprocessing one request at a time) reports its own
+work.
+<code class="docutils literal notranslate"><span class="pre">input_modalities</span></code> is the request’s input modalities, sorted and comma-joined like
+<code class="docutils literal notranslate"><span class="pre">output_modalities</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar_data_worker_preprocess_seconds{model_name,</span> <span class="pre">input_modalities}</span></code>: histogram over
+requests whose preprocessing finished, from the data worker taking the request off its
+queue to handing it to the conductor. Unlike <code class="docutils literal notranslate"><span class="pre">mstar_request_preprocess_seconds</span></code> it
+leaves out the wait in the queue, and it counts requests whatever their outcome later.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar_data_worker_preprocess_failures_total{model_name,</span> <span class="pre">input_modalities}</span></code>:
+counter, requests whose preprocessing failed in the data worker, each once, whatever
+raised: a file count or media length over its limit, a file that cannot be decoded,
+the model’s prompt processing, or handing the inputs on. The client gets the error
+(a 400 for a bad input), so the request also ends as <code class="docutils literal notranslate"><span class="pre">outcome=&quot;error&quot;</span></code> in
+<code class="docutils literal notranslate"><span class="pre">mstar_requests_total</span></code> unless its client had already gone. That counter counts
+failures from every stage by output modalities; this one only the data worker’s
+preprocessing, by input modalities (failures turning results into output chunks are
+not counted here).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar_upload_size_bytes{model_name,</span> <span class="pre">modality}</span></code>: histogram, the size on disk of
+each image, audio or video file a request carried to the data worker (<code class="docutils literal notranslate"><span class="pre">modality</span></code> is
+<code class="docutils literal notranslate"><span class="pre">image</span></code>, <code class="docutils literal notranslate"><span class="pre">audio</span></code> or <code class="docutils literal notranslate"><span class="pre">video</span></code>), whether the request succeeded or failed. Every
+route writes its media to a file first: an upload as received, inline media (a
+<code class="docutils literal notranslate"><span class="pre">data:</span></code> URL, base64 files on <code class="docutils literal notranslate"><span class="pre">/generate/ws</span></code>) after base64 decoding. The realtime
+route and long transcriptions send WAV files they write from the decoded audio, so
+those count the WAV sizes. Requests refused before they were submitted (an oversized
+body, a bad form) are not counted.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mstar_data_worker_queue_depth{model_name}</span></code>: gauge, read at scrape time, requests
+submitted and not yet taken up by the data worker (the one it is working on is not
+counted). A request whose client went away still counts until the data worker takes
+it up.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mstar<span class="w"> </span>serve<span class="w"> </span>kokoro<span class="w"> </span>--enable-metrics
+curl<span class="w"> </span>-s<span class="w"> </span>localhost:8000/metrics<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">'^mstar_'</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="quickstart.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Quickstart</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="metrics.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Metrics reference</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar-serve">mstar serve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">mstar-serve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#api-key">API key</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#config-files">Config files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-kwargs">model_kwargs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensor-transport">Tensor transport</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#request-profiling">Request profiling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics">Metrics</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By M* Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2026, M* Team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Oct 24, 2026.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
