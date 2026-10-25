@@ -1,7 +1,6 @@
 """Cacheless varlen prefill through FA3 ``flash_attn_varlen`` (AITER on ROCm).
 
-The FA3 side of ``wrappers.py``: the same base, layouts and padding as the
-FlashInfer wrappers there, with no workspace and no head-dim padding.
+Same layouts as the FlashInfer wrappers, without a workspace or head-dim padding.
 """
 
 import torch
@@ -20,8 +19,8 @@ _ZERO_BLOCK = 4096
 
 @triton.jit
 def _zero_rows_from(out_ptr, first_row_ptr, numel, row_numel, BLOCK: tl.constexpr):
-    """Zero a contiguous tensor in place from row ``*first_row_ptr`` on. A chunk
-    wholly before that row returns at once, so the cost is the zeroed rows'."""
+    """Zero a contiguous tensor in place from row ``*first_row_ptr`` onward.
+    Chunks that land entirely before that row return immediately."""
     start = tl.program_id(0).to(tl.int64) * BLOCK
     first = tl.load(first_row_ptr).to(tl.int64) * row_numel
     if start + BLOCK > first:
@@ -37,9 +36,11 @@ def _max_span(cu_seqlens: torch.Tensor) -> int:
 
 
 class _DenseRaggedPrefillBase(_RaggedPrefillBase):
-    """FA3 varlen over packed q/k/v. In graph mode it reads the layout from the
-    base's static buffers, and its launch geometry is the bucket's ceiling, so
-    every replay of the bucket runs the kernel that was captured."""
+    """FA3 varlen over packed q/k/v.
+
+    Graph mode reads the layout from the static buffers and launches at the
+    bucket ceiling, so every replay of that bucket runs the same kernel.
+    """
 
     def __init__(self, num_qo_heads: int, num_kv_heads: int, head_dim: int, **kwargs):
         super().__init__(num_qo_heads, num_kv_heads, head_dim, **kwargs)
@@ -51,7 +52,7 @@ class _DenseRaggedPrefillBase(_RaggedPrefillBase):
 
         # varlen writes only the planned rows, so in a replay the rest hold
         # whatever the graph pool had there (a previous replay's, possibly NaN).
-        # ``run`` overwrites the rows from ``_n_valid`` (the planned total) on with zeros.
+        # ``run`` zeros from ``_n_valid`` (the planned total) onward.
         self._n_valid = (
             torch.zeros((), dtype=torch.int32, device=self.device) if self.accelerator_graph else None
         )

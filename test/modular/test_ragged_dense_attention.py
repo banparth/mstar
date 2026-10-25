@@ -241,9 +241,7 @@ def test_step_causal_flag_reaches_the_kernel():
 
 
 def test_manager_builds_captured_wrappers_without_a_workspace():
-    """A leased plan builds a graph-mode wrapper, and FA3 takes no workspace:
-    nothing like the per-(label, slot) workspace a FlashInfer manager holds is
-    allocated."""
+    """A leased plan builds a graph-mode wrapper; FA3 has no workspace to allocate."""
     mgr = manager()
     before = torch.cuda.memory_allocated(DEVICE)
     lease = SlotLease(slot=0, bucket=BucketKey(graph_walk="__piecewise__", bs=2, num_tokens=256))

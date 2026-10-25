@@ -1,8 +1,6 @@
 """Cacheless varlen attention through FA3 (AITER on ROCm).
 
-Sibling of ``ragged/flashinfer.py``: the same plan / preplan / CUDA-graph slot
-machinery from ``ragged/base.py``, with the wrappers in ``dense_wrappers.py``.
-FA3 takes no workspace, so unlike FlashInfer's managers these allocate none.
+FA3 takes no workspace, so these managers allocate none.
 """
 
 import functools

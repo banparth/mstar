@@ -144,11 +144,10 @@ class RaggedBlockCausalAttnManager(AttentionResource):
 
 
 class _RaggedManagerBase:
-    """What every ragged manager shares, whatever its backend: persistent
-    wrappers per (bucket, slot, label) and per (label, slot), the preplan
-    protocol, and ``run``. A subclass names its wrapper class and lays its step
-    out in ``_plan_layouts``; a backend whose wrappers need more than the
-    shared arguments adds them in ``_build_wrapper``."""
+    """What the self- and cross-attention managers share: persistent wrappers per
+    (bucket, slot, label) and per (label, slot), the preplan protocol, and ``run``.
+    A subclass names its wrapper class and lays its step out in ``_plan_layouts``;
+    extra constructor args (a workspace, a kernel backend) go in ``_build_wrapper``."""
 
     wrapper_class: type[_RaggedPrefillBase]
 

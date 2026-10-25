@@ -1,10 +1,7 @@
 """Cacheless (ragged) prefill wrappers: queries and keys packed by segment into
 ``[total_tokens, H, D]`` tensors, laid out by ``cu_seqlens``.
 
-``_RaggedPrefillBase`` holds what every backend shares, and
-``RaggedPrefillWrapper`` / ``RaggedCrossPrefillWrapper`` say where a plan's key
-layout comes from. The FlashInfer wrappers are here; the FA3 ones are in
-``dense_wrappers.py``.
+FlashInfer wrappers live here; FA3 is in ``dense_wrappers.py``.
 """
 
 from abc import ABC, abstractmethod
@@ -27,11 +24,8 @@ def padded_head_dim(head_dim: int) -> int:
 
 
 class _RaggedPrefillBase(ABC):
-    """What every ragged wrapper shares, whatever its kernel: the bucket
-    ceilings, the graph-mode layout buffers, and padding a layout out to the
-    segment count the graph was captured with.
-
-    A backend subclass plans and runs its kernel (``_plan_kernel``, ``run``).
+    """What the self- and cross-attention wrappers share: the graph-mode static
+    buffers and their padding. A backend subclass plans and runs its kernel.
     """
 
     def __init__(

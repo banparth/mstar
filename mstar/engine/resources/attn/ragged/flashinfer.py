@@ -21,11 +21,8 @@ from mstar.engine.resources.step import StepContext
 
 
 class _FlashInferRaggedManagerBase(_RaggedManagerBase):
-    """What a FlashInfer wrapper needs beyond the shared arguments: the backend
-    FlashInfer dispatches to, and a workspace per (label, slot), shared by that
-    slot's eager and captured wrappers. A manager combines this with a layout
-    base (self, cross); both derive from ``_RaggedManagerBase``, so either base
-    order runs this ``__init__``."""
+    """FlashInfer extras on top of the shared manager: the kernel backend, and a
+    workspace per (label, slot) shared by that slot's eager and captured wrappers."""
 
     def __init__(
         self,
