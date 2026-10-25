@@ -20,6 +20,7 @@ from mstar.engine.resources import (
     RaggedAttentionConfig,
     RaggedAttentionSpec,
     RaggedAttnBackend,
+    RaggedBlockCausalAttentionSpec,
     RaggedCrossAttentionSpec,
     apply_yaml_overrides,
 )
@@ -33,6 +34,7 @@ from mstar.engine.resources.attn.ragged.dense import (
     DenseRaggedManager,
 )
 from mstar.engine.resources.attn.ragged.flashinfer import (
+    FlashInferRaggedBlockCausalManager,
     FlashInferRaggedCrossManager,
     FlashInferRaggedManager,
 )
@@ -208,6 +210,22 @@ def test_explicit_ragged_dense_falls_back_when_the_kernel_is_missing(
         _clear_fa3_caches()
     assert type(manager) is manager_class
     assert "using the ragged 'flashinfer' backend" in caplog.text
+
+
+def test_block_causal_dense_falls_back_even_with_the_kernel_present(monkeypatch, caplog):
+    monkeypatch.setattr(dense_module, "_VARLEN_IMPORT_ERROR", None)
+    _clear_fa3_caches()
+    try:
+        spec = RaggedBlockCausalAttentionSpec(
+            resource_key="ragged", nodes={"node"}, block_size=16,
+            config=ragged_config(backend=RaggedAttnBackend.DENSE),
+        )
+        with caplog.at_level(logging.WARNING, logger="mstar.engine.resources.attn.ragged.dense"):
+            manager = build_resource(spec, EngineResourceInfo(device=CPU, kv_dtype=torch.bfloat16))
+    finally:
+        _clear_fa3_caches()
+    assert type(manager) is FlashInferRaggedBlockCausalManager
+    assert "no block-causal kernel" in caplog.text
 
 
 # --- deployment overrides --------------------------------------------------------

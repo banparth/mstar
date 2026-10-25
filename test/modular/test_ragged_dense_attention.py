@@ -29,10 +29,9 @@ from mstar.engine.resources import (
     cross_label,
 )
 from mstar.engine.resources.attn.dense import _fa3_unavailable_reason
-from mstar.engine.resources.attn.ragged.dense import (
-    DenseRaggedCrossManager,
+from mstar.engine.resources.attn.ragged.dense import DenseRaggedCrossManager, DenseRaggedManager
+from mstar.engine.resources.attn.ragged.dense_wrappers import (
     DenseRaggedCrossPrefillWrapper,
-    DenseRaggedManager,
     DenseRaggedPrefillWrapper,
 )
 from mstar.engine.resources.base import EngineResourceInfo, build_resource
@@ -50,13 +49,6 @@ HEADS, HEAD_DIM = 4, 72
 MAX_SEGMENTS, MAX_TOKENS = 4, 512
 TOL = 3e-2
 ATTN = "ragged"
-
-
-@pytest.fixture(autouse=True)
-def _small_workspaces(monkeypatch):
-    # WorkspacePool still allocates per (label, slot) for the shared manager
-    # base; the default 512 MB is wasted here because the FA3 wrappers ignore it.
-    monkeypatch.setenv("MSTAR_WORKSPACE_BUFFER_MB", "64")
 
 
 def cu(seg_lens: list[int]) -> torch.Tensor:
@@ -94,7 +86,6 @@ def close(got, want, tol=TOL):
 
 def wrapper(**overrides) -> DenseRaggedPrefillWrapper:
     kwargs = dict(
-        workspace_buffer=torch.empty(0, dtype=torch.uint8, device=DEVICE),
         num_qo_heads=HEADS, num_kv_heads=HEADS, head_dim=HEAD_DIM,
         device=DEVICE, q_data_type=DTYPE,
     )
@@ -104,7 +95,7 @@ def wrapper(**overrides) -> DenseRaggedPrefillWrapper:
 
 def graph_wrapper() -> DenseRaggedPrefillWrapper:
     return wrapper(
-        max_num_segments=MAX_SEGMENTS, max_total_tokens=MAX_TOKENS, use_cuda_graph=True,
+        max_num_segments=MAX_SEGMENTS, max_total_tokens=MAX_TOKENS, accelerator_graph=True,
     )
 
 
@@ -166,15 +157,24 @@ def test_graph_replay_matches_reference(seg_lens):
     close(*replay(w, *capture_wrapper(w), seg_lens))
 
 
-def test_graph_replay_survives_a_poisoned_output_tail():
+def test_graph_replay_zeros_rows_past_the_layout():
+    """Rows past the planned total read back zero after a replay that left real
+    values there, and NaN in the padding rows of q/k/v (a previous layer's tail)
+    does not reach the real rows."""
     w = graph_wrapper()
     graph, static, out = capture_wrapper(w)
+    replay(w, graph, static, out, [128] * 4)
     seg_lens = [100, 60, 30, 0]
     total = sum(seg_lens)
-    w._out_buf[total:].fill_(float("nan"))
-    close(*replay(w, graph, static, out, seg_lens))
-    assert torch.isfinite(out[:total]).all()
-    assert (w._out_buf[total:] == 0).all()
+    q, k, v = qkv(total, seed=1)
+    w.plan(cu(seg_lens))
+    for buf, real in zip(static, (q, k, v), strict=True):
+        buf[:total].copy_(real)
+        buf[total:].fill_(float("nan"))
+    graph.replay()
+    torch.cuda.synchronize()
+    close(out[:total], ref(q, k, v, cu(seg_lens)))
+    assert (out[total:] == 0).all()
 
 
 def test_graph_mode_pads_fewer_segments():
@@ -230,6 +230,20 @@ def test_step_causal_flag_reaches_the_kernel():
     close(mgr.run(q, k, v), ref(q, k, v, cu(spans), causal=True))
 
 
+def test_manager_builds_captured_wrappers_without_a_workspace():
+    """A leased plan builds a graph-mode wrapper, and FA3 takes no workspace:
+    nothing like the per-(label, slot) workspace a FlashInfer manager holds is
+    allocated."""
+    mgr = manager()
+    before = torch.cuda.memory_allocated(DEVICE)
+    lease = SlotLease(slot=0, bucket=BucketKey(graph_walk="__piecewise__", bs=2, num_tokens=256))
+    mgr.plan(step(64, 32), ctx(["r0", "r1"], lease=lease))
+    assert mgr._current_plan_states["main"].accelerator_graph
+    mgr.plan(step(64, 32), ctx(["r0", "r1"]))
+    # a captured and an eager wrapper: layout buffers and one bucket-sized output
+    assert torch.cuda.memory_allocated(DEVICE) - before < 1 << 20
+
+
 def test_preplan_promotes_on_the_next_plan():
     mgr = manager()
     two = step(64, 32)
@@ -256,7 +270,6 @@ def cross_ref(q, k, v, q_cu, kv_cu):
 
 def cross_wrapper(**overrides) -> DenseRaggedCrossPrefillWrapper:
     kwargs = dict(
-        workspace_buffer=torch.empty(0, dtype=torch.uint8, device=DEVICE),
         num_qo_heads=HEADS, num_kv_heads=HEADS, head_dim=HEAD_DIM,
         device=DEVICE, q_data_type=DTYPE,
     )
@@ -288,7 +301,7 @@ def test_eager_cross_matches_reference(q_lens, kv_lens):
 )
 def test_graph_cross_replay_matches_reference(q_lens, kv_lens):
     w = cross_wrapper(
-        max_num_segments=MAX_SEGMENTS, max_total_tokens=MAX_TOKENS, use_cuda_graph=True,
+        max_num_segments=MAX_SEGMENTS, max_total_tokens=MAX_TOKENS, accelerator_graph=True,
     )
     sq, sk, sv = (torch.zeros(MAX_TOKENS, HEADS, HEAD_DIM, dtype=DTYPE, device=DEVICE) for _ in range(3))
     w.plan(cu([MAX_TOKENS // MAX_SEGMENTS] * MAX_SEGMENTS), cu([64] * MAX_SEGMENTS))
