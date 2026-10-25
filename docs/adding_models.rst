@@ -541,7 +541,7 @@ The spec types are:
        default, ``RaggedAttnBackend.FLASHINFER``, or ``RaggedAttnBackend.DENSE``),
        ``flashinfer_backend``, and the
        two CUDA-graph ceilings ``max_segments_per_request`` and
-       ``max_tokens_per_request``. ``DENSE`` runs FA3 ``flash_attn_varlen`` (AITER on ROCm) 
+       ``max_tokens_per_request``. ``DENSE`` runs FA3 ``flash_attn_varlen`` (AITER on ROCm)
        and falls back to FlashInfer if that kernel is missing. See `Cacheless attention (encoder towers)`_.
    * - ``RaggedCrossAttentionSpec(config=RaggedAttentionConfig(...))``
      - The cross-attention counterpart: one span of each request attends another
@@ -736,8 +736,11 @@ mask from it, cannot be captured this way.
 ``RaggedAttnBackend.AUTO`` (and an explicit ``FLASHINFER``) plan through FlashInfer's
 ragged prefill wrapper. ``RaggedAttnBackend.DENSE`` plans the same layouts into static
 ``cu_seqlens`` buffers and runs FA3 ``flash_attn_varlen`` (AITER on ROCm) instead, with
-no page scatter. If that kernel is not importable, the factory logs a warning and
-builds FlashInfer. Leave the spec at ``AUTO`` unless a deployment opts in.
+no page scatter. If that kernel is not importable, or the spec is a
+``RaggedBlockCausalAttentionSpec`` (whose overlapping prefixes varlen cannot express),
+the factory logs a warning and builds FlashInfer. The fallback does not cover a GPU or
+dtype the kernel lacks: ``fa3-fwd`` 0.0.3 is built for Hopper (``sm_90a``) and runs bf16
+but not fp16.
 
 BAGEL's SigLIP2 tower is the reference implementation. The spec stands alone, over the
 encoder node only, and names no cache:
