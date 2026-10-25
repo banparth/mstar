@@ -5,6 +5,8 @@ FlashInfer wrappers there, with no workspace and no head-dim padding.
 """
 
 import torch
+import triton
+import triton.language as tl
 
 from mstar.engine.resources.attn.dense import flash_attn_varlen_func
 from mstar.engine.resources.attn.ragged.wrappers import (
@@ -12,6 +14,19 @@ from mstar.engine.resources.attn.ragged.wrappers import (
     RaggedPrefillWrapper,
     _RaggedPrefillBase,
 )
+
+_ZERO_BLOCK = 4096
+
+
+@triton.jit
+def _zero_rows_from(out_ptr, first_row_ptr, numel, row_numel, BLOCK: tl.constexpr):
+    """Zero a contiguous tensor in place from row ``*first_row_ptr`` on. A chunk
+    wholly before that row returns at once, so the cost is the zeroed rows'."""
+    start = tl.program_id(0).to(tl.int64) * BLOCK
+    first = tl.load(first_row_ptr).to(tl.int64) * row_numel
+    if start + BLOCK > first:
+        offs = start + tl.arange(0, BLOCK)
+        tl.store(out_ptr + offs, 0.0, mask=(offs >= first) & (offs < numel))
 
 
 def _max_span(cu_seqlens: torch.Tensor) -> int:
@@ -34,16 +49,12 @@ class _DenseRaggedPrefillBase(_RaggedPrefillBase):
         self._max_q = 0
         self._max_k = 0
 
-        if not self.accelerator_graph:
-            self._n_valid = None
-            self._row_idx = None
-            return
         # varlen writes only the planned rows, so in a replay the rest hold
         # whatever the graph pool had there (a previous replay's, possibly NaN).
-        # ``run`` selects zeros over rows past ``_n_valid``, the planned total.
-        # Select, not multiply: inf*0 is nan.
-        self._n_valid = torch.zeros((), dtype=torch.int32, device=self.device)
-        self._row_idx = torch.arange(self.max_total_tokens, device=self.device)
+        # ``run`` overwrites the rows from ``_n_valid`` (the planned total) on with zeros.
+        self._n_valid = (
+            torch.zeros((), dtype=torch.int32, device=self.device) if self.accelerator_graph else None
+        )
 
     def _plan_kernel(
         self, cu: torch.Tensor, kv_cu: torch.Tensor, total_tokens: int, causal: bool,
@@ -74,9 +85,13 @@ class _DenseRaggedPrefillBase(_RaggedPrefillBase):
         out = out[0] if isinstance(out, tuple) else out
         if self._n_valid is None:
             return out
-        n = q.shape[0]
-        self._check_rows(n)
-        return out.masked_fill((self._row_idx[:n] >= self._n_valid).view(n, 1, 1), 0)
+        self._check_rows(q.shape[0])
+        assert out.is_contiguous(), "the tail is zeroed by flat offset"
+        numel = out.numel()
+        _zero_rows_from[(triton.cdiv(numel, _ZERO_BLOCK),)](
+            out, self._n_valid, numel, out[0].numel(), BLOCK=_ZERO_BLOCK,
+        )
+        return out
 
 
 class DenseRaggedPrefillWrapper(_DenseRaggedPrefillBase, RaggedPrefillWrapper):

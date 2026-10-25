@@ -14,6 +14,7 @@ sys.path.insert(0, ".")
 import pytest
 import torch
 import torch.nn.functional as F
+import triton
 
 from mstar.engine.resources import (
     AttentionStep,
@@ -31,8 +32,10 @@ from mstar.engine.resources import (
 from mstar.engine.resources.attn.dense import _fa3_unavailable_reason
 from mstar.engine.resources.attn.ragged.dense import DenseRaggedCrossManager, DenseRaggedManager
 from mstar.engine.resources.attn.ragged.dense_wrappers import (
+    _ZERO_BLOCK,
     DenseRaggedCrossPrefillWrapper,
     DenseRaggedPrefillWrapper,
+    _zero_rows_from,
 )
 from mstar.engine.resources.base import EngineResourceInfo, build_resource
 
@@ -159,22 +162,29 @@ def test_graph_replay_matches_reference(seg_lens):
 
 def test_graph_replay_zeros_rows_past_the_layout():
     """Rows past the planned total read back zero after a replay that left real
-    values there, and NaN in the padding rows of q/k/v (a previous layer's tail)
-    does not reach the real rows."""
+    values there. The next layer reads them as its padding rows, and the kernel
+    reads padding keys next to the last segment, so they must stay finite."""
     w = graph_wrapper()
     graph, static, out = capture_wrapper(w)
     replay(w, graph, static, out, [128] * 4)
+    assert (out != 0).any(dim=(1, 2)).all()
     seg_lens = [100, 60, 30, 0]
     total = sum(seg_lens)
-    q, k, v = qkv(total, seed=1)
-    w.plan(cu(seg_lens))
-    for buf, real in zip(static, (q, k, v), strict=True):
-        buf[:total].copy_(real)
-        buf[total:].fill_(float("nan"))
-    graph.replay()
-    torch.cuda.synchronize()
-    close(out[:total], ref(q, k, v, cu(seg_lens)))
+    close(*replay(w, graph, static, out, seg_lens, seed=1))
     assert (out[total:] == 0).all()
+
+
+@pytest.mark.parametrize("first_zero", [0, 190, 191, MAX_TOKENS], ids=["all", "mid", "unaligned", "none"])
+def test_tail_zeroing_overwrites_nan_and_keeps_real_rows(first_zero):
+    out = torch.randn(MAX_TOKENS, HEADS, HEAD_DIM, dtype=DTYPE, device=DEVICE)
+    out[first_zero:] = float("nan")
+    real = out[:first_zero].clone()
+    n_valid = torch.tensor(first_zero, dtype=torch.int32, device=DEVICE)
+    _zero_rows_from[(triton.cdiv(out.numel(), _ZERO_BLOCK),)](
+        out, n_valid, out.numel(), out[0].numel(), BLOCK=_ZERO_BLOCK,
+    )
+    assert torch.equal(out[:first_zero], real)
+    assert (out[first_zero:] == 0).all()
 
 
 def test_graph_mode_pads_fewer_segments():
