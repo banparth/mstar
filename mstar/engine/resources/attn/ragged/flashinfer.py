@@ -20,10 +20,12 @@ from mstar.engine.resources.attn.ragged.wrappers import (
 from mstar.engine.resources.step import StepContext
 
 
-class _FlashInferBackend:
+class _FlashInferRaggedManagerBase(_RaggedManagerBase):
     """What a FlashInfer wrapper needs beyond the shared arguments: the backend
     FlashInfer dispatches to, and a workspace per (label, slot), shared by that
-    slot's eager and captured wrappers."""
+    slot's eager and captured wrappers. A manager combines this with a layout
+    base (self, cross); both derive from ``_RaggedManagerBase``, so either base
+    order runs this ``__init__``."""
 
     def __init__(
         self,
@@ -41,15 +43,15 @@ class _FlashInferBackend:
         )
 
 
-class FlashInferRaggedManager(_FlashInferBackend, _RaggedSelfManagerBase):
+class FlashInferRaggedManager(_FlashInferRaggedManagerBase, _RaggedSelfManagerBase):
     wrapper_class = FlashInferRaggedPrefillWrapper
 
 
-class FlashInferRaggedCrossManager(_FlashInferBackend, _RaggedCrossManagerBase):
+class FlashInferRaggedCrossManager(_FlashInferRaggedManagerBase, _RaggedCrossManagerBase):
     wrapper_class = FlashInferRaggedCrossPrefillWrapper
 
 
-class FlashInferRaggedBlockCausalManager(_FlashInferBackend, _RaggedManagerBase, RaggedBlockCausalAttnManager):
+class FlashInferRaggedBlockCausalManager(_FlashInferRaggedManagerBase, RaggedBlockCausalAttnManager):
     """Block-causal self-attention: every label in the step is its own layout,
     each segment attending block-causally within itself."""
 
