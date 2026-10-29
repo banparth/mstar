@@ -1506,6 +1506,22 @@ def test_qwen3_tts_codec_postprocess_uses_its_own_pass_geometry():
     assert out_second["audio_chunk"][0].tolist() == list(range(4, 16))
 
 
+def test_qwen3_tts_codec_batches_each_window_bucket_apart():
+    """A batch decodes its widest window's span for every row, so a ramp
+    chunk and a full window are separate capture groups, batched apart."""
+    submodule = CodecSubmodule(_FakeCodecDecoder(4), _tiny_model_config())   # windows [1, 4, 5]
+    assert submodule.split_batches_by_capture_key("codec_chunk")
+
+    def group(context, window):
+        chunk = StreamChunkInfo(start_offset=0, context_items=context, num_items=window, is_final=False)
+        return submodule.cg_key_info(
+            "codec_chunk", {"request": None},
+            per_request_input_metadata={"request": InputMetadata(stream_chunks={"codec_tokens": chunk})},
+        )
+
+    assert [group(0, 1), group(1, 4), group(2, 5), group(2, 3)] == [1, 4, 5, 4]
+
+
 def _codec_tail_step(submodule, chunks: dict[str, torch.Tensor], final: bool = False):
     outputs = {rid: {"audio_chunk": [chunk]} for rid, chunk in chunks.items()}
     inputs = [ARNodeInputs(kwargs={"is_final": final}) for _ in chunks]

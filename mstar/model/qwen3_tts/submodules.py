@@ -1117,10 +1117,10 @@ class CodecSubmodule(ARNodeSubmodule):
     ) -> dict[str, torch.Tensor]:
         """Stack the batch's windows, padded to its widest bucket.
 
-        Requests reach the codec at different points of the chunk ramp, so one
-        batch mixes windows. The decoder is causal, so trailing padding never
-        changes the frames in front of it; each request's ``postprocess`` keeps
-        only its own frames.
+        The scheduler batches each bucket apart (`split_batches_by_capture_key`),
+        but a forward driven outside it can mix windows. The decoder is causal,
+        so trailing padding never changes the frames in front of it; each
+        request's ``postprocess`` keeps only its own frames.
         """
         del graph_walk, engine_inputs
         windows = [item.tensor_inputs["codec_tokens"] for item in inputs]
@@ -1279,6 +1279,12 @@ class CodecSubmodule(ARNodeSubmodule):
     def max_batch_size(self, graph_walk: str) -> int:
         del graph_walk
         return self.MAX_BATCH_SIZE
+
+    def split_batches_by_capture_key(self, graph_walk: str) -> bool:
+        """Batch each window bucket apart. A batch is padded to its widest
+        window and the conv stack decodes the same span of it for every row,
+        so a 1-frame ramp chunk batched with a full window costs a full one."""
+        return graph_walk == "codec_chunk"
 
     def cg_key_info(
         self,
