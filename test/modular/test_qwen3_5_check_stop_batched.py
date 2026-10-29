@@ -135,3 +135,24 @@ def test_rows_out_of_batch_order_still_map_by_request():
     # forward order: the same answer without the row map
     stops = LLMSubmodule.check_stop_batched(sub, ["a", "b", "c"], infos, rows)
     assert stops == {"b": {"decode_loop"}, "c": {"decode_loop"}}
+
+
+def test_budget_counts_the_prefill_token():
+    """``max_tokens`` caps the whole reply. The last prefill samples its first
+    token, so decode_loop's iteration n (0-based) samples token n + 2 and the
+    loop stops at iteration ``max_tokens - 2``, after ``max_tokens`` tokens."""
+    sub = _sub()
+    tokens = torch.tensor([3, 3])
+    for max_tokens in (2, 5, 256):
+        infos = {
+            "before": _info(done=max_tokens - 3, max_tokens=max_tokens),
+            "last": _info(done=max_tokens - 2, max_tokens=max_tokens),
+        }
+        if max_tokens - 3 < 0:
+            del infos["before"]
+        rids = tuple(infos)
+        rows = HostRows(rids, {"new_token": tokens[: len(rids)]})
+        assert LLMSubmodule.check_stop_batched(sub, list(rids), infos, rows) == {"last": {"decode_loop"}}
+        for rid, info in infos.items():
+            got = LLMSubmodule.check_stop(sub, rid, info, {"new_token": [tokens[:1]]})
+            assert got == ({"decode_loop"} if rid == "last" else set())

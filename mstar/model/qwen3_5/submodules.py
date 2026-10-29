@@ -631,8 +631,10 @@ class LLMSubmodule(ARNodeSubmodule):
         token = outputs["new_token"][0].item()
         ignore_eos = request_info.resource_configs[SAMPLER].ignore_eos
         hit_eos = not ignore_eos and token in self.config.stop_token_ids
+        # the last prefill sampled the reply's first token, so decode_loop's
+        # iteration n (0-based) samples token n + 2
         out_of_budget = (
-            request_info.dynamic_loop_iter_counts.get("decode_loop", 0) + 1
+            request_info.dynamic_loop_iter_counts.get("decode_loop", 0) + 2
             >= request_info.max_tokens
         )
         return {"decode_loop"} if hit_eos or out_of_budget else set()
@@ -674,7 +676,7 @@ class LLMSubmodule(ARNodeSubmodule):
                 value in stop_ids
                 and not info.resource_configs[SAMPLER].ignore_eos
             ) or (
-                info.dynamic_loop_iter_counts.get("decode_loop", 0) + 1
+                info.dynamic_loop_iter_counts.get("decode_loop", 0) + 2
                 >= info.max_tokens
             ):
                 stops[rid] = {"decode_loop"}
