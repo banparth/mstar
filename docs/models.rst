@@ -360,6 +360,13 @@ not the 256-slot default. The state defaults to the checkpoint's
 ``gdn_state.state_dtype: bfloat16`` halves state traffic at some precision and
 needs FlashInfer's fused bf16 decode kernel (K = V = 128).
 
+New prompts wait for a step of their own by default, which keeps decode fast
+and lets time to first token grow with load. ``speculation_mixes_walks: {LLM:
+true}`` in the deployment YAML lets decode steps take prompts in as they arrive
+instead. On 9B with 128 concurrent 1k-token prompts (one H100) it cut median
+time to first token from ~2.0 s to ~0.54 s, for ~3% less throughput there and
+~4% more on short chat prompts.
+
 ``temperature``, ``top_p``, ``max_tokens`` and ``seed`` are the standard fields.
 ``repetition_penalty`` and ``enable_thinking`` (default true; the template opens
 a ``<think>`` block) are read by the model but are not OpenAI fields — pass them
