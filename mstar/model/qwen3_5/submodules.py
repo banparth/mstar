@@ -683,6 +683,7 @@ class LLMSubmodule(ARNodeSubmodule):
 
 # The vision tower's block loop, as a piecewise capture region
 VISION_BLOCK_LOOP = "vision_block_loop"
+PACKED_VISION_EMBEDS = "__vision_embeds__"
 
 
 class VisionEncoderSubmodule(NodeSubmodule):
@@ -692,19 +693,27 @@ class VisionEncoderSubmodule(NodeSubmodule):
     `prepare_inputs` and attention boundaries are declared as step segments,
     so the compiled tower's only symbolic shape is its token count.
 
-    The block loop is captured one prompt per replay, which beats batching:
-    eager, the tower is launch-bound (~500 kernels, ~4 ms of GPU work in a
-    ~20 ms forward on 9B). So the encoder takes one request a step.
+    The block loop is captured, since eager the tower is launch-bound (~500
+    kernels, ~4 ms of GPU work in a ~20 ms forward on 9B). A step packs up to
+    ``MAX_BATCH_SIZE`` prompts into one replay: the encoder shares its worker
+    with the LLM, so one step per image stalls every running decode once per
+    image.
 
     A replay's attention plan holds at most the vision attention resource's
     ``max_segments_per_request`` segments (one per image and per video frame
     group). A prompt with more takes no lease and runs the block loop
-    eagerly, however few its patches.
+    eagerly, however few its patches. A packed replay declares one segment
+    per prompt, so a step that packs a multi-segment prompt with others runs
+    eagerly too; a multi-segment prompt alone still replays.
     """
 
-    # Patch-count buckets, one prompt per replay. 16384 patches merge to the
-    # LLM's 4096 `prefill_vision` bucket; a larger prompt runs eagerly.
+    # Patch-count buckets of one replay. 16384 patches merge to the LLM's 4096
+    # `prefill_vision` bucket; a larger step runs eagerly.
     BLOCK_LOOP_PATCH_BUCKETS = [256, 512, 1024, 2048, 4096, 8192, 16384]
+    # Prompts a step packs, each of them a captured batch size; matches the
+    # LLM's `prefill_vision` step, which takes these embeddings next.
+    MAX_BATCH_SIZE = 4
+    BLOCK_LOOP_CAPTURE_BATCH_SIZES = [1, 2, 4]
 
     def __init__(
         self, model: Qwen3_5VisionModel, config: Qwen3_5VisionConfig,
@@ -776,18 +785,18 @@ class VisionEncoderSubmodule(NodeSubmodule):
         return True
 
     def max_batch_size(self, graph_walk: str) -> int | None:
-        # one request a step, so it can take the captured block loop
-        return 1
+        return self.MAX_BATCH_SIZE
 
     def get_piecewise_accelerator_graph_configs(
         self, device: torch.device, autocast_dtype: torch.dtype,
         tp_world_size: int = 1, **kwargs,
     ) -> dict[str, PiecewiseAcceleratorGraphConfig]:
-        """The block loop, one prompt per replay, by patch-count bucket.
+        """The block loop, by (prompts, patch-count) bucket.
 
         Patch embed, position resample and rope run eagerly before it, the
         merger after (it quarters the row count, which a region's output view
-        cannot express). Batch size 1: one replay is one prompt's segments.
+        cannot express). A replay of one prompt declares each of its segments;
+        a packed replay declares one segment per prompt (see `_fits_capture`).
         """
         hidden, head_dim = self.config.hidden_size, self.config.head_dim
 
@@ -800,9 +809,17 @@ class VisionEncoderSubmodule(NodeSubmodule):
             }
 
         def declare_step(request_ids: list[str], seq_lens: list[int]) -> SubmoduleStep:
-            (rid,) = request_ids
+            if len(request_ids) == 1:
+                # one prompt: each of its images and frame groups is a segment
+                segments = [Segment(request_id=request_ids[0], label="main", span=n) for n in seq_lens]
+            else:
+                # packed: one segment per prompt, zero-length on padding rows
+                segments = [
+                    Segment(request_id=rid, label="main", span=n)
+                    for rid, n in zip(request_ids, seq_lens, strict=True)
+                ]
             return SubmoduleStep(
-                segments=[Segment(request_id=rid, label="main", span=n) for n in seq_lens],
+                segments=segments,
                 steps={VISION_ATTN: AttentionStep(causal=False)},
             )
 
@@ -814,13 +831,15 @@ class VisionEncoderSubmodule(NodeSubmodule):
                 lease_before_step=True,
                 can_lease=self._fits_capture,
                 total_tokens=self.BLOCK_LOOP_PATCH_BUCKETS,
-                capture_batch_sizes=[1],
+                capture_batch_sizes=self.BLOCK_LOOP_CAPTURE_BATCH_SIZES,
             )
         }
 
     def _fits_capture(self, inputs: list[NodeInputs]) -> bool:
-        """Whether the batch's segments fit a replay's attention plan: the
-        resource's per-request ceiling, read from it so a YAML override holds.
+        """Whether the batch's segments fit a replay's attention plan. One
+        prompt fits up to the resource's per-request ceiling, read from it so a
+        YAML override holds; a packed replay declares one segment per prompt,
+        so it fits only prompts of one image each.
 
         TODO: capture more than 64 segments, so long low-res videos replay
         too. The ceiling is sized for images (16384 patches / 256-patch
@@ -829,9 +848,11 @@ class VisionEncoderSubmodule(NodeSubmodule):
         2x2 merge block) would hold any prompt that fits, at small buckets'
         cost unchanged; that is a ragged-resource change.
         """
-        per_request = self.node_resources[VISION_ATTN].max_segments_per_request
-        segments = sum(len(inp.tensor_inputs["seq_lengths"]) for inp in inputs)
-        return segments <= per_request * len(inputs)
+        counts = [len(inp.tensor_inputs["seq_lengths"]) for inp in inputs]
+        if len(inputs) > 1:
+            # a packed replay declares one segment per prompt
+            return all(n == 1 for n in counts)
+        return counts[0] <= self.node_resources[VISION_ATTN].max_segments_per_request
 
     def _capture_block_loop(self, inp: PiecewiseCallInputs) -> dict[str, torch.Tensor]:
         """The captured region: reads the runner's buffers, never rebinds."""
@@ -846,8 +867,9 @@ class VisionEncoderSubmodule(NodeSubmodule):
         cos: torch.Tensor,
         sin: torch.Tensor,
         seq_lengths: tuple[int, ...],
+        prompt_patches: tuple[int, ...],
     ) -> torch.Tensor | None:
-        """The block loop replayed once per prompt, or None if not leased.
+        """The block loop replayed once per step, or None if not leased.
 
         A leased step declares nothing of its own (`declare_step`), so
         ``engine_inputs.step`` is None; a bucket that fits is not enough, as
@@ -860,11 +882,13 @@ class VisionEncoderSubmodule(NodeSubmodule):
         ):
             return None
         # one replay for every image, not one each: a second plan overwrites the schedule a queued replay still reads
+        request_ids = list(engine_inputs.request_ids)
         return runner.run(
             static_inputs={"hidden": hidden, "cos": cos, "sin": sin},
-            request_ids=[engine_inputs.request_ids[0]],
-            seq_lens=list(seq_lengths),
-            real_bs=1,
+            request_ids=request_ids,
+            # a packed replay's segments are its prompts (`_fits_capture`)
+            seq_lens=list(seq_lengths) if len(request_ids) == 1 else list(prompt_patches),
+            real_bs=len(request_ids),
         ).get_view("hidden")
 
     def preprocess(
@@ -873,17 +897,22 @@ class VisionEncoderSubmodule(NodeSubmodule):
         engine_inputs: ModelInputsFromEngine,
         inputs: list[NodeInputs],
     ) -> dict[str, Any]:
-        """The batch's one request (see `max_batch_size`), its images packed
-        in `declare_step`'s segment order."""
-        (inp,) = inputs
+        """The batch's prompts packed in request order, each one's images in
+        `declare_step`'s segment order; every tensor here is per patch."""
         device = self.get_device()
-        tensors = inp.tensor_inputs
+
+        def packed(name: str) -> torch.Tensor:
+            parts = [inp.tensor_inputs[name] for inp in inputs]
+            return (parts[0] if len(parts) == 1 else torch.cat(parts, dim=0)).to(device)
+
+        lengths = [tuple(inp.tensor_inputs["seq_lengths"]) for inp in inputs]
         return {
-            "pixel_values": tensors["pixel_values"].to(device),
-            "indices": tensors["indices"].to(device),
-            "weights": tensors["weights"].to(device),
-            "position_ids": tensors["position_ids"].to(device),
-            "seq_lengths": tuple(tensors["seq_lengths"]),
+            "pixel_values": packed("pixel_values"),
+            "indices": packed("indices"),
+            "weights": packed("weights"),
+            "position_ids": packed("position_ids"),
+            "seq_lengths": tuple(n for spans in lengths for n in spans),
+            "prompt_patches": tuple(sum(spans) for spans in lengths),
         }
 
     def forward(
@@ -891,9 +920,8 @@ class VisionEncoderSubmodule(NodeSubmodule):
         graph_walk: str,
         engine_inputs: ModelInputsFromEngine,
         **kwargs,
-    ) -> NameToTensorList:
-        rid = engine_inputs.request_ids[0]
-        return self.forward_batched(graph_walk, engine_inputs, **kwargs)[rid]
+    ) -> BatchedModelOutput:
+        return self.forward_batched(graph_walk, engine_inputs, **kwargs)
 
     def forward_batched(
         self,
@@ -904,13 +932,34 @@ class VisionEncoderSubmodule(NodeSubmodule):
         weights: torch.Tensor,
         position_ids: torch.Tensor,
         seq_lengths: tuple[int, ...] = (),
+        prompt_patches: tuple[int, ...] = (),
         **kwargs,
-    ) -> dict[str, NameToTensorList]:
-        # One call for every image; the ragged kernel's per-frame segments
-        # keep them apart.
+    ) -> BatchedModelOutput:
+        # One call for every image of every prompt; the ragged kernel's
+        # per-frame segments keep them apart.
         hidden, cos, sin = self.model.embed(pixel_values, indices, weights, position_ids)
-        encoded = self._replay_block_loop(engine_inputs, hidden, cos, sin, seq_lengths)
+        encoded = self._replay_block_loop(engine_inputs, hidden, cos, sin, seq_lengths, prompt_patches)
         if encoded is None:
             encoded = self.model.encode(hidden, cos, sin)
-        embeds = self.model.merger(encoded)
-        return {engine_inputs.request_ids[0]: {"vision_embeds": [embeds]}}
+        return BatchedModelOutput(packed_outputs={PACKED_VISION_EMBEDS: self.model.merger(encoded)})
+
+    def unpack_packed_outputs(
+        self,
+        static_output: dict,
+        request_ids: list[str],
+        real_seq_lens: list[int],
+        inputs: list[NodeInputs],
+        per_request_info: dict[str, CurrentForwardPassInfo],
+    ) -> dict[str, NameToTensorList]:
+        """The step's embeddings cut per prompt. Not in the compiled forward:
+        there the cut points and the request ids keying the result are guards,
+        and a new batch composition recompiles."""
+        embeds = static_output.get(PACKED_VISION_EMBEDS)
+        if embeds is None:
+            return {}
+        # the merger folds each 2x2 block of a prompt's patches into one row
+        rows = [n // self.config.spatial_merge_size**2 for n in real_seq_lens]
+        return {
+            rid: {"vision_embeds": [part]}
+            for rid, part in zip(request_ids, embeds.split(rows), strict=True)
+        }

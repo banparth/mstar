@@ -558,7 +558,7 @@ def test_vision_block_loop_replays_exactly_when_leased():
         engine_inputs = SimpleNamespace(
             piecewise_runners={VISION_BLOCK_LOOP: runner}, request_ids=["r"], step=step,
         )
-        return encoder._replay_block_loop(engine_inputs, hidden, cos, sin, (4, 4))
+        return encoder._replay_block_loop(engine_inputs, hidden, cos, sin, (4, 4), (8,))
 
     assert replay(step=object()) is None
     assert not hasattr(runner, "ran")
