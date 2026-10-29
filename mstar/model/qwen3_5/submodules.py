@@ -86,15 +86,20 @@ class LLMSubmodule(ARNodeSubmodule):
     # the decode walk reads its input ids off the sampler's slot masters
     reads_device_loopback = True
 
-    # Total tokens of a packed text-prefill step, one captured graph per
-    # (bucket, batch size). A prompt past the top bucket prefills eagerly, and
-    # an eager 8k prefill is launch-bound (~1,100 kernel launches, the GPU
-    # idle half the time: 78 ms of wall for 36 ms of kernels on 0.8B), so the
-    # ladder runs to 8192. MSTAR_QWEN35_PREFILL_TOKEN_BUCKETS narrows or
-    # extends it (static buffers are sized by the largest bucket).
+    # Total tokens of a packed text-prefill or mixed step, one captured graph per
+    # (bucket, batch size). A step replays the smallest bucket that holds it and
+    # computes the rest as padding: on power-of-two buckets a mixed step of four
+    # 1k-token prompts (~4.3k tokens) replays 8192, half of it padding. Steps of
+    # 512 above 1024 keep padding under a third near 1k and under 15% past 3k.
+    # A prompt past the top bucket prefills eagerly, and an eager 8k prefill is
+    # launch-bound (~1,100 kernel launches, the GPU idle half the time: 78 ms of
+    # wall for 36 ms of kernels on 0.8B), so the ladder runs to 8192.
+    # MSTAR_QWEN35_PREFILL_TOKEN_BUCKETS narrows or extends it (static buffers
+    # are sized by the largest bucket).
     PREFILL_TOKEN_BUCKETS = [
         int(x) for x in os.environ.get(
-            "MSTAR_QWEN35_PREFILL_TOKEN_BUCKETS", "32,64,128,256,512,1024,2048,4096,8192",
+            "MSTAR_QWEN35_PREFILL_TOKEN_BUCKETS",
+            "32,64,128,256,512,1024,1536,2048,2560,3072,3584,4096,4608,5120,5632,6144,7168,8192",
         ).split(",")
     ]
     PREFILL_CAPTURE_BATCH_SIZES = [1, 2, 4, 8, 16]
