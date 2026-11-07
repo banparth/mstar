@@ -70,12 +70,14 @@ REFERENCE_MODEL_KWARGS = {"reference_numerics": True}
 
 ENCODE_TEXT_WALK = "encode_text"
 _DIT_INPUTS = ("text_embeds_pos", "image_inputs", "camera_poses", "intrinsics", "clock")
-# the rollout's rolling K/V tokens a layer, which process_prompt settles from the output size
+# the rollout's rolling K/V tokens a layer and its latent's (height, width), which
+# process_prompt settles from the output size; they size the rollout's pool region
 DIT_KV_TOKENS = "dit_kv_tokens"
+DIT_LAT_HW = "dit_lat_hw"
 
 
 class LingBotWorldModel(Model):
-    INTERNAL_KWARGS = (DIT_KV_TOKENS,)
+    INTERNAL_KWARGS = (DIT_KV_TOKENS, DIT_LAT_HW)
 
     def __init__(
         self,
@@ -110,9 +112,9 @@ class LingBotWorldModel(Model):
     # ------------------------------------------------------------------
 
     def get_node_resources(self) -> list[NodeResourceSpec]:
-        """The request pool that holds each rollout's rolling K/V and text K/V, the
-        rolling K/V window over the former, and the ragged attention over both unless
-        ``reference_numerics`` attends with the reference's FA2 instead."""
+        """The request pool that holds each rollout's rolling K/V, text K/V and encoder
+        cache, the rolling K/V window over the first, and the ragged attention over the
+        K/V unless ``reference_numerics`` attends with the reference's FA2 instead."""
         cfg = self.config
         specs: list[NodeResourceSpec] = [
             # inference tensors: the dit's forward runs in inference mode, and its compiled
@@ -140,28 +142,38 @@ class LingBotWorldModel(Model):
         frames = cfg.local_attn_size if cfg.local_attn_size > -1 else cfg.max_chunks * cfg.chunk_size
         return frames * (cfg.max_area // cell)
 
+    def largest_latent(self) -> tuple[int, int]:
+        """A latent with the most pixels any output aspect has at the area limit
+        (90 x 160 = 14400), as square as the VAE allows: the VAE caches scale with
+        the latent's pixels, whatever its aspect."""
+        cfg = self.config
+        side = cfg.max_area // (cfg.vae_stride[1] * cfg.vae_stride[2])
+        lat_w = 2 * int(np.sqrt(side / 4))
+        return (side // lat_w) // 2 * 2, lat_w
+
     def default_pool_bytes(self) -> int:
-        """Room for one rollout at the largest area (``max_window_tokens``), or
-        several smaller ones."""
-        return RequestPoolReqConfig.of(rollout_state_buffers(self.config, self.max_window_tokens())).nbytes()
+        """Room for one rollout at the largest area: its K/V at the most tokens any
+        aspect keeps, its caches at the most latent pixels any aspect has."""
+        buffers = rollout_state_buffers(self.config, self.largest_latent(), self.max_window_tokens())
+        return RequestPoolReqConfig.of(buffers).nbytes()
 
     def validate_config_yaml(self, config: dict, config_path: str) -> None:
         """Refuse to serve more than one rollout at a time.
 
-        The pool bounds each rollout's rolling K/V and text K/V, not how many
-        rollouts run: at small output sizes it admits many. Each one's VAE caches
-        are allocated by the dit outside the engine's resources, so until they are
-        resources, the conductor's admit queue, which exists only when
-        ``max_concurrent_requests`` is set, has to hold them to one rollout.
+        The pool bounds each rollout's K/V and encoder cache, not how many
+        rollouts run: at small output sizes it admits many. Each one's VAE decoder
+        cache is allocated by the dit outside the engine's resources, so until it
+        is a resource, the conductor's admit queue, which exists only when
+        ``max_concurrent_requests`` is set, has to hold it to one rollout.
         """
         limit = config.get("max_concurrent_requests")
         if type(limit) is int and limit == 1:
             return
         raise ValueError(
             f"LingBot-World requires `max_concurrent_requests: 1` in {config_path}; got {limit!r}. "
-            "The request pool bounds each rollout's K/V, not how many run, and each rollout's VAE "
-            "caches are allocated by the dit outside the engine's resources, so the admit queue "
-            "that this key enables is the only bound on them."
+            "The request pool bounds each rollout's K/V and encoder cache, not how many run, and each "
+            "rollout's VAE decoder cache is allocated by the dit outside the engine's resources, so the "
+            "admit queue that this key enables is the only bound on it."
         )
 
     def get_graph_walk_graphs(self) -> dict[str, GraphSection]:
@@ -297,7 +309,7 @@ class LingBotWorldModel(Model):
             "image_inputs": [image],
             "camera_poses": [latent_camera_poses(poses[:frame_num], lat_f)],
             "intrinsics": [scale_intrinsics(intrinsics, cfg.intrinsics_height, cfg.intrinsics_width, height, width)],
-        }, {DIT_KV_TOKENS: sum(rolling_extent(cfg, (height, width), lat_f))})
+        }, {DIT_KV_TOKENS: sum(rolling_extent(cfg, (height, width), lat_f)), DIT_LAT_HW: [lat_h, lat_w]})
 
     def _preprocess_image(self, image: torch.Tensor, kwargs: dict) -> torch.Tensor:
         """``[3, h, w]`` float32 in [-1, 1] at the output size: the reference's
@@ -362,12 +374,13 @@ class LingBotWorldModel(Model):
     ) -> dict[str, ResourceReqConfig]:
         """The rollout's state in the pool, declared up front so it waits in the
         engine's queue for room, and a size the pool can never hold is a 400.
-        ``process_prompt`` sizes it (``DIT_KV_TOKENS``), once it knows the output size."""
+        ``process_prompt`` sizes it (``DIT_KV_TOKENS``, ``DIT_LAT_HW``), once it knows
+        the output size."""
         del input_modalities, output_modalities
-        tokens = model_kwargs.get(DIT_KV_TOKENS)
-        if tokens is None:
+        tokens, lat_hw = model_kwargs.get(DIT_KV_TOKENS), model_kwargs.get(DIT_LAT_HW)
+        if tokens is None or lat_hw is None:
             return {}
-        return {DIT_POOL: RequestPoolReqConfig.of(rollout_state_buffers(self.config, int(tokens)))}
+        return {DIT_POOL: RequestPoolReqConfig.of(rollout_state_buffers(self.config, tuple(lat_hw), int(tokens)))}
 
     # ------------------------------------------------------------------
     # Submodule loading
