@@ -5,6 +5,7 @@ import torch
 from jinja2 import TemplateError
 from transformers import AutoTokenizer
 
+from mstar.engine.resources.sampler.grammar import STRUCTURED_OUTPUTS_KWARG, grammar_request
 from mstar.engine.state import (
     Array,
     Attend,
@@ -197,7 +198,8 @@ class Qwen3_5DenseModel(MultimodalDecoderModel):
         self, input_modalities: list[str], output_modalities: list[str], model_kwargs: dict,
     ) -> dict[str, SampleSettings]:
         config = super().get_request_resource_configs(input_modalities, output_modalities, model_kwargs)[SAMPLER]
-        return {SAMPLER: SampleSettings(**{k: getattr(config, k) for k in SAMPLING_KEYS})}
+        grammar = grammar_request((model_kwargs or {}).get(STRUCTURED_OUTPUTS_KWARG))
+        return {SAMPLER: SampleSettings(**{k: getattr(config, k) for k in SAMPLING_KEYS}, grammar=grammar)}
 
     # -----------------------------------------------------------------------
     # Chunked prefill
