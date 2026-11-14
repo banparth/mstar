@@ -200,8 +200,9 @@ def main() -> int:
             np.save(args.out / f"session{i}_frames.npy", frames)
         spans = sorted((r["arrivals"][0], r["arrivals"][-1]) for r in results.values())
         report["first_last_chunk_s"] = spans
-        # waited: a rollout's first chunk came after an earlier one's last
-        report["waited"] = sum(1 for a, b in zip(spans, spans[1:], strict=False) if b[0] > a[1])
+        # waited: a rollout's first chunk came after the last of any rollout that started before it
+        # (not only the one just before: with room for two, the third starts when the first ends)
+        report["waited"] = sum(1 for i, (first, _) in enumerate(spans) if any(last < first for _, last in spans[:i]))
         arrivals = solos[sessions[0]]["arrivals"]
         report["solo_chunk_gaps_s"] = [round(b - a, 3) for a, b in zip(arrivals, arrivals[1:], strict=False)]
     finally:
