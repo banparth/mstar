@@ -1,0 +1,1349 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Preemption under KV pressure &#8212; M* v0.2.1 Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=4418a689" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../_static/documentation_options.js?v=c480a563"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=ccdb6887"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'design/admission_and_preemption';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.2.1" />
+    <meta name="docbuild:last-update" content="Nov 22, 2026"/>
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">M* v0.2.1 Documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../serving.html">Serving</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics.html">Metrics reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../clients.html">Using a Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../evaluation.html">Evaluation and Benchmarks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">Supported Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../asr.html">Speech recognition: Whisper and Qwen3-ASR</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api.html">API Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../_autosummary/mstar.api_server.html">mstar.api_server</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.api_server.auth.html">mstar.api_server.auth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.api_server.media_io.html">mstar.api_server.media_io</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.api_server.openai.html">mstar.api_server.openai</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.api_server.openai.protocol.html">mstar.api_server.openai.protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.api_server.openai.realtime_vad.html">mstar.api_server.openai.realtime_vad</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.api_server.openai.serving_chat.html">mstar.api_server.openai.serving_chat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.api_server.openai.serving_images.html">mstar.api_server.openai.serving_images</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.api_server.openai.serving_realtime.html">mstar.api_server.openai.serving_realtime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.api_server.openai.serving_speech.html">mstar.api_server.openai.serving_speech</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.api_server.openai.serving_videos.html">mstar.api_server.openai.serving_videos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.api_server.openai.speech_chunking.html">mstar.api_server.openai.speech_chunking</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.api_server.request_types.html">mstar.api_server.request_types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.api_server.rust_frontend.html">mstar.api_server.rust_frontend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.api_server.streaming_response.html">mstar.api_server.streaming_response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.api_server.ws_frames.html">mstar.api_server.ws_frames</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../_autosummary/mstar.communication.html">mstar.communication</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.communication.arena.html">mstar.communication.arena</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.communication.codec.html">mstar.communication.codec</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.communication.communicator.html">mstar.communication.communicator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.communication.edge_items.html">mstar.communication.edge_items</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.communication.event.html">mstar.communication.event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.communication.rust_communicator.html">mstar.communication.rust_communicator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.communication.tensor_store.html">mstar.communication.tensor_store</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.communication.tensor_uuid.html">mstar.communication.tensor_uuid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.communication.tensors.html">mstar.communication.tensors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.communication.wire.html">mstar.communication.wire</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../_autosummary/mstar.conductor.html">mstar.conductor</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.conductor.lora_ops.html">mstar.conductor.lora_ops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.conductor.mps.html">mstar.conductor.mps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.conductor.request_info.html">mstar.conductor.request_info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.conductor.workers.html">mstar.conductor.workers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../_autosummary/mstar.engine.html">mstar.engine</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.engine.accelerator_graph_backend.html">mstar.engine.accelerator_graph_backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.engine.chunking.html">mstar.engine.chunking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.engine.fp32_precision.html">mstar.engine.fp32_precision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.engine.node_dtype.html">mstar.engine.node_dtype</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.engine.resources.html">mstar.engine.resources</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.engine.resources.admission.html">mstar.engine.resources.admission</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.engine.resources.attn.html">mstar.engine.resources.attn</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.engine.resources.base.html">mstar.engine.resources.base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.engine.resources.context_parallel.html">mstar.engine.resources.context_parallel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.engine.resources.dsa.html">mstar.engine.resources.dsa</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.engine.resources.kv.html">mstar.engine.resources.kv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.engine.resources.lora.html">mstar.engine.resources.lora</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.engine.resources.position.html">mstar.engine.resources.position</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.engine.resources.resident_hooks.html">mstar.engine.resources.resident_hooks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.engine.resources.rms_norm.html">mstar.engine.resources.rms_norm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.engine.resources.runner.html">mstar.engine.resources.runner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.engine.resources.sampler.html">mstar.engine.resources.sampler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.engine.resources.sequence_shard.html">mstar.engine.resources.sequence_shard</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.engine.resources.spec.html">mstar.engine.resources.spec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.engine.resources.step.html">mstar.engine.resources.step</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.engine.windowing.html">mstar.engine.windowing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../_autosummary/mstar.graph.html">mstar.graph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.graph.base.html">mstar.graph.base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.graph.graph_io.html">mstar.graph.graph_io</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.graph.loop_indices.html">mstar.graph.loop_indices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.graph.special_destinations.html">mstar.graph.special_destinations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../_autosummary/mstar.model.html">mstar.model</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.model.audio_watermark.html">mstar.model.audio_watermark</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.model.canary.html">mstar.model.canary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.model.canary_qwen.html">mstar.model.canary_qwen</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.chatterbox.html">mstar.model.chatterbox</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.chatterbox.config.html">mstar.model.chatterbox.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.command_a_plus.html">mstar.model.command_a_plus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.command_a_plus.assets.html">mstar.model.command_a_plus.assets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.command_a_plus.components.html">mstar.model.command_a_plus.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.command_a_plus.config.html">mstar.model.command_a_plus.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.command_a_plus.tests.html">mstar.model.command_a_plus.tests</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.cosmos3.html">mstar.model.cosmos3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.cosmos3.components.html">mstar.model.cosmos3.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.cosmos3.config.html">mstar.model.cosmos3.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.cosmos3.constants.html">mstar.model.cosmos3.constants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.cosmos3.loader.html">mstar.model.cosmos3.loader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.cosmos3.sessions.html">mstar.model.cosmos3.sessions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.cosmos3.tests.html">mstar.model.cosmos3.tests</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.cosyvoice3.html">mstar.model.cosyvoice3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.cosyvoice3.components.html">mstar.model.cosyvoice3.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.cosyvoice3.config.html">mstar.model.cosyvoice3.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.flux2_klein.html">mstar.model.flux2_klein</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.flux2_klein.components.html">mstar.model.flux2_klein.components</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.glm52.html">mstar.model.glm52</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.glm52.components.html">mstar.model.glm52.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.glm52.config.html">mstar.model.glm52.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.glm52.weight_loader.html">mstar.model.glm52.weight_loader</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.glm5_next.html">mstar.model.glm5_next</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.glm5_next.components.html">mstar.model.glm5_next.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.glm5_next.config.html">mstar.model.glm5_next.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.glm5_next.fused_decode.html">mstar.model.glm5_next.fused_decode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.glm5_next.mhc.html">mstar.model.glm5_next.mhc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.glm5_next.sinkhorn_kernel.html">mstar.model.glm5_next.sinkhorn_kernel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.glm5_next.weight_loader.html">mstar.model.glm5_next.weight_loader</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.higgs_audio.html">mstar.model.higgs_audio</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.higgs_audio.components.html">mstar.model.higgs_audio.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.higgs_audio.config.html">mstar.model.higgs_audio.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.model.keys.html">mstar.model.keys</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.kokoro.html">mstar.model.kokoro</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.kokoro.config.html">mstar.model.kokoro.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.kokoro.g2p.html">mstar.model.kokoro.g2p</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.kokoro.voices.html">mstar.model.kokoro.voices</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.lingbot_world.html">mstar.model.lingbot_world</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.lingbot_world.components.html">mstar.model.lingbot_world.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.lingbot_world.config.html">mstar.model.lingbot_world.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.ltx2_5.html">mstar.model.ltx2_5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.ltx2_5.components.html">mstar.model.ltx2_5.components</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.model.media_limits.html">mstar.model.media_limits</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.minicpm_o.html">mstar.model.minicpm_o</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.minicpm_o.components.html">mstar.model.minicpm_o.components</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.minimax_h3.html">mstar.model.minimax_h3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.minimax_h3.components.html">mstar.model.minimax_h3.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.minimax_h3.tests.html">mstar.model.minimax_h3.tests</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.model.multimodal.html">mstar.model.multimodal</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.muse.html">mstar.model.muse</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.muse.components.html">mstar.model.muse.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.muse.config.html">mstar.model.muse.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.muse.processing.html">mstar.model.muse.processing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.nemotron_duplex.html">mstar.model.nemotron_duplex</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.nemotron_duplex.components.html">mstar.model.nemotron_duplex.components</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.omnilingual_asr.html">mstar.model.omnilingual_asr</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.omnilingual_asr.audio.html">mstar.model.omnilingual_asr.audio</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.omnilingual_asr.components.html">mstar.model.omnilingual_asr.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.omnilingual_asr.config.html">mstar.model.omnilingual_asr.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.omnilingual_asr.tokenizer.html">mstar.model.omnilingual_asr.tokenizer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.omnilingual_asr.weight_loader.html">mstar.model.omnilingual_asr.weight_loader</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.omnivoice.html">mstar.model.omnivoice</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.omnivoice.components.html">mstar.model.omnivoice.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.omnivoice.config.html">mstar.model.omnivoice.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.orpheus.html">mstar.model.orpheus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.orpheus.components.html">mstar.model.orpheus.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.orpheus.config.html">mstar.model.orpheus.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.model.parakeet.html">mstar.model.parakeet</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.phi4mm.html">mstar.model.phi4mm</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.phi4mm.components.html">mstar.model.phi4mm.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.phi4mm.tests.html">mstar.model.phi4mm.tests</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.pi05.html">mstar.model.pi05</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.pi05.components.html">mstar.model.pi05.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.pi05.config.html">mstar.model.pi05.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.pi05.kernels.html">mstar.model.pi05.kernels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.qwen3_5.html">mstar.model.qwen3_5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.qwen3_5.components.html">mstar.model.qwen3_5.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.qwen3_5.video.html">mstar.model.qwen3_5.video</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.qwen3_asr.html">mstar.model.qwen3_asr</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.qwen3_asr.constants.html">mstar.model.qwen3_asr.constants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.qwen3_asr.repetition.html">mstar.model.qwen3_asr.repetition</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.model.rebuild.html">mstar.model.rebuild</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.ripple.html">mstar.model.ripple</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.ripple.config.html">mstar.model.ripple.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.model.submodule_base.html">mstar.model.submodule_base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.model.utils.html">mstar.model.utils</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.vjepa2.html">mstar.model.vjepa2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.vjepa2.components.html">mstar.model.vjepa2.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.vjepa2.config.html">mstar.model.vjepa2.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.voxcpm2.html">mstar.model.voxcpm2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.voxcpm2.components.html">mstar.model.voxcpm2.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.voxcpm2.config.html">mstar.model.voxcpm2.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.wan22.html">mstar.model.wan22</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.wan22.config.html">mstar.model.wan22.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.waypoint.html">mstar.model.waypoint</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.waypoint.checkpoint.html">mstar.model.waypoint.checkpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.waypoint.components.html">mstar.model.waypoint.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.waypoint.config.html">mstar.model.waypoint.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.waypoint.ring_geometry.html">mstar.model.waypoint.ring_geometry</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.whisper.html">mstar.model.whisper</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.whisper.components.html">mstar.model.whisper.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.whisper.config.html">mstar.model.whisper.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../_autosummary/mstar.model.z_image.html">mstar.model.z_image</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/mstar.model.z_image.components.html">mstar.model.z_image.components</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../_autosummary/mstar.observability.html">mstar.observability</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.observability.catalog.html">mstar.observability.catalog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.observability.metrics.html">mstar.observability.metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.observability.recorders.html">mstar.observability.recorders</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../_autosummary/mstar.streaming.html">mstar.streaming</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.streaming.chunk_policy.html">mstar.streaming.chunk_policy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.streaming.stream_buffer.html">mstar.streaming.stream_buffer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.streaming.topology.html">mstar.streaming.topology</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../_autosummary/mstar.utils.html">mstar.utils</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.utils.adarms_norm.html">mstar.utils.adarms_norm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.utils.cache_home.html">mstar.utils.cache_home</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.utils.client_errors.html">mstar.utils.client_errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.utils.containers.html">mstar.utils.containers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.utils.cpus.html">mstar.utils.cpus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.utils.device.html">mstar.utils.device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.utils.exitcode.html">mstar.utils.exitcode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.utils.fast_tokenize.html">mstar.utils.fast_tokenize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.utils.fp8_block.html">mstar.utils.fp8_block</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.utils.gc_freeze.html">mstar.utils.gc_freeze</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.utils.generation_kwargs.html">mstar.utils.generation_kwargs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.utils.h2d.html">mstar.utils.h2d</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.utils.hf_snapshot.html">mstar.utils.hf_snapshot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.utils.host_copy.html">mstar.utils.host_copy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.utils.ipc_format.html">mstar.utils.ipc_format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.utils.knobs.html">mstar.utils.knobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.utils.logging_config.html">mstar.utils.logging_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.utils.mla_latent_norm.html">mstar.utils.mla_latent_norm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.utils.orphan.html">mstar.utils.orphan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.utils.profiler.html">mstar.utils.profiler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.utils.socket_prefix.html">mstar.utils.socket_prefix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.utils.streams.html">mstar.utils.streams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.utils.threads.html">mstar.utils.threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.utils.utf8_stream.html">mstar.utils.utf8_stream</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../_autosummary/mstar.worker.html">mstar.worker</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.worker.batch_builder.html">mstar.worker.batch_builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.worker.chunk_loops.html">mstar.worker.chunk_loops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.worker.host_copies.html">mstar.worker.host_copies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.worker.host_pool.html">mstar.worker.host_pool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.worker.lora_loads.html">mstar.worker.lora_loads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.worker.node_manager_utils.html">mstar.worker.node_manager_utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.worker.phase_timer.html">mstar.worker.phase_timer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.worker.preemption.html">mstar.worker.preemption</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.worker.rebuild.html">mstar.worker.rebuild</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.worker.rid_table.html">mstar.worker.rid_table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.worker.scheduled_batch.html">mstar.worker.scheduled_batch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.worker.scheduling_policy.html">mstar.worker.scheduling_policy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.worker.spec_rows.html">mstar.worker.spec_rows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.worker.stream_buffers.html">mstar.worker.stream_buffers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mstar.worker.worker_metrics.html">mstar.worker.worker_metrics</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../environment_variables.html">Environment variables</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contributing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../adding_models.html">Adding a New Model</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/mstar-project/mstar" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mstar-project/mstar/blob/main/docs/design/admission_and_preemption.md?plain=1" target="_blank"
+   class="btn btn-sm btn-source-file-button dropdown-item"
+   title="Show source"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="btn__text-container">Show source</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mstar-project/mstar/issues/new?title=Issue%20on%20page%20%2Fdesign/admission_and_preemption.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/design/admission_and_preemption.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Preemption under KV pressure</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">1. Classes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reservations">2. Reservations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preemption">3. Preemption</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arrival-numbers">3.1 Arrival numbers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-victims">3.2 Choosing the victims</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#earmarks">3.3 Earmarks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-drop">4. The drop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#return-and-rebuild">5. Return and rebuild</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#states">5.1 States</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-return-check">5.2 The return check</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-rebuild-row">5.3 The rebuild row</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokens-after-a-rebuild">5.4 Tokens after a rebuild</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-every-request-finishes">5.5 Why every request finishes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tp-followers">6. TP followers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checks">7. Checks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trade-offs">8. Trade-offs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps-out-of-scope-here">9. Next steps (Out of Scope here)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="preemption-under-kv-pressure">
+<h1>Preemption under KV pressure<a class="headerlink" href="#preemption-under-kv-pressure" title="Link to this heading">#</a></h1>
+<p>Since M* has no admission control today, requests take pages as they prefill and decode, and free them only when they finish. Once every running request in a full pool needs another page, none can finish, and all wait until clients time out (#307).</p>
+<p>Earlier PR (#400) proposed admission control that reserves each request’s worst case — its prompt plus <code class="docutils literal notranslate"><span class="pre">max_tokens</span></code>. It removes the stall completely, but induces severe HoL blocking (e.g. chats queue behind image requests): their TTFT p50 rose from 0.45 s to 17.7 s. Whether this fragments the pool was never measured, but it is nonetheless based on a banker check which felt too strict.</p>
+<p>This design adds slim version of admission control by default (A1). A request reserves only its prompt’s pages and waits in a queue until they fit. On top of it, the requests are classified as either:</p>
+<ol class="arabic simple">
+<li><p><strong>Guaranteed.</strong> A request that streams an output that can’t pause, such as audio, or whose pages nothing could take back, also reserves pages for the most it can generate, and is never preempted once it starts.</p></li>
+<li><p><strong>Preemptible.</strong> When a request runs out of pages, newer preemptible requests free pages for it. Each moves to the host when the host pool can hold all of its pages, and is otherwise dropped and later rebuilds its KV from token ids. A request that can’t be rebuilt moves only to the host, into room the host set aside for it.</p></li>
+</ol>
+<p>A host tier for the prefix cache, which was on the roadmap regardless, is built alongside, and aims to cut that recompute by copying pages between host and device asynchronously, hiding the offload and reload cost.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Part</p></th>
+<th class="head"><p>PR</p></th>
+<th class="head"><p>Section</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Reservations and a queue per pool</p></td>
+<td><p>A1</p></td>
+<td><p>§2</p></td>
+</tr>
+<tr class="row-odd"><td><p>The rebuild row</p></td>
+<td><p>R1</p></td>
+<td><p>§5</p></td>
+</tr>
+<tr class="row-even"><td><p>Preemption on a failed grant</p></td>
+<td><p>R2</p></td>
+<td><p>§3, §4</p></td>
+</tr>
+<tr class="row-odd"><td><p>Guaranteed and preemptible requests</p></td>
+<td><p>R3</p></td>
+<td><p>§1</p></td>
+</tr>
+<tr class="row-even"><td><p>TP followers</p></td>
+<td><p>R4</p></td>
+<td><p>§6</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<section id="classes">
+<span id="1-classes"></span><h2>1. Classes<a class="headerlink" href="#classes" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">KVReqConfig</span><span class="p">(</span><span class="n">ResourceReqConfig</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="n">unpausable</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>   <span class="c1"># streams an output that can't pause, set by the conductor</span>
+    <span class="n">rebuildable</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>   <span class="c1"># a drop on this worker can free its pages, set by the worker</span>
+</pre></div>
+</div>
+<p>A dropped request keeps only its token ids, so a request can be dropped only if its node can rebuild all of its KV from them. One that can’t be dropped can still move to the host.</p>
+<p>A request that nothing can take pages back from must never run short. From the moment it is guaranteed, it reserves its whole footprint, its prompt plus its growth bound, and is never preempted once it starts. That is what guaranteed means.</p>
+<p>The model declares the footprint as KV spans (#832). A span’s kind says what its KV is made from:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ids</span></code>: token ids</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">digest</span></code>: an encoder’s output</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rows</span></code>: another node’s outputs</p></li>
+</ul>
+<p>Each pool decides the class from two facts. The conductor marks a request that streams an output that can’t pause, and that mark holds in every pool. The worker marks whether a drop there can free the request’s pages: every node of the pool that writes the request’s KV on that worker has a policy that can write all of it again. A request no drop can free is preemptible while the host pool sets aside room for its move: its prompt when it is admitted, and each page it takes after that before it takes it. When the host pool has no room for that, at admission or at any page after, it becomes guaranteed, and the host pool logs and counts it.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>#</p></th>
+<th class="head"><p>A request with</p></th>
+<th class="head"><p>Class</p></th>
+<th class="head"><p>Why</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>An output it streams that can’t pause, audio unless the model or the deployment says otherwise</p></td>
+<td><p>guaranteed</p></td>
+<td><p>a pause is a gap in playback</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>A <code class="docutils literal notranslate"><span class="pre">rows</span></code> span from another node’s outputs</p></td>
+<td><p>moves only to the host there, or guaranteed</p></td>
+<td><p>its KV comes from another node’s outputs, such as the Thinker’s hidden states the Qwen3-Omni Talker reads, and no policy on its node rebuilds it</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>A <code class="docutils literal notranslate"><span class="pre">digest</span></code> or <code class="docutils literal notranslate"><span class="pre">rows</span></code> span on a walk of its node’s rebuild policy</p></td>
+<td><p>preemptible at one rank, and elsewhere moves only to the host there, or guaranteed</p></td>
+<td><p>its KV comes from an encoder’s output, freed after prefill, such as a Qwen3.5 image’s or video’s, so a rebuild needs a host copy of it</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>No rebuild policy on the node that writes its KV</p></td>
+<td><p>moves only to the host there, or guaranteed</p></td>
+<td><p>the model declares no way to rebuild the node’s KV, as when its decode reads embeddings</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Only <code class="docutils literal notranslate"><span class="pre">ids</span></code> spans</p></td>
+<td><p>preemptible</p></td>
+<td><p>its token ids reproduce all of its KV</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>R5 keeps a host copy of the encoder’s output for the rebuild of a row 3 request. R5a covers Qwen3.5 images, and R5b covers Bagel, Qwen3-Omni and Higgs. Without a copy, a rebuild of row 3 would have to run the encoder again, which on Bagel and Qwen3-Omni sits on another worker, so such a request stays guaranteed.</p>
+<p>On initial tests, I measured that keeping row 3 guaranteed costs about 9% of TTFT under pressure. On a 48-page pool at c16, Qwen3.5 image requests’ TTFT p50 fell from 3.48 s to 3.18 s once R5a made them preemptible.</p>
+<p>Why this shape:</p>
+<ul class="simple">
+<li><p><strong>The class comes from the request.</strong> A priority or a per-request flag would be one more input to tune, when the footprint and the output can be used to make the decision.</p></li>
+<li><p><strong>An output that can’t pause holds in every pool.</strong> A Qwen3-Omni request with streamed audio out must not be dropped by the Thinker’s worker while its Talker is speaking, so the conductor marks it. A span no rebuild can write again holds only in its node’s pools: for an unstreamed reply, a Thinker rebuild only delays the Talker’s rows.</p></li>
+<li><p><strong>Only streamed outputs that can’t pause.</strong> The model declares them (<code class="docutils literal notranslate"><span class="pre">Model.UNPAUSABLE_OUTPUTS</span></code>, audio by default), and a deployment overrides them with <code class="docutils literal notranslate"><span class="pre">unpausable_outputs</span></code>, as an Orpheus deployment may to keep a fast first chunk. A streamed text reply that pauses is late, not broken, and an unstreamed audio reply is played after it arrives.</p></li>
+<li><p><strong>Room on the host is set aside, not assumed.</strong> A request that can only move to the host must be able to move when an older request needs its pages (§5.5). Room counted at that moment is whatever other moves left, so a full host pool would leave it holding its pages, and a pool of such requests stalls as in #307. The room set aside always covers the pages it holds, so its move fits. Past <code class="docutils literal notranslate"><span class="pre">cpu_offload_pages</span></code>, the rest are guaranteed.</p></li>
+<li><p><strong>The room grows with what it holds.</strong> Setting its whole footprint aside at its first ask held host room for pages it might never write, and for requests still waiting in the queue, so few requests got room and the host prefix tier was left little. Turning guaranteed at the page the host can’t cover needs the rest of its footprint free on the device, and until it is, the request is short of those pages as a decode step is short of one (§3).</p></li>
+<li><p><strong>Not the worst case for every request.</strong> With 32 Bagel text chats beside 16 image chats on 64 pages, chat TTFT p50 was 559 ms with every request guaranteed and 69.7 ms with two classes.</p></li>
+<li><p><strong>Seeded requests stay preemptible.</strong> Guaranteeing them would charge the worst case to every request that sets a seed. A rebuilt seeded request may not repeat its output (§5.4).</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="reservations">
+<span id="2-reservations"></span><h2>2. Reservations<a class="headerlink" href="#reservations" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">KVManager._alloc</span></code> (<a class="reference download internal" download="" href="../_downloads/80b0b8624f2e11368fbec0c403b15d87/manager.py"><span class="xref download myst">manager.py</span></a>) checks every one of the grants against the reservations, under the KV lock which it already holds. A grant is <code class="docutils literal notranslate"><span class="pre">_alloc</span></code> giving a request the next page to write into. Each pool gains:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># per pool, under the KV lock</span>
+<span class="n">_allotments</span>   <span class="c1"># each admitted request's Allotment, its reservation</span>
+<span class="n">_unused</span>       <span class="c1"># pages reserved but not yet used, summed over requests</span>
+<span class="n">_asks</span>         <span class="c1"># the pages each request that asked and has no reservation asks for</span>
+</pre></div>
+</div>
+<p>The code calls a reservation an <code class="docutils literal notranslate"><span class="pre">Allotment</span></code>, since <code class="docutils literal notranslate"><span class="pre">manager.py</span></code> already uses “reservation” for an admit’s unwind record.</p>
+<p>Rules:</p>
+<ul class="simple">
+<li><p><strong>Ingest.</strong> A request whose footprint is bigger than its pool gets a 400 at ingest. A request that asks for no length has its default cut to fit the pool (#808).</p></li>
+<li><p><strong>Queue.</strong> A request joins the runner’s waiting list at its first readiness check, by its arrival number (§3.1), or behind every numbered request in the order it first asks when it has none. It is admitted when it is first among the waiting requests of every pool it asks, and its reservation fits in each, in the room its class sees (below).</p></li>
+<li><p><strong>Passing.</strong> While the first request of a pool’s queue can’t start, a request behind it is admitted if what its own admission would reserve, plus the growth that admission leaves out, fits. A request refused while passing can’t start either, until what it didn’t fit has grown, so the requests behind it may pass it too. While a request waits, no request behind it is admitted into the pages a passer frees, or into the pages moves made for the waiting request free before they cover it. A passer that a drop or a move to the host sends back returns as it passed, so it takes none of those pages either. Those pages are kept for one waiting request at a time, up to what it asks for, and stop being kept once it is admitted or leaves. A recurrent pool and the sampler’s in-graph rows let a request pass when a slot or row is left for the first one.</p></li>
+<li><p><strong>Asking again.</strong> A request that moves to the host, is dropped, gives back a reservation it never wrote to, or waits for its shortage (§3.2) asks again at once and waits in no queue. Each pass tries these requests first, oldest first, once what each didn’t fit has grown. While one of them is the oldest live request to have asked a pool it waits for, that pool’s queue admits no newer prompt, other than one the pool has already allotted its room, as the moves a waiting request chose do once they land (§3.2). That prompt asks the pool for nothing more, and the request asking again may need the pages its allotment holds.</p></li>
+<li><p><strong>Size.</strong> A preemptible request reserves its prompt. A guaranteed one, and one admitted past the first request, also reserves its growth.</p></li>
+<li><p><strong>Inside a reservation.</strong> A grant always succeeds, except a guaranteed request’s grant into pages it lent. Any other failure there is an accounting bug, and the manager raises.</p></li>
+<li><p><strong>Lending.</strong> A preemptible request may borrow the pages a guaranteed request was allotted and hasn’t written, past its own reservation and for its admission or return, but never the room kept for a waiting request. When a guaranteed request’s grant needs pages it lent and none is free, it takes them back by moving preemptible requests (§3.2), and holds back from borrowers every page the moves free up to what it lent. While it waits for them, nothing more is lent. A pool on a node that rebuilds no request, and has no host pool or isn’t the node’s only KV cache, moves no request there, so it lends nothing.</p></li>
+<li><p><strong>Past a reservation.</strong> A grant takes only from the room its class sees, and fails with <code class="docutils literal notranslate"><span class="pre">AllocationFailed(pages_short=...)</span></code> when that room is short.</p></li>
+<li><p><strong>Across pools.</strong> A request takes its reservation in every pool its node asks, the recurrent pool’s slot and the sampler’s in-graph row included, or in none, and nothing is retrieved for it before then. A waiting request is asked again only after a pool it waits on has grown.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">room</span> <span class="o">=</span> <span class="n">free</span> <span class="o">+</span> <span class="n">evictable</span> <span class="o">-</span> <span class="n">_unused</span>
+<span class="n">lent</span> <span class="o">=</span> <span class="n">what</span> <span class="n">guaranteed</span> <span class="n">requests</span> <span class="n">were</span> <span class="n">allotted</span> <span class="ow">and</span> <span class="n">haven</span><span class="s1">'t written, less what they took back</span>
+
+<span class="n">a</span> <span class="n">preemptible</span> <span class="n">request</span><span class="s1">'s room = room + lent, or room while a guaranteed request waits to take back</span>
+<span class="n">a</span> <span class="n">guaranteed</span> <span class="n">request</span><span class="s1">'s room  = room + what moving every preemptible request frees, when it asks to be admitted</span>
+                               <span class="ow">and</span> <span class="n">the</span> <span class="n">pool</span> <span class="n">lends</span>
+                             <span class="o">=</span> <span class="n">the</span> <span class="n">smaller</span> <span class="n">of</span> <span class="n">room</span> <span class="o">+</span> <span class="n">lent</span> <span class="ow">and</span> <span class="n">what</span> <span class="n">it</span> <span class="n">lends</span> <span class="n">plus</span> <span class="n">the</span> <span class="n">room</span><span class="p">,</span> <span class="n">once</span> <span class="n">admitted</span>
+
+<span class="n">invariant</span><span class="p">,</span> <span class="n">after</span> <span class="n">every</span> <span class="n">grant</span><span class="p">,</span> <span class="n">reservation</span><span class="p">,</span> <span class="n">lease</span> <span class="ow">and</span> <span class="n">release</span><span class="p">:</span>
+    <span class="n">_unused</span> <span class="o">-</span> <span class="n">lent</span> <span class="o">&lt;=</span> <span class="n">free</span> <span class="o">+</span> <span class="n">evictable</span>
+</pre></div>
+</div>
+<p>What a cache hit costs:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>A hit on</p></th>
+<th class="head"><p>Costs</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>a page only the index holds</p></td>
+<td><p>a fresh page, out of a guaranteed request’s room alone until it adopts its lease</p></td>
+</tr>
+<tr class="row-odd"><td><p>a page another request holds</p></td>
+<td><p>nothing, lent</p></td>
+</tr>
+<tr class="row-even"><td><p>a page past the newest recurrent snapshot under the hit</p></td>
+<td><p>a fresh page, since the step runs from the snapshot</p></td>
+</tr>
+<tr class="row-odd"><td><p>a cached prefix copied from the host at readiness</p></td>
+<td><p>a grant within the request’s reservation</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Why this shape:</p>
+<ul class="simple">
+<li><p><strong>The rule lives in <code class="docutils literal notranslate"><span class="pre">_alloc</span></code>.</strong> Today it grants any free page, so a growing request could take a page a guaranteed request reserved, and that request’s next grant would fail. A preemptible request may take such a page only as a loan the guaranteed request can take back.</p></li>
+<li><p><strong>Guaranteed requests lend what they haven’t written.</strong> On Orpheus with half the requests streamed, 256 pages and no host pool, every one of 3,026 moves over two launches came from a preemptible request running short while the free and evictable pages covered its shortage, a median of 75 of them unwritten in guaranteed reservations. Streamed TTFA p50 rose from 189 ms to 729 ms.</p></li>
+<li><p><strong>A guaranteed request is admitted against what it can take back.</strong> Its footprint has to fit in the free and evictable pages plus what moving every preemptible request frees, less what other guaranteed requests reserved and haven’t written, so the guaranteed requests can always take back everything they lent. Counting only free pages, it waited for borrowers to finish.</p></li>
+<li><p><strong>The head is passed only while it doesn’t fit.</strong> The pages that passing requests free are kept for it, so it can’t wait forever behind a stream of small ones.</p></li>
+<li><p><strong>A passer’s hit comes off as the head’s does.</strong> A passer that runs short past its reservation is the newest request holding pages, so preemption takes it first, and the pages kept for the head are never lent to it.</p></li>
+<li><p><strong>A request that asks again waits outside the queues, and holds newer prompts back only while it is the oldest in its pool.</strong> Waiting at its arrival for its whole history and a page, it held every newer prompt back: 32 Bagel requests over four shared prefixes on 96 pages, with 512 host pages, ran about 3 at once and took about 58 s, against 41 to 54 s today. Today an offloaded request reloads outside admission once its pages fit, and trying returns first in the same way took that run to 40.8 to 47.9 s on R4. Waiting outside the queues with no such rule, a request on the host or dropped could be passed by a steady stream of newer prompts until it timed out, even once it was the oldest. Every older request in its pool finishes (§5.5), so it becomes the oldest there, and no newer prompt passes it then.</p></li>
+<li><p><strong>Evictable hits are charged as fresh.</strong> Eviction could hand such a page to another request before the probe leases it.</p></li>
+<li><p><strong>A guaranteed request is charged for no hit until it adopts its lease.</strong> A cut lease leaves the walk to write the cut pages, and a cut page another request still holds frees no room, so its reservation keeps every page until then.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="preemption">
+<span id="3-preemption"></span><h2>3. Preemption<a class="headerlink" href="#preemption" title="Link to this heading">#</a></h2>
+<p>Preemption starts when a grant past a reservation fails, in <code class="docutils literal notranslate"><span class="pre">StepPipeline._handle_admit_failure</span></code> (<a class="reference download internal" download="" href="../_downloads/c6c09ab6fb65bb1a9110bc80da8ec1ee/step_pipeline.py"><span class="xref download myst">step_pipeline.py</span></a>), which calls <code class="docutils literal notranslate"><span class="pre">Preemption.preempt</span></code> (<a class="reference download internal" download="" href="../_downloads/c0bb601c3467c39e83c833f5aa56be84/preemption.py"><span class="xref download myst">preemption.py</span></a>) before <code class="docutils literal notranslate"><span class="pre">Admission.relieve</span></code>. In place of today’s 50 ms hold, the worker moves victims to the host or drops them, or makes the request wait. A victim moves to the host when the host pool can hold all of its pages, since dropping and rebuilding requests the host pool could hold made 32 Bagel requests sharing a prefix take about 4x as long with 256 host pages.</p>
+<p>Only KV pages trigger it. Qwen3.5’s recurrent state pool, the sampler’s in-graph rows and the ring KV manager give each request one fixed-size slot for its whole life, so a running request never runs short there. A new request waits at admission until a slot is free beyond those already reserved, so it never holds KV pages it can’t use.</p>
+<section id="arrival-numbers">
+<span id="31-arrival-numbers"></span><h3>3.1 Arrival numbers<a class="headerlink" href="#arrival-numbers" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CurrentForwardPassInfo</span><span class="p">:</span>
+    <span class="o">...</span>
+    <span class="n">arrival</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>   <span class="c1"># set by the conductor when it takes the request</span>
+</pre></div>
+</div>
+<p>The conductor numbers each request from a single counter, in the order it takes them, and sends the number with the request. A dropped request keeps its number. The runner keeps the requests in that order, and each pool’s queue, the order it tries requests that ask again in, and its victim choice go by it.</p>
+<p>A number set by each worker won’t work, since requests reach workers on separate sockets, and so two workers can see the same two requests in different orders. Each will drop a different one, and neither makes progress.</p>
+</section>
+<section id="choosing-the-victims">
+<span id="32-choosing-the-victims"></span><h3>3.2 Choosing the victims<a class="headerlink" href="#choosing-the-victims" title="Link to this heading">#</a></h3>
+<p>Say request R’s grant is short by <code class="docutils literal notranslate"><span class="pre">pages_short</span></code> pages, one for a decode row. A request frees the pages only it holds, alone or with the index, plus the unused part of its reservation.</p>
+<ul class="simple">
+<li><p><strong>Candidates.</strong> The preemptible requests that arrived after R, and for a guaranteed R those that arrived before it too, since any of them may hold what R lent, newest first, other than requests with a step or a KV read in flight on their pages, a dropped request whose rebuild hasn’t landed, since the rebuild runs on its reservation, and a request holding a lease, until its walk’s admit takes the lease over. The probe that took the lease moved the position counter, which never moves back, and a walk the cache served keeps its KV only in the lease. Each holds no page of its own, fits whole in the host pool, or has a drop that isn’t refused for a lasting reason (§4). Any other that holds no page only gives back its reservation and the room the host set aside for it, and asks again, whatever the host pool. The host’s room is its free pages and the cached pages it can evict, less the room set aside for requests that can only move to the host, and each victim chosen for the host takes from it in turn. A request with room set aside moves into it.</p></li>
+<li><p><strong>Victims.</strong> The fewest leading candidates that together free at least <code class="docutils literal notranslate"><span class="pre">pages_short</span></code>, minus any whose move wouldn’t change what the set frees.</p></li>
+</ul>
+<p>Then:</p>
+<ol class="arabic simple">
+<li><p>If the victims free enough, <code class="docutils literal notranslate"><span class="pre">preempt</span></code> earmarks what R’s grant needed past its reservation, or for a guaranteed R at least what it lent (§3.3), and moves each victim to the host or drops it (§4).</p></li>
+<li><p>Otherwise, R asks the pool for every page its grant needed past its reservation. When the host pool can hold all of R’s pages, R moves there, as today’s offload-and-hold moves a request that can’t grow, and returns once its history and those pages fit. Otherwise R keeps its reservation and its pages, and waits, parked as a new prompt is, until the room covers them.</p></li>
+</ol>
+<p>A waiting request chooses victims too. Once each step’s admit has settled, the worker walks the waiting requests the pools have refused, oldest first, whether a new prompt, a request that asks again or one waiting for its shortage. It helps the first whose pool chooses victims for it among the newer requests that wait holding pages, newest first, as for a short grant (<code class="docutils literal notranslate"><span class="pre">KVManager.make_room</span></code>), so an older request stuck on another resource’s slot, or in a pool that doesn’t move, holds up no younger one. A guaranteed request waiting to take back what it lent chooses among the older preemptible requests that wait holding pages too, and one waiting to be admitted moves none, since its room already counts what they would free. It takes the room their moves free as they land (§3.3). The walk stops at the first refused request the room now fits, so no younger request takes that room. The next admission pass tries it, and admits it unless another resource refuses it or a request that asks again holds its queue back. While no request waits holding pages, the worker skips the walk without taking a lock, and a walk that moved nothing runs again only once the refusals, the requests the pools could move or the room moving them would make change.</p>
+<p>The choice is one <code class="docutils literal notranslate"><span class="pre">KVManager.preempt</span></code> call under the pool’s lock.</p>
+<p>Why this shape:</p>
+<ul class="simple">
+<li><p><strong>Newest first.</strong> No request is chosen as a victim for a newer request, except by a guaranteed request taking back what it lent, which tries every newer preemptible request first. A newer one that can’t move yet, with a step or a read in flight, a lease, or a rebuild still landing, keeps its pages while an older one moves, rather than holding up a stream that can’t pause. A request that moved itself to the host can see newer prompts start in the pages it freed while an older request runs, but none once it is the oldest in its pool. vLLM’s FCFS policy preempts the last entry in <code class="docutils literal notranslate"><span class="pre">running</span></code>, which is where a resumed request sits.</p></li>
+<li><p><strong>A waiting request moves newer ones that wait holding pages.</strong> A rule decided only when a request runs short can’t see an older request that asks later, as one held in an encoder does. The newer request that waited first holds the pages it needs and runs no step that could run short, so both waited for good. R moving itself whenever nothing newer covered its shortage avoided that, but R came straight back into the room it freed and ran short again. R now moves itself only to the host, and returns only once its history and every page its grant needed fit.</p></li>
+<li><p><strong>Only requests that wait are moved for one.</strong> A running request is never moved for a waiting one, so prompts still start in arrival order whenever they fit and requests that ask again are tried first. A new prompt is usually the newest request, so it rarely has anyone to move. A waiting request runs no step, so moving it once the admit has settled races nothing.</p></li>
+<li><p><strong>A waiting request waits for its whole shortage.</strong> It is measured again only when the room grows, and let go only once the room covers its whole shortage.</p></li>
+<li><p><strong>Not the row last in line.</strong> Today’s offload picks it, but under <code class="docutils literal notranslate"><span class="pre">TURNS</span></code> it can be the oldest request in the pool, so nothing guarantees progress.</p></li>
+<li><p><strong>Not the largest request.</strong> A long request would be preempted every time it grows.</p></li>
+</ul>
+</section>
+<section id="earmarks">
+<span id="33-earmarks"></span><h3>3.3 Earmarks<a class="headerlink" href="#earmarks" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Earmark</span><span class="p">:</span>
+    <span class="n">rid</span><span class="p">:</span> <span class="nb">str</span>            <span class="c1"># R, the request whose grant failed</span>
+    <span class="n">pages</span><span class="p">:</span> <span class="nb">int</span>          <span class="c1"># what R's grant needed past its reservation</span>
+    <span class="n">victims</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>   <span class="c1"># the victims whose moves cover the rest</span>
+</pre></div>
+</div>
+<p>The room R’s grant counted joins R’s reservation at once. As each victim’s move lands, what it frees joins too, up to what the grant needed past the reservation, so R’s next grant can’t fail again. A guaranteed R holds back from borrowers what it frees, up to everything it lent, so it doesn’t run short again at its next page. Without it, the head of the queue, or a victim that asks again at once, could be admitted into the freed pages before R’s next step, and R would fail again, as it does today.</p>
+<p>Every victim can move in the call that chose it, since no step or read is in flight on its pages. A victim whose move fails comes off the earmark with nothing freed, so R chooses again at its next failed grant.</p>
+<p>When a waiting request W chooses victims, the earmark is W’s. W takes the room as its victims’ moves land, once that covers all W asks for, so a victim, which asks again at once, can’t take it back first. If the host then has no room to set aside for W’s move (§1), W turns guaranteed and waits for its whole footprint instead.</p>
+<p>Lifecycle:</p>
+<ol class="arabic simple">
+<li><p>Created with its victims when the worker handles R’s failed grant.</p></li>
+<li><p>Grows R’s reservation as each victim’s move lands, and closes once the last one has.</p></li>
+<li><p>Removed with R.</p></li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="the-drop">
+<span id="4-the-drop"></span><h2>4. The drop<a class="headerlink" href="#the-drop" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">KVManager</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">drop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rid</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tokens</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Take rid's KV off the GPU without copying it, and return the number</span>
+<span class="sd">        of pages that reach the free list. Keyed pages stay in the index as</span>
+<span class="sd">        evictable pages. Needs no host pool. tokens is the slots rid's rebuild</span>
+<span class="sd">        writes: every prefill step its layout lays out and its samples but the</span>
+<span class="sd">        last, or the steps before the one in progress and the chunks that one</span>
+<span class="sd">        ran."""</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">residency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rid</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Residency</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""ON_HOST while rid is offloaded, DROPPED from its drop until its</span>
+<span class="sd">        rebuild lands, and RESIDENT otherwise."""</span>
+</pre></div>
+</div>
+<p>A drop releases the request’s whole reservation. A drop is refused for:</p>
+<ul class="simple">
+<li><p>one that keeps no ids, or whose ids haven’t reached the host or don’t cover its KV, unless it is between two chunks of its prompt, which its rebuild runs again (<code class="docutils literal notranslate"><span class="pre">Rebuilds.refusal</span></code>)</p></li>
+<li><p>one with a host copy, or one dropped already whose rebuild hasn’t landed (<code class="docutils literal notranslate"><span class="pre">KVManager.check_drop</span></code>, as are the rest)</p></li>
+<li><p>one rebuilt that has written nothing since its rebuild landed, so no rebuild is thrown away before it keeps a token. A move to the host keeps the rebuilt KV, so it can still move there</p></li>
+<li><p>one with a step, a KV read or a sample in flight, until that lands</p></li>
+<li><p>one whose KV can’t be recomputed from token ids, or that writes more than one label or growth loop</p></li>
+<li><p>one whose rebuild would write other than the tokens its KV holds</p></li>
+<li><p>any request above one rank in a CFG-parallel pool other than its leader’s, which keeps no reservations</p></li>
+</ul>
+<p>At a drop, the other resources:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Resource</p></th>
+<th class="head"><p>At a drop</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Sampler</p></td>
+<td><p>kept, since its RNG offset and repetition mask can’t be recomputed</p></td>
+</tr>
+<tr class="row-odd"><td><p>Position counter</p></td>
+<td><p>reset, and the rebuild moves it back to the end of the history</p></td>
+</tr>
+<tr class="row-even"><td><p>Qwen3.5’s recurrent state</p></td>
+<td><p>zeroed in place, and the request keeps its slot, so its rebuild never waits for one</p></td>
+</tr>
+<tr class="row-odd"><td><p>Attention</p></td>
+<td><p>kept, since it holds no state a rebuild writes again</p></td>
+</tr>
+<tr class="row-even"><td><p>LoRA adapter pool</p></td>
+<td><p>kept, so the rebuild runs under the request’s adapter, which keeps its slot</p></td>
+</tr>
+<tr class="row-odd"><td><p>Anything else</p></td>
+<td><p>refused at load: a node with a rebuild policy needs every resource it holds to support a drop (<code class="docutils literal notranslate"><span class="pre">Resource.supports_drop</span></code>)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Why this shape:</p>
+<ul class="simple">
+<li><p><strong>A drop needs no host pool.</strong> <code class="docutils literal notranslate"><span class="pre">cpu_offload_pages</span></code> is 0 by default, and a full host pool would stall preemption as it stalls offload today.</p></li>
+<li><p><strong>The whole reservation goes.</strong> Keeping its unused part, as the offload of the row last in line does, would leave pages counted that nothing can use until the victim returns.</p></li>
+</ul>
+<blockquote>
+<div><p>Note: a dropped request’s keyed pages stay in the index as evictable cache. With write-ahead (H1b) and a host pool, they reach the host once no request holds them, so a later request with that prefix copies them back. A rebuild row doesn’t read the host index, though, so it recomputes what only the host holds.</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="return-and-rebuild">
+<span id="5-return-and-rebuild"></span><h2>5. Return and rebuild<a class="headerlink" href="#return-and-rebuild" title="Link to this heading">#</a></h2>
+<section id="states">
+<span id="51-states"></span><h3>5.1 States<a class="headerlink" href="#states" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>State</p></th>
+<th class="head"><p>Held as</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>running</p></td>
+<td><p>resident, admitted</p></td>
+</tr>
+<tr class="row-odd"><td><p>on the host</p></td>
+<td><p>its pages on the host, waiting to return, no reservation</p></td>
+</tr>
+<tr class="row-even"><td><p>dropped</p></td>
+<td><p>not resident, waiting to return, no reservation</p></td>
+</tr>
+<tr class="row-odd"><td><p>rebuilding</p></td>
+<td><p>not resident, admitted, holding its return reservation, its rebuild under way in the worker’s log</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>No field holds the state: residency, the host pool, admission and the log’s rebuilds tell the four apart.</p>
+<p>Lifecycle:</p>
+<ul class="simple">
+<li><p>A rebuilding request is never chosen again: its residency stays dropped until the rebuild lands, and the KV refuses a second drop until then. Once it lands, the KV refuses to drop it until a step writes past the rebuild, and that step runs on the page its return reserved. It can still move to the host, which keeps the rebuilt KV. An older request that runs short while the host can’t take the rebuilt one waits, on the host or holding its pages, and a waiting request moves only newer requests that wait, so it waits at most until the rebuilt one finishes, or runs short with nothing newer than itself to move. Each time the rebuilt one runs short and can move a newer request, it takes that request’s pages and keeps running. It returned with the pages its history fills and one more, so at 128 tokens a page it first runs short 129 to 256 decode steps after it returns, by how full its history left its last page.</p></li>
+<li><p>Removing a request in any state releases its earmark, its pages on the host, its wait to return, its return reservation, its rebuild and its kept ids. A removal during a step that holds a rebuild row waits for the step.</p></li>
+</ul>
+</section>
+<section id="the-return-check">
+<span id="52-the-return-check"></span><h3>5.2 The return check<a class="headerlink" href="#the-return-check" title="Link to this heading">#</a></h3>
+<p>A dropped request asks again when it is dropped, and waits outside the queues (§2), with this check in place of the fit check:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">need</span><span class="p">(</span><span class="n">V</span><span class="p">)</span> <span class="o">=</span> <span class="n">the</span> <span class="n">larger</span> <span class="n">of</span> <span class="n">V</span><span class="s1">'s prompt and, for each label, the pages</span>
+          <span class="n">V</span><span class="s1">'s kept history fills, plus 1, capped at V'</span><span class="n">s</span> <span class="n">footprint</span><span class="p">,</span>
+          <span class="n">less</span> <span class="n">the</span> <span class="n">whole</span> <span class="n">prompt</span> <span class="n">pages</span> <span class="n">another</span> <span class="n">request</span> <span class="n">holds</span><span class="p">,</span> <span class="n">up</span> <span class="n">to</span> <span class="n">a</span>
+          <span class="n">page</span> <span class="n">under</span> <span class="n">what</span> <span class="n">V</span><span class="s1">'s KV held</span>
+
+<span class="k">return</span> <span class="n">when</span> <span class="n">_unused</span> <span class="o">+</span> <span class="n">need</span><span class="p">(</span><span class="n">V</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">free</span> <span class="o">+</span> <span class="n">evictable</span>
+</pre></div>
+</div>
+<p>A page another request holds can’t be evicted, so the rebuild’s probe takes it for nothing, as a prompt’s probe does (§2), and the probe takes at most a page under what V’s KV held (§5.3). Any other hit is charged as fresh.</p>
+<p>When it passes, V reserves <code class="docutils literal notranslate"><span class="pre">need(V)</span></code> and readiness starts its rebuild. The drop counts the history from the tokens V’s KV held and the sample its next step writes.</p>
+<p>A request on the host asks again when it moves there, and the runner tries it before the queues, oldest first (§2), with the same check. Its return reservation covers the pages its reload takes, plus one page per stream, capped at its footprint, or its queued prompt if that is larger. A request that waited for its shortage before it moved returns with every page its grant needed instead of the one page. The readiness check for its next step then reloads it within that reservation. Once admitted it holds no newer request back, so a next step that comes only after its REMOVE costs nothing but the reservation.</p>
+<p>Why this shape:</p>
+<ul class="simple">
+<li><p><strong>A whole history and a page, not the prompt alone.</strong> A victim readmitted once its prompt fit would take back its own pages, and R would fail again. A victim dropped partway through its prompt still writes the rest of it, so it returns with the whole prompt at least.</p></li>
+<li><p><strong>Capped at the footprint.</strong> The ingest 400 bounds the footprint, not the history plus a page.</p></li>
+<li><p><strong>Not its whole footprint.</strong> A footprint far larger than what the request held kept it at the head of the queue while pages were free, and every prompt behind it waited too. When it runs short again it waits for its shortage instead (§3.2).</p></li>
+<li><p><strong>Outside <code class="docutils literal notranslate"><span class="pre">check_ready</span></code>.</strong> After a partial cache hit, <code class="docutils literal notranslate"><span class="pre">admit_retrieve</span></code> would move the position counter past what the rebuild restores, so no <code class="docutils literal notranslate"><span class="pre">admit_retrieve</span></code> runs on a request between its drop and the end of its rebuild.</p></li>
+</ul>
+</section>
+<section id="the-rebuild-row">
+<span id="53-the-rebuild-row"></span><h3>5.3 The rebuild row<a class="headerlink" href="#the-rebuild-row" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RebuildPolicy</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""How a node rebuilds a dropped request's KV, as its model declares it."""</span>
+    <span class="n">walks</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>   <span class="c1"># the prefill walks its rebuild rows run, those the request prefilled in</span>
+    <span class="n">ids_input</span><span class="p">:</span> <span class="nb">str</span>          <span class="c1"># the input a row's ids go under, which the ids sampled since follow</span>
+    <span class="n">sample_output</span><span class="p">:</span> <span class="nb">str</span>      <span class="c1"># the output that carries each sampled id</span>
+    <span class="n">loop</span><span class="p">:</span> <span class="nb">str</span>               <span class="c1"># the loop each of whose iterations samples one id</span>
+    <span class="n">copy_width</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>           <span class="c1"># a walk that reads more than the ids -&gt; values its copies hold per KV slot</span>
+</pre></div>
+</div>
+<p>A model declares a policy per node (<code class="docutils literal notranslate"><span class="pre">Model.rebuild_policies</span></code>), and the worker checks it against the graphs at startup and reads off them what the node reads in each walk besides the ids. A node without one never drops a request.</p>
+<p>A rebuild is a reload whose transfer is computed. The readiness check reads the request’s residency: a request on the host is reloaded by copying, and a dropped one is answered with a rebuild. The scheduler then has the KV lay the label out again to hold the slots its drop checked, and opens the rebuild over those slots in the worker’s log. Readiness answers the request’s decode row from the log until the rebuild lands, without asking the engine, even if the request is let back in for room meanwhile.</p>
+<p>The rebuild runs one row per prefill step the request’s layout lays out (<code class="docutils literal notranslate"><span class="pre">StreamLayout.steps</span></code>), in order, the last also writing the ids sampled since minus the last, as rows mid-prefill that nothing popped. Each row runs in its step’s walk, cut by that walk’s budget, and a walk the model doesn’t chunk rebuilds whole. The scheduler offers them where it offers a speculation’s chunk in flight, so the walk’s token budget cuts and counts them as it does a prompt, and they share steps with the walk’s decode rows. Their inputs come from the log, which also advances their progress as each chunk lands. The step context names them (<code class="docutils literal notranslate"><span class="pre">StepContext.rebuild_rids</span></code>), so the sampler throws their samples away and leaves the request’s last token and RNG offset alone. Postprocess takes them off the step before the graph runtime reads it. Decoding resumes from the last kept id once the last chunk lands.</p>
+<p>A request dropped between two chunks of a prompt step reruns the steps before it from the log, then that step’s chunks up to where it stood. Its chunk Loop still stands there, and the engine still holds the input it prepared for the step, which waits aside while the earlier rows prepare theirs, so the last row is cut from that input, over the layout the request already has. The prompt’s next chunk waits until the rebuild lands and then starts where the Loop stands. Another request may have cached more of the prompt meanwhile, so the KV answers a dropped request’s probe with at most a page under what it held.</p>
+<p>The worker records each prefill step of a request on the step’s first chunk, which carries its whole input: the ids, copied as the step read them to a pinned host pool (<code class="docutils literal notranslate"><span class="pre">rebuild_host_mb</span></code>) once that step completes, every other input the node reads there, such as the encoder’s output a Qwen3.5 prompt with images reads (the pool is 1024 MiB by default on such a worker), copied after the step’s outputs, or on a pass of the worker’s loop that runs no step once its last copy has landed, within the bytes #876 lets a step copy to the host, and the step’s metadata, which the step’s rebuild row runs under. A step other than the one the layout says comes next leaves the request with nothing kept, so it is never dropped. Once the last step is recorded, the worker appends each sample from the stop check’s host copy. They go back to the device when the row’s step is built, on a stream of the pool’s apart from its copies to the host, and only that step waits for them. A request takes one slice of the pool for all of it when it arrives, sized from its layout: 8 B for each slot, since a step may read an id at a copied slot too, and for each copied slot the values the policy declares, in the node’s dtype. So a request the pool can’t hold is known before it is admitted and takes the class of one no drop can free. The worker keeps all of this per node and per handle, and lists it in <code class="docutils literal notranslate"><span class="pre">rid_table.py</span></code>.</p>
+<p>Why this shape:</p>
+<ul class="simple">
+<li><p><strong>The graph runtime never sees the rows.</strong> Switching the request’s runtime walk for one step would touch the runtime, the output edges, <code class="docutils literal notranslate"><span class="pre">WORKER_GRAPHS_DONE</span></code> and the loop-back. Every call that hands a step’s rows to the runtime takes <code class="docutils literal notranslate"><span class="pre">ScheduledBatch.graph_rows</span></code>, which leaves them out.</p></li>
+<li><p><strong>The prefill walk.</strong> Each model’s decode walk breaks a multi-token row in its own way. Bagel’s declares a span of 1, the Qwen3-Omni Thinker’s embeds every id at one position, and Qwen3.5’s with device loop-back reads one token off the sampler.</p></li>
+<li><p><strong>The prompt’s ids from the walk’s input.</strong> A drop can come at any token, after the prompt tensor is freed, so the worker copies the ids after the step that read them, on a stream of the pool’s own. Sending the ids from the data worker with every request instead added 0.5 to 1.8 ms of TTFT at Bagel c16 and Qwen3.5 c32.</p></li>
+<li><p><strong>Not a remove and re-ingest.</strong> The sampler’s RNG offset and repetition mask would be lost.</p></li>
+<li><p><strong>A prompt mid-prefill reruns its own chunks.</strong> Restarting it at chunk 0 would move its chunk Loop back, which only the graph runtime can do.</p></li>
+</ul>
+<blockquote>
+<div><p>Note: a rebuild’s first chunk starts past its cached prefix, measured as a fresh prompt’s is on each try, so it recomputes only what the GPU index doesn’t hold, and Qwen3.5 restores a recurrent snapshot for the prefix.</p>
+</div></blockquote>
+</section>
+<section id="tokens-after-a-rebuild">
+<span id="54-tokens-after-a-rebuild"></span><h3>5.4 Tokens after a rebuild<a class="headerlink" href="#tokens-after-a-rebuild" title="Link to this heading">#</a></h3>
+<p>A rebuild’s prefill rounds differently from the decode steps that first wrote the KV. So a rebuilt request continues like a fresh prefill of its context, not like the run it was dropped from, and a seeded request rebuilt under load may not repeat its output.</p>
+<p>In 24 cases on Qwen3.5, Bagel, Orpheus and the Qwen3-Omni Thinker, greedy and seeded, captured and eager, the tokens after every rebuild equal a prefill of the kept ids with the same step shape and cached length. 7 of the 24 also match the run without the drop for 64 tokens.</p>
+</section>
+<section id="why-every-request-finishes">
+<span id="55-why-every-request-finishes"></span><h3>5.5 Why every request finishes<a class="headerlink" href="#why-every-request-finishes" title="Link to this heading">#</a></h3>
+<p>A guaranteed request reserves its whole footprint and is never preempted once it starts. It is admitted only into pages it can take back, so when borrowers hold what it lent it moves them. When none of them can move yet, it waits holding its allotment and nothing more is lent, so each borrower either finishes or runs short at its next page and waits where it can be moved. So it then finishes.</p>
+<p>Take the oldest request O, once every older request has finished:</p>
+<ol class="arabic simple">
+<li><p>Only a guaranteed request chooses O as a victim, since any other victim is newer than the request it is chosen for, and only to take back what it lent once moving the newer preemptible requests that can move now doesn’t cover it. O then waits as the oldest request, so no newer prompt starts in its pools before it returns, and it returns with its history and a page. A drop costs O no more than the tokens since its last return, and no drop takes it again until it writes past its rebuild, as below. A move to the host keeps O’s KV, and a move of an O that holds an allotment and no page only gives the allotment back, so neither costs O a token, and either can come again before O samples one.</p></li>
+<li><p>When O runs short, newer requests move to the host or are dropped first. When their moves can’t cover the shortage, O moves to the host if the host holds it whole, and otherwise waits. A newer request whose ids or host copies haven’t landed yet can’t be dropped, the same as one that never can, so O may move itself to the host while that request’s copies land. O still finishes, after a trip to the host it could have avoided.</p></li>
+<li><p>While O waits, on the host or holding its pages, every other request that holds pages is newer, and no newer prompt starts in O’s pools except one already allotted its room, which takes nothing more. Each one that runs either finishes, which grows the room, or runs short and, with nothing newer to cover its shortage, moves to the host or waits too. O then moves the newer requests that wait, chosen together as one set, and takes the room as their moves land. Until then the room their moves free is kept from passers. A newer request with images can be dropped only once its host copies have landed, and with every request waiting no step runs, so the worker starts those copies on its passes that run no step. A guaranteed request among them waits either because it was admitted before it could write a page, and then its move only undoes that admission, or to take back what it lent, and then it moves O or another borrower and runs on. One no drop can free moves into the room the host set aside for it (§1). O’s footprint fits the pool, so those pages and the room cover it once every newer request has finished or waits.</p></li>
+<li><p>So O runs again each time it waits, and each time it has grown by at least a page. From the host it returns with every page its grant needed, so that grant can’t fail again. Its footprint fits the pool, so it finishes.</p></li>
+</ol>
+<p>The next oldest request then takes its place in the argument. Two requests that hold pages and wait can’t wait on each other for good, since the older one, or an older request still, moves the newer one. A dropped request returns with its whole history and one more page reserved, and no drop takes it again until a step writes past its rebuild, so each rebuild keeps at least one token, and once it is the oldest no newer prompt passes it. Until every older request has finished, newer prompts, guaranteed ones included, can start in O’s pools. After that none does, so the argument holds while new requests keep arriving. <code class="docutils literal notranslate"><span class="pre">admit_waiting</span></code> tries every return that fits, oldest first, so it can admit returns newer than O ahead of O, and the argument survives that because each newer return grows by a page each time it is preempted, up to its footprint.</p>
+<p>For example, an older and a newer request hold 5 pages each of a 10-page pool, and the older needs a sixth. The newer one is dropped and needs 6 pages to return, so it waits until the older one finishes. Readmitted once its prompt fit, it would take back its own pages and the older one would fail again. Today both requests end with HTTP 500 at the 600 s timeout.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="tp-followers">
+<span id="6-tp-followers"></span><h2>6. TP followers<a class="headerlink" href="#tp-followers" title="Link to this heading">#</a></h2>
+<p>Rank 0 journals a decision only when it reads state a follower lacks. It decides every reservation and its undo, the room a short grant counted, a request that waits for its shortage, a flip to guaranteed at admission, each earmark, drop and return, and a request that keeps no ids, and records it in the <code class="docutils literal notranslate"><span class="pre">OffloadDelta</span></code> (<a class="reference download internal" download="" href="../_downloads/6f23d3360ef0e39c2e20a12ef5c0f306/ipc_format.py"><span class="xref download myst">ipc_format.py</span></a>) it sends with the next <code class="docutils literal notranslate"><span class="pre">ScheduleTPNode</span></code> of any of the worker’s lockstep nodes, next to the offloads and reloads the delta already carries. A follower applies the delta before it builds that step, so every rank admits each step from the same counts. Every rank works out the rest from those counts: the host room a reservation sets aside, as a follower replays the reservation, and the host room and the flip to guaranteed inside a step’s admit. At TP the host holds no cached pages, since <code class="docutils literal notranslate"><span class="pre">prefix_cache_tp</span></code> refuses a host pool, so its room moves only with moves every rank makes in rank 0’s order and is the same on every rank at each of those points.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">OffloadDelta</span><span class="p">:</span>
+    <span class="n">rids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="n">kinds</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">MoveKind</span><span class="p">]</span>   <span class="c1"># offload, reload, reserve, unreserve, earmark, drop, land, guarantee, allot, wait or forget</span>
+    <span class="o">...</span>                     <span class="c1"># the page counts and victims the kinds carry</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Every rank checks each grant against the reservations. Only rank 0 queues, runs the fit check, chooses victims and makes a request wait.</p></li>
+<li><p>Rank 0 moves a victim in the call that chose it, as at one rank, and tears no request down while its journal holds moves.</p></li>
+<li><p>A request that waits for its shortage goes out as a wait, with the pages it asks for, so every rank returns it with them from a move. A request that moves itself to the host goes out as that wait and a move to the host, as any victim’s does.</p></li>
+<li><p>The victims a waiting request chooses (§3.3) go out as its reservation, naming them, since only rank 0 knows that request waits for room. Rank 0 admits it once their moves cover it, or turns it guaranteed when the host has no room left, and journals that right after the move, since another rank can hold other room as the move lands there.</p></li>
+<li><p>A follower drops a request with the tokens rank 0’s rebuild writes, which its own KV refuses unless it holds as many.</p></li>
+<li><p>A rebuild row rides <code class="docutils literal notranslate"><span class="pre">ScheduleTPNode</span></code> as any row mid-prefill does, with its chunk range. A follower knows the row from its own KV, which replayed rank 0’s drop, starts the rebuild at its first row, and builds its input from its own kept ids, which match, since every rank samples rank 0’s token. Rank 0’s pool decides which requests keep ids when it takes them in, and rank 0 journals each node whose pool couldn’t hold a request’s log ahead of the request’s first move. A follower takes room for every log, past its pool when the pool is full, and gives back the room rank 0 refused before it admits the request, so it holds every log rank 0 holds and admits the request in rank 0’s class.</p></li>
+<li><p>A follower whose counts can’t take a move exits. A follower replays a reload, or a drop or an offload of a request in its own last step, only once that step has committed, and exits if the move still can’t land then. Rank 0 can reload before or after its commit of the step before, but a commit only gives pages back, to the end of the free list, so with nothing evicted the follower’s reload takes the pages rank 0’s took.</p></li>
+<li><p>A pre-admit takes only free pages and host room already set aside. Rank 0 can’t undo an eviction, a host room set aside or a flip for a stage it throws away, and a follower may never plan the step, so the pre-admit refuses and exec admits the step on every rank.</p></li>
+</ul>
+<p>With speculation on, rank 0 decides only where pages already move today, after the admit fence or after a refused step, so a speculative step never carries a move made after it was sent.</p>
+<p>Why this shape:</p>
+<ul class="simple">
+<li><p><strong>Rank 0 decides.</strong> Victims chosen from per-rank state could differ between ranks, which <a class="reference external" href="http://AGENTS.md">AGENTS.md</a> invariant 11 rules out.</p></li>
+<li><p><strong>A removal waits for the journal.</strong> A follower replays the journal before the step that carries it, and tears a request down after the step rank 0 stamped the removal with. A removal rank 0 applied while moves waited in its journal would free pages ahead of those moves there and behind them on a follower, and the ranks’ free lists would hand out different pages.</p></li>
+<li><p><strong>No kept ids on the wire.</strong> Every rank already holds them.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="checks">
+<span id="7-checks"></span><h2>7. Checks<a class="headerlink" href="#checks" title="Link to this heading">#</a></h2>
+<p>Always on:</p>
+<ul class="simple">
+<li><p>A victim is preemptible, or guaranteed and not yet started, and is never older than the request whose grant failed unless that request is guaranteed. A breach raises, and so does a forced drop of a guaranteed request.</p></li>
+<li><p>A grant that a reservation covers and that can’t take its pages raises.</p></li>
+<li><p>Counters per node: preemptions, drops, tokens rebuilt, and requests dropped more than once.</p></li>
+</ul>
+<p>Under <code class="docutils literal notranslate"><span class="pre">MSTAR_KV_DEBUG_ASSERTS</span></code>:</p>
+<ul class="simple">
+<li><p>The invariant of §2, on each grant.</p></li>
+<li><p>After a drop or a move to the host, the victim holds no page in the pool, and the pool’s pages are conserved.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="trade-offs">
+<span id="8-trade-offs"></span><h2>8. Trade-offs<a class="headerlink" href="#trade-offs" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Drops cost a rebuild.</strong> A victim the host pool can’t hold is dropped and rebuilt. Under sustained overload the newest requests are dropped again each time an older request runs short.</p></li>
+<li><p><strong>A lone rebuild isn’t speculated.</strong> Speculation targets come from the graph runtime, which holds no rebuild row, so a step of rebuild rows alone pays one scheduling gap per chunk. A rebuild chunk rides speculation when another row of its step gives a target.</p></li>
+<li><p><strong>Kept ids.</strong> A node with a rebuild policy copies each request’s prompt ids to a pinned host pool, 64 MB by default, and keeps them until the request finishes: 256 KB for a 32K-token request. A request the pool can’t hold is never dropped on that node, though with a host pool it can still move to the host. Above one rank, every rank but the first sets aside twice the pool, since each rank gives its slices back at its own teardown.</p></li>
+<li><p><strong>Shared prefixes with host offload.</strong> A hit on a page only the index holds is charged as fresh, so prompts sharing a prefix run fewer at once, though passing lets in those whose prefix a running request holds. With host offload on, 32 Bagel requests over four shared prefixes on 96 pages, with 512 host pages, at c16, took 6.17 s against 15.2 s today at 256 tokens, and 37.2 s against 54.4 s at 1,024 tokens, the medians of 8 launches. At 1,024 tokens the ranges overlap, 34.8 to 44.0 s against 37.7 to 57.5 s.</p></li>
+<li><p><strong>A swept pass walks every waiting request.</strong> When a pool or a refusal’s mark grows, or a queue gets a new first request, admission walks every waiting request and asks each pool that lets requests pass whether it still needs room, so that a request whose room the pool already set aside can start: about 0.4 ms at 256 waiting requests and 0.03 ms at 16 on CPU. A pass that changed nothing walks nothing.</p></li>
+<li><p><strong>Guaranteed requests queue.</strong> On Orpheus at c16, streamed TTFA p99 rose from 247 ms to 2.58 s against preemption without classes. But, I am fine with the p99 cost since for voice, a later first chunk is better than a gap in the middle of playback.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="next-steps-out-of-scope-here">
+<span id="9-next-steps-out-of-scope-here"></span><h2>9. Next steps (Out of Scope here)<a class="headerlink" href="#next-steps-out-of-scope-here" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Pool sizing.</strong> Fixed, hand-set pool sizes can also cause thrashing, which this work surfaced. Each cache’s <code class="docutils literal notranslate"><span class="pre">max_num_pages</span></code> comes from the config, 2048 pages by default, so a pool can fill and preempt long before memory runs out: Command A+’s TP8 config gets about 4 GB of KV per GPU where, by my estimate, about 20 GB is free after weights. Except for M*, every other engine sizes the pool from free memory instead.</p></li>
+<li><p><strong>One pool per GPU.</strong> SGLang has moved from a fixed pool per cache type to one physical pool, where full-attention KV and window or recurrent state grow from opposite ends and compaction remaps pages, since agent contexts vary too much in length for fixed ratios. M*’s caches on a worker could share one pool the same way, but the effects would need to be measured.</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">1. Classes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reservations">2. Reservations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preemption">3. Preemption</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arrival-numbers">3.1 Arrival numbers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-victims">3.2 Choosing the victims</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#earmarks">3.3 Earmarks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-drop">4. The drop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#return-and-rebuild">5. Return and rebuild</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#states">5.1 States</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-return-check">5.2 The return check</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-rebuild-row">5.3 The rebuild row</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokens-after-a-rebuild">5.4 Tokens after a rebuild</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-every-request-finishes">5.5 Why every request finishes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tp-followers">6. TP followers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checks">7. Checks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trade-offs">8. Trade-offs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps-out-of-scope-here">9. Next steps (Out of Scope here)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By M* Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2026, M* Team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Nov 22, 2026.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

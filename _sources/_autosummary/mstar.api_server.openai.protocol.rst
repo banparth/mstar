@@ -20,10 +20,13 @@ mstar.api\_server.openai.protocol
       ChatCompletionRequest
       ChatMessage
       ImageGenerationRequest
+      LoadLoraAdapterRequest
       ModelCard
       ModelList
       SpeechRequest
+      StreamOptions
       TranscriptionRequest
+      UnloadLoraAdapterRequest
       VideoGenerationRequest
       VoiceCard
       VoiceList

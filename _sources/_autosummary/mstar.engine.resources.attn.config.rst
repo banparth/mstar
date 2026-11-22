@@ -13,6 +13,7 @@ mstar.engine.resources.attn.config
 
    .. autosummary::
    
+      derive_kv_groups
       refuse_context_only
    
    
@@ -27,6 +28,7 @@ mstar.engine.resources.attn.config
       AttentionSpec
       AttentionStep
       AttnBackend
+      BlockCausalAttentionSpec
       CrossAttentionConfig
       CrossAttentionSpec
    

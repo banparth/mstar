@@ -14,6 +14,7 @@ mstar.engine.resources.base
    .. autosummary::
    
       build_resource
+      head_shards
    
    
 
@@ -26,11 +27,16 @@ mstar.engine.resources.base
       AttentionResource
       CGSlotKey
       CGSlotSpec
+      CachedLease
       CachedPrefix
       EngineResourceInfo
       KeyedWalks
+      MoveKind
       PublishedInfo
+      Rebuild
+      Residency
       Resource
+      StepAllowance
    
    
 

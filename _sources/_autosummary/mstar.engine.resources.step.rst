@@ -9,6 +9,12 @@ mstar.engine.resources.step
 
    
    
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      lean_subsets
+   
    
 
    
@@ -23,11 +29,14 @@ mstar.engine.resources.step
       AllocationFailed
       BucketKey
       FullAdmitOutcome
+      PerReqSetting
       RequestOffloading
       ResourceStep
       Segment
+      SettingValue
       SlotLease
       StepContext
+      StepHandle
       SubmoduleStep
    
    

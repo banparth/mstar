@@ -31,8 +31,13 @@
    body_limit
    data_worker
    entrypoint
+   lora_admin
    media_io
    openai
+   openpi
    request_types
    rust_frontend
+   served_models
+   streaming_response
+   ws_frames
 

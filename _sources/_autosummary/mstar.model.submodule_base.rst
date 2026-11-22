@@ -9,6 +9,16 @@ mstar.model.submodule\_base
 
    
    
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      chunk_loop_name
+      chunk_tick_name
+      engine_step
+      splice_loopback_ids
+      with_segment_steps
+   
    
 
    
@@ -20,14 +30,24 @@ mstar.model.submodule\_base
       ARNodeInputs
       ARNodeSubmodule
       BatchedModelOutput
+      BatchedStopCheck
+      ChunkingPolicy
+      DeviceLoopback
       HostRows
       InputMetadata
+      InputSeqLenInfo
       LazyRequestStates
       ModelInputsFromEngine
       NodeInputs
       NodeSubmodule
       PerRequestState
       StackingMethod
+      StepOrder
+      StopCheck
+      StopKind
+      StopLimits
+      StopPolicy
+      TokenStop
    
    
 

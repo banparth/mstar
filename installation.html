@@ -55,7 +55,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="0.2.1" />
-    <meta name="docbuild:last-update" content="Oct 25, 2026"/>
+    <meta name="docbuild:last-update" content="Nov 22, 2026"/>
   
     
     <script src="_static/searchtools.js"></script>
@@ -208,6 +208,7 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models.html">Supported Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asr.html">Speech recognition: Whisper and Qwen3-ASR</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="api.html">API Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.api_server.html">mstar.api_server</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.api_server.auth.html">mstar.api_server.auth</a></li>
@@ -225,12 +226,15 @@
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.api_server.request_types.html">mstar.api_server.request_types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.api_server.rust_frontend.html">mstar.api_server.rust_frontend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.api_server.streaming_response.html">mstar.api_server.streaming_response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.api_server.ws_frames.html">mstar.api_server.ws_frames</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.communication.html">mstar.communication</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.arena.html">mstar.communication.arena</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.codec.html">mstar.communication.codec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.communicator.html">mstar.communication.communicator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.edge_items.html">mstar.communication.edge_items</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.event.html">mstar.communication.event</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.rust_communicator.html">mstar.communication.rust_communicator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.tensor_store.html">mstar.communication.tensor_store</a></li>
@@ -240,22 +244,31 @@
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.conductor.html">mstar.conductor</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.conductor.lora_ops.html">mstar.conductor.lora_ops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.conductor.mps.html">mstar.conductor.mps</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.conductor.request_info.html">mstar.conductor.request_info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.conductor.workers.html">mstar.conductor.workers</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.engine.html">mstar.engine</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.engine.accelerator_graph_backend.html">mstar.engine.accelerator_graph_backend</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.engine.accelerator_graph_config.html">mstar.engine.accelerator_graph_config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.engine.accelerator_graph_runner.html">mstar.engine.accelerator_graph_runner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.engine.chunking.html">mstar.engine.chunking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.engine.fp32_precision.html">mstar.engine.fp32_precision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.engine.node_dtype.html">mstar.engine.node_dtype</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.engine.resources.html">mstar.engine.resources</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.admission.html">mstar.engine.resources.admission</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.attn.html">mstar.engine.resources.attn</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.base.html">mstar.engine.resources.base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.context_parallel.html">mstar.engine.resources.context_parallel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.dsa.html">mstar.engine.resources.dsa</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.kv.html">mstar.engine.resources.kv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.lora.html">mstar.engine.resources.lora</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.position.html">mstar.engine.resources.position</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.recurrent.html">mstar.engine.resources.recurrent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.resident_hooks.html">mstar.engine.resources.resident_hooks</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.rms_norm.html">mstar.engine.resources.rms_norm</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.runner.html">mstar.engine.resources.runner</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.sampler.html">mstar.engine.resources.sampler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.sequence_shard.html">mstar.engine.resources.sequence_shard</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.spec.html">mstar.engine.resources.spec</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.step.html">mstar.engine.resources.step</a></li>
 </ul>
@@ -272,8 +285,17 @@
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.model.html">mstar.model</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.audio_watermark.html">mstar.model.audio_watermark</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.canary.html">mstar.model.canary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.canary_qwen.html">mstar.model.canary_qwen</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.chatterbox.html">mstar.model.chatterbox</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.chatterbox.config.html">mstar.model.chatterbox.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.command_a_plus.html">mstar.model.command_a_plus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.command_a_plus.assets.html">mstar.model.command_a_plus.assets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.command_a_plus.components.html">mstar.model.command_a_plus.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.command_a_plus.config.html">mstar.model.command_a_plus.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.command_a_plus.tests.html">mstar.model.command_a_plus.tests</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.cosmos3.html">mstar.model.cosmos3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -282,12 +304,31 @@
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.cosmos3.constants.html">mstar.model.cosmos3.constants</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.cosmos3.loader.html">mstar.model.cosmos3.loader</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.cosmos3.sessions.html">mstar.model.cosmos3.sessions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.cosmos3.submodules.html">mstar.model.cosmos3.submodules</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.cosmos3.tests.html">mstar.model.cosmos3.tests</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.cosyvoice3.html">mstar.model.cosyvoice3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.cosyvoice3.components.html">mstar.model.cosyvoice3.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.cosyvoice3.config.html">mstar.model.cosyvoice3.config</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.flux2_klein.html">mstar.model.flux2_klein</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.flux2_klein.components.html">mstar.model.flux2_klein.components</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.glm52.html">mstar.model.glm52</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.glm52.components.html">mstar.model.glm52.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.glm52.config.html">mstar.model.glm52.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.glm52.weight_loader.html">mstar.model.glm52.weight_loader</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.glm5_next.html">mstar.model.glm5_next</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.glm5_next.components.html">mstar.model.glm5_next.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.glm5_next.config.html">mstar.model.glm5_next.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.glm5_next.fused_decode.html">mstar.model.glm5_next.fused_decode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.glm5_next.mhc.html">mstar.model.glm5_next.mhc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.glm5_next.sinkhorn_kernel.html">mstar.model.glm5_next.sinkhorn_kernel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.glm5_next.weight_loader.html">mstar.model.glm5_next.weight_loader</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.higgs_audio.html">mstar.model.higgs_audio</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -295,6 +336,7 @@
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.higgs_audio.config.html">mstar.model.higgs_audio.config</a></li>
 </ul>
 </details></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.keys.html">mstar.model.keys</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.kokoro.html">mstar.model.kokoro</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.kokoro.config.html">mstar.model.kokoro.config</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.kokoro.g2p.html">mstar.model.kokoro.g2p</a></li>
@@ -311,12 +353,24 @@
 </ul>
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.media_limits.html">mstar.model.media_limits</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.minicpm_o.html">mstar.model.minicpm_o</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.minicpm_o.components.html">mstar.model.minicpm_o.components</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.minimax_h3.html">mstar.model.minimax_h3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.minimax_h3.components.html">mstar.model.minimax_h3.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.minimax_h3.tests.html">mstar.model.minimax_h3.tests</a></li>
+</ul>
+</details></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.multimodal.html">mstar.model.multimodal</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.muse.html">mstar.model.muse</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.muse.components.html">mstar.model.muse.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.muse.config.html">mstar.model.muse.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.muse.processing.html">mstar.model.muse.processing</a></li>
+</ul>
+</details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.nemotron_duplex.html">mstar.model.nemotron_duplex</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.nemotron_duplex.components.html">mstar.model.nemotron_duplex.components</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.nemotron_duplex.config.html">mstar.model.nemotron_duplex.config</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.nemotron_duplex.realtime_api.html">mstar.model.nemotron_duplex.realtime_api</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.nemotron_duplex.submodules.html">mstar.model.nemotron_duplex.submodules</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.omnilingual_asr.html">mstar.model.omnilingual_asr</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -330,12 +384,17 @@
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.omnivoice.html">mstar.model.omnivoice</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.omnivoice.components.html">mstar.model.omnivoice.components</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.omnivoice.config.html">mstar.model.omnivoice.config</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.omnivoice.submodules.html">mstar.model.omnivoice.submodules</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.orpheus.html">mstar.model.orpheus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.orpheus.components.html">mstar.model.orpheus.components</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.orpheus.config.html">mstar.model.orpheus.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.parakeet.html">mstar.model.parakeet</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.phi4mm.html">mstar.model.phi4mm</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.phi4mm.components.html">mstar.model.phi4mm.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.phi4mm.tests.html">mstar.model.phi4mm.tests</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.pi05.html">mstar.model.pi05</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -346,14 +405,29 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.qwen3_5.html">mstar.model.qwen3_5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.qwen3_5.components.html">mstar.model.qwen3_5.components</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.qwen3_5.config.html">mstar.model.qwen3_5.config</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.qwen3_5.video.html">mstar.model.qwen3_5.video</a></li>
 </ul>
 </details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.qwen3_asr.html">mstar.model.qwen3_asr</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.qwen3_asr.constants.html">mstar.model.qwen3_asr.constants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.qwen3_asr.repetition.html">mstar.model.qwen3_asr.repetition</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.rebuild.html">mstar.model.rebuild</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.ripple.html">mstar.model.ripple</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.ripple.config.html">mstar.model.ripple.config</a></li>
+</ul>
+</details></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.submodule_base.html">mstar.model.submodule_base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.utils.html">mstar.model.utils</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.vjepa2.html">mstar.model.vjepa2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.vjepa2.components.html">mstar.model.vjepa2.components</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.vjepa2.config.html">mstar.model.vjepa2.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.voxcpm2.html">mstar.model.voxcpm2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.voxcpm2.components.html">mstar.model.voxcpm2.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.voxcpm2.config.html">mstar.model.voxcpm2.config</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.wan22.html">mstar.model.wan22</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -365,7 +439,6 @@
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.waypoint.components.html">mstar.model.waypoint.components</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.waypoint.config.html">mstar.model.waypoint.config</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.waypoint.ring_geometry.html">mstar.model.waypoint.ring_geometry</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.waypoint.submodules.html">mstar.model.waypoint.submodules</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.whisper.html">mstar.model.whisper</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -393,26 +466,46 @@
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.utils.html">mstar.utils</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.adarms_norm.html">mstar.utils.adarms_norm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.cache_home.html">mstar.utils.cache_home</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.client_errors.html">mstar.utils.client_errors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.containers.html">mstar.utils.containers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.cpus.html">mstar.utils.cpus</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.device.html">mstar.utils.device</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.exitcode.html">mstar.utils.exitcode</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.fast_tokenize.html">mstar.utils.fast_tokenize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.fp8_block.html">mstar.utils.fp8_block</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.gc_freeze.html">mstar.utils.gc_freeze</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.generation_kwargs.html">mstar.utils.generation_kwargs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.h2d.html">mstar.utils.h2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.hf_snapshot.html">mstar.utils.hf_snapshot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.host_copy.html">mstar.utils.host_copy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.ipc_format.html">mstar.utils.ipc_format</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.knobs.html">mstar.utils.knobs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.logging_config.html">mstar.utils.logging_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.mla_latent_norm.html">mstar.utils.mla_latent_norm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.orphan.html">mstar.utils.orphan</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.profiler.html">mstar.utils.profiler</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.socket_prefix.html">mstar.utils.socket_prefix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.streams.html">mstar.utils.streams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.threads.html">mstar.utils.threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.utf8_stream.html">mstar.utils.utf8_stream</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.worker.html">mstar.worker</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.batch_builder.html">mstar.worker.batch_builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.chunk_loops.html">mstar.worker.chunk_loops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.host_copies.html">mstar.worker.host_copies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.host_pool.html">mstar.worker.host_pool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.lora_loads.html">mstar.worker.lora_loads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.node_manager_utils.html">mstar.worker.node_manager_utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.phase_timer.html">mstar.worker.phase_timer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.preemption.html">mstar.worker.preemption</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.rebuild.html">mstar.worker.rebuild</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.rid_table.html">mstar.worker.rid_table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.scheduled_batch.html">mstar.worker.scheduled_batch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.scheduling_policy.html">mstar.worker.scheduling_policy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.spec_rows.html">mstar.worker.spec_rows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.stream_buffers.html">mstar.worker.stream_buffers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.worker_metrics.html">mstar.worker.worker_metrics</a></li>
 </ul>
 </details></li>
@@ -647,15 +740,15 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu-libraries">GPU libraries</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#omnivoice-omnivoice">omnivoice (OmniVoice)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qwen-tts-qwen3-tts">qwen-tts (Qwen3-TTS)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flash-attn-qwen3-omni-lingbot-world">flash-attn (Qwen3-Omni, LingBot-World)</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flash-attn-lingbot-world">flash-attn (LingBot-World)</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#no-matching-wheel-build-from-source">No matching wheel — build from source</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flash-attn-4-waypoint-fa3-sm90-kernel">flash-attn-4 (Waypoint, FA3 sm90 kernel)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matching-your-cuda-toolkit">Matching your CUDA toolkit</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verify-the-install">Verify the install</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-rust-support">Optional: Rust support</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-the-rust-http-frontend">Optional: the Rust HTTP frontend</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rust-extension">Rust extension</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-rust-http-frontend">The Rust HTTP frontend</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cudnn-status-sublibrary-version-mismatch"><code class="docutils literal notranslate"><span class="pre">CUDNN_STATUS_SUBLIBRARY_VERSION_MISMATCH</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libcudart-so-12-cannot-open-shared-object-file"><code class="docutils literal notranslate"><span class="pre">libcudart.so.12:</span> <span class="pre">cannot</span> <span class="pre">open</span> <span class="pre">shared</span> <span class="pre">object</span> <span class="pre">file</span></code></a></li>
@@ -720,12 +813,15 @@ uv<span class="w"> </span>venv<span class="w"> </span>--python<span class="w"> <
 uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--torch-backend<span class="o">=</span>auto<span class="w"> </span>-e<span class="w"> </span>.
 </pre></div>
 </div>
-<p>This pulls in the core runtime (PyTorch, FastAPI/Uvicorn, ZMQ, …) and installs the two
-console scripts, <code class="docutils literal notranslate"><span class="pre">mstar</span></code> and <code class="docutils literal notranslate"><span class="pre">mstar-serve</span></code>.</p>
+<p>This pulls in the core runtime (PyTorch, FastAPI/Uvicorn, msgpack, …) and installs the two
+console scripts, <code class="docutils literal notranslate"><span class="pre">mstar</span></code> and <code class="docutils literal notranslate"><span class="pre">mstar-serve</span></code>. To serve from a checkout, also build the
+extension (see <a class="reference internal" href="#rust-extension">Rust extension</a>) and <code class="docutils literal notranslate"><span class="pre">mstar-server</span></code> (see <a class="reference internal" href="#the-rust-http-frontend">The Rust HTTP frontend</a>).</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p><strong>For CUDA installs, always pass</strong> <code class="docutils literal notranslate"><span class="pre">--torch-backend=auto</span></code>. <code class="docutils literal notranslate"><span class="pre">mstar</span></code> floors
-PyTorch at 2.9 (<code class="docutils literal notranslate"><span class="pre">torch&gt;=2.9.1</span></code> / <code class="docutils literal notranslate"><span class="pre">torchvision&gt;=0.24.1</span></code> / <code class="docutils literal notranslate"><span class="pre">torchaudio&gt;=2.9.1</span></code>).
+PyTorch at 2.10 (<code class="docutils literal notranslate"><span class="pre">torch&gt;=2.10.0</span></code> / <code class="docutils literal notranslate"><span class="pre">torchvision&gt;=0.25.0</span></code> /
+<code class="docutils literal notranslate"><span class="pre">torchaudio&gt;=2.10.0,!=2.11.1</span></code>; torchaudio 2.11.1 needs a newer torch than its
+metadata says and fails to load next to torch 2.11 or 2.12).
 The flag tells
 <code class="docutils literal notranslate"><span class="pre">uv</span></code> to detect your driver’s CUDA version and fetch the <strong>matching</strong> torch build
 — cu128 on a CUDA 12.x box, cu130 on a CUDA 13.x box. This matters because source-
@@ -750,10 +846,14 @@ interactive shell and check GPU access:</p>
 <span class="w">  </span>-v<span class="w"> </span>/dev/dri/by-path:/dev/dri/by-path:ro<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-p<span class="w"> </span><span class="m">8000</span>:8000<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-v<span class="w"> </span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.cache/huggingface:/root/.cache/huggingface"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span>mstar-cache:/root/.cache/mstar<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>mstar:xpu
 python<span class="w"> </span>-c<span class="w"> </span><span class="s2">"import torch; print(torch.xpu.is_available(), torch.xpu.device_count())"</span>
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">mstar-cache</span></code> volume keeps compiled kernels across containers. It is a named volume
+rather than <code class="docutils literal notranslate"><span class="pre">$HOME/.cache/mstar</span></code> because the container runs as root, and root-owned files
+there would stop a later native run from writing its cache.</p>
 <p>Inside the container, serve BAGEL using the TP2 deployment with three Intel GPUs:
 one for the encoders and decoder, and two for the LLM.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/mstar-workspace/mstar
@@ -785,15 +885,28 @@ mstar<span class="w"> </span>serve<span class="w"> </span>bagel<span class="w"> 
 batched token sampling with per-request RNG state on the device.
 Install the matching XPU build of PyTorch.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.[qwen3_omni]</span></code></p></td>
-<td><p>Qwen3-Omni runtime: the BAGEL set plus <code class="docutils literal notranslate"><span class="pre">qwen-omni-utils</span></code>, <code class="docutils literal notranslate"><span class="pre">datasets</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">ninja</span></code> (speeds up the JIT build of the vendored MoE align kernel).
-<strong>Also needs</strong> <code class="docutils literal notranslate"><span class="pre">flash-attn</span></code>, which is installed separately —
-see <a class="reference internal" href="#flash-attn-qwen3-omni-lingbot-world">flash-attn (Qwen3-Omni, LingBot-World)</a>.</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.[command_a_plus]</span></code></p></td>
+<td><p>Command A+ runtime: <code class="docutils literal notranslate"><span class="pre">flashinfer-python&gt;=0.6.18</span></code> (its one-kernel all-reduce),
+<code class="docutils literal notranslate"><span class="pre">transformers&gt;=5.17</span></code> (the version its Hugging Face parity checks use),
+<code class="docutils literal notranslate"><span class="pre">huggingface-hub</span></code>, <code class="docutils literal notranslate"><span class="pre">safetensors</span></code>, <code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine</span></code>, and <code class="docutils literal notranslate"><span class="pre">ninja</span></code>
+(speeds up the JIT build of the vendored MoE align kernel). Set <code class="docutils literal notranslate"><span class="pre">CUDA_HOME</span></code> to a
+CUDA toolkit matching PyTorch’s so that kernel can build. <code class="docutils literal notranslate"><span class="pre">.[all]</span></code> allows older
+FlashInfer and Transformers for the other models, so add <code class="docutils literal notranslate"><span class="pre">.[command_a_plus]</span></code>
+when installing both.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.[orpheus]</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.[qwen3_omni]</span></code></p></td>
+<td><p>Qwen3-Omni runtime: the BAGEL set plus <code class="docutils literal notranslate"><span class="pre">qwen-omni-utils</span></code>, <code class="docutils literal notranslate"><span class="pre">datasets</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">ninja</span></code> (speeds up the JIT build of the vendored MoE align kernel). It needs
+<code class="docutils literal notranslate"><span class="pre">transformers&gt;=5.18</span></code>. Its encoders attend through FlashInfer, so it needs no
+<code class="docutils literal notranslate"><span class="pre">flash-attn</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.[orpheus]</span></code></p></td>
 <td><p>Orpheus TTS runtime: <code class="docutils literal notranslate"><span class="pre">transformers</span></code>, <code class="docutils literal notranslate"><span class="pre">flashinfer-python</span></code>, <code class="docutils literal notranslate"><span class="pre">safetensors</span></code>,
 <code class="docutils literal notranslate"><span class="pre">einops</span></code>, <code class="docutils literal notranslate"><span class="pre">huggingface-hub</span></code>, <code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.[minicpm_o]</span></code></p></td>
+<td><p>MiniCPM-o 4.5 runtime: <code class="docutils literal notranslate"><span class="pre">transformers</span></code>, <code class="docutils literal notranslate"><span class="pre">flashinfer-python</span></code>, <code class="docutils literal notranslate"><span class="pre">safetensors</span></code>,
+<code class="docutils literal notranslate"><span class="pre">soundfile</span></code>, <code class="docutils literal notranslate"><span class="pre">torchaudio</span></code> / <code class="docutils literal notranslate"><span class="pre">torchcodec</span></code>, <code class="docutils literal notranslate"><span class="pre">Pillow</span></code>, <code class="docutils literal notranslate"><span class="pre">huggingface-hub</span></code>.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.[fish_s2_pro]</span></code></p></td>
 <td><p>Fish Audio S2-Pro runtime: <code class="docutils literal notranslate"><span class="pre">transformers</span></code>, <code class="docutils literal notranslate"><span class="pre">flashinfer-python</span></code>, <code class="docutils literal notranslate"><span class="pre">safetensors</span></code>,
@@ -806,19 +919,33 @@ see <a class="reference internal" href="#omnivoice-omnivoice">omnivoice (OmniVoi
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.[pi05]</span></code></p></td>
 <td><p>Pi0.5 runtime: <code class="docutils literal notranslate"><span class="pre">transformers</span></code>, <code class="docutils literal notranslate"><span class="pre">flashinfer-python</span></code>, <code class="docutils literal notranslate"><span class="pre">safetensors</span></code>,
-<code class="docutils literal notranslate"><span class="pre">triton</span></code>, <code class="docutils literal notranslate"><span class="pre">huggingface-hub</span></code>, <code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine</span></code>.</p></td>
+<code class="docutils literal notranslate"><span class="pre">huggingface-hub</span></code>, <code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine</span></code>. Its tokenizer
+comes from the gated <code class="docutils literal notranslate"><span class="pre">google/paligemma-3b-pt-224</span></code>: accept its license on
+Hugging Face and set <code class="docutils literal notranslate"><span class="pre">HF_TOKEN</span></code>, or the server refuses to start.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.[vjepa2]</span></code> / <code class="docutils literal notranslate"><span class="pre">.[vjepa2_ac]</span></code></p></td>
 <td><p>V-JEPA 2 runtime: <code class="docutils literal notranslate"><span class="pre">safetensors</span></code>, <code class="docutils literal notranslate"><span class="pre">torchcodec</span></code>, <code class="docutils literal notranslate"><span class="pre">huggingface-hub</span></code>,
 <code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine</span></code> (<code class="docutils literal notranslate"><span class="pre">vjepa2_ac</span></code> also adds <code class="docutils literal notranslate"><span class="pre">flashinfer-python</span></code>).</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.[waypoint]</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.[glm]</span></code></p></td>
+<td><p>GLM runtime: <code class="docutils literal notranslate"><span class="pre">transformers</span></code>, <code class="docutils literal notranslate"><span class="pre">flashinfer-python</span></code>, <code class="docutils literal notranslate"><span class="pre">safetensors</span></code>,
+<code class="docutils literal notranslate"><span class="pre">huggingface-hub</span></code>, <code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine</span></code>, and <code class="docutils literal notranslate"><span class="pre">ninja</span></code>
+(speeds up the JIT build of the vendored MoE align kernel).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.[waypoint]</span></code></p></td>
 <td><p>Index-hosted Waypoint dependencies: <code class="docutils literal notranslate"><span class="pre">huggingface-hub</span></code>, <code class="docutils literal notranslate"><span class="pre">safetensors</span></code>,
 and <code class="docutils literal notranslate"><span class="pre">tensordict</span></code> for reference validation. The pinned TAEHV implementation
 must be installed separately as shown below; keeping its direct URL out of
 package metadata allows <code class="docutils literal notranslate"><span class="pre">m-star</span></code> to be published on PyPI. <strong>Also needs</strong>
 <code class="docutils literal notranslate"><span class="pre">flash-attn-4</span></code>, which is installed separately —
 see <a class="reference internal" href="#flash-attn-4-waypoint-fa3-sm90-kernel">flash-attn-4 (Waypoint, FA3 sm90 kernel)</a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.[asr]</span></code></p></td>
+<td><p>Speech recognition models: <code class="docutils literal notranslate"><span class="pre">transformers</span></code>, <code class="docutils literal notranslate"><span class="pre">flashinfer-python</span></code>, <code class="docutils literal notranslate"><span class="pre">safetensors</span></code>,
+<code class="docutils literal notranslate"><span class="pre">einops</span></code>, <code class="docutils literal notranslate"><span class="pre">soundfile</span></code> (WAV / FLAC / OGG / MP3 uploads), <code class="docutils literal notranslate"><span class="pre">torchcodec</span></code>
+(FFmpeg-backed decoding of the other formats), <code class="docutils literal notranslate"><span class="pre">huggingface-hub</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine</span></code>, and <code class="docutils literal notranslate"><span class="pre">datasets</span></code> / <code class="docutils literal notranslate"><span class="pre">jiwer</span></code> for
+<code class="docutils literal notranslate"><span class="pre">benchmark/asr_eval.py</span></code>.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.[audio]</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">soundfile</span></code> — only needed to return <strong>non-WAV</strong> audio containers (mp3/flac/…)
@@ -844,7 +971,7 @@ model’s runtime, so not part of <code class="docutils literal notranslate"><sp
 Convenient for a machine that serves multiple models; heavier and slower to
 install than a single family’s extra. It excludes the separately installed
 TAEHV, <code class="docutils literal notranslate"><span class="pre">flash-attn</span></code> and <code class="docutils literal notranslate"><span class="pre">qwen-tts</span></code> packages; see below,
-<a class="reference internal" href="#flash-attn-qwen3-omni-lingbot-world">flash-attn (Qwen3-Omni, LingBot-World)</a> and <a class="reference internal" href="#qwen-tts-qwen3-tts">qwen-tts (Qwen3-TTS)</a>.</p></td>
+<a class="reference internal" href="#flash-attn-lingbot-world">flash-attn (LingBot-World)</a> and <a class="reference internal" href="#qwen-tts-qwen3-tts">qwen-tts (Qwen3-TTS)</a>.</p></td>
 </tr>
 </tbody>
 </table>
@@ -875,8 +1002,7 @@ python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </sp
 <p class="admonition-title">Tip</p>
 <p>If you’re just getting started or have the disk/time to spare, <code class="docutils literal notranslate"><span class="pre">.[all]</span></code> installs all
 index-hosted model dependencies in one shot. Waypoint still needs the pinned TAEHV
-command above, Qwen3-Omni still needs <code class="docutils literal notranslate"><span class="pre">flash-attn</span></code>, and Qwen3-TTS still needs
-<code class="docutils literal notranslate"><span class="pre">qwen-tts</span></code> (see <a class="reference internal" href="#qwen-tts-qwen3-tts">qwen-tts (Qwen3-TTS)</a>):</p>
+command above, and Qwen3-TTS still needs <code class="docutils literal notranslate"><span class="pre">qwen-tts</span></code> (see <a class="reference internal" href="#qwen-tts-qwen3-tts">qwen-tts (Qwen3-TTS)</a>):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--torch-backend<span class="o">=</span>auto<span class="w"> </span>-e<span class="w"> </span><span class="s2">".[all,dev]"</span>
 </pre></div>
 </div>
@@ -894,15 +1020,26 @@ transport for disaggregated deployments.</p>
 <p>The GPU model families depend on:</p>
 <ul class="simple">
 <li><p><strong>FlashInfer</strong> (<code class="docutils literal notranslate"><span class="pre">flashinfer-python</span></code>) — paged attention and continuous batching for the
-autoregressive backbones (every model with a <code class="docutils literal notranslate"><span class="pre">KV_CACHE</span></code> node runs attention through it).</p></li>
-<li><p><strong>flash-attn</strong> — used by Qwen3-Omni and LingBot-World. <strong>Not installed by any extra</strong>; install it separately
-(see <a class="reference internal" href="#flash-attn-qwen3-omni-lingbot-world">flash-attn (Qwen3-Omni, LingBot-World)</a>).</p></li>
+autoregressive backbones (every model with a <code class="docutils literal notranslate"><span class="pre">KV_CACHE</span></code> node runs attention through it).
+Pinned to the version the attention wrappers’ direct planner calls were checked against
+(<code class="docutils literal notranslate"><span class="pre">DIRECT_PLAN_FLASHINFER_VERSIONS</span></code> in <code class="docutils literal notranslate"><span class="pre">mstar/engine/resources/attn/wrappers.py</span></code>); on any
+other version they fall back to FlashInfer’s own <code class="docutils literal notranslate"><span class="pre">plan()</span></code>.</p></li>
+<li><p><strong>flash-attn</strong> — used by LingBot-World’s <code class="docutils literal notranslate"><span class="pre">reference_numerics</span></code> mode. <strong>Not installed by any extra</strong>; install it separately
+(see <a class="reference internal" href="#flash-attn-lingbot-world">flash-attn (LingBot-World)</a>).</p></li>
 <li><p><strong>flash-attn-4</strong> — Waypoint’s flex-attention <code class="docutils literal notranslate"><span class="pre">FLASH</span></code> backend. <strong>Not installed by any
 extra</strong>; install it separately (see <a class="reference internal" href="#flash-attn-4-waypoint-fa3-sm90-kernel">flash-attn-4 (Waypoint, FA3 sm90 kernel)</a>).</p></li>
+<li><p><strong>fa3-fwd</strong> — FlashAttention-3 forward, the <code class="docutils literal notranslate"><span class="pre">dense</span></code> attention backend (Cosmos3’s dense
+passes, its reasoner’s vision tower). The wheel is built against one CUDA major: 0.0.2 for a
+CUDA 12 torch (<code class="docutils literal notranslate"><span class="pre">+cu12x</span></code>), 0.0.3 for CUDA 13 (<code class="docutils literal notranslate"><span class="pre">+cu130</span></code>). The extras take the latest, so next
+to a CUDA 12 torch install <code class="docutils literal notranslate"><span class="pre">fa3-fwd==0.0.2</span></code>. A mismatched wheel fails to import, and every
+<code class="docutils literal notranslate"><span class="pre">dense</span></code> attention then runs on FlashInfer with a warning at startup; check with
+<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-c</span> <span class="pre">&quot;import</span> <span class="pre">fa3_fwd_interface&quot;</span></code>.</p></li>
 <li><p><strong>mooncake-transfer-engine</strong> (0.3.13.post1 or newer) — RDMA tensor transport for
 multi-GPU, disaggregated deployments. Single-node deployments can use shared-memory
 (<code class="docutils literal notranslate"><span class="pre">SHM</span></code>) or <code class="docutils literal notranslate"><span class="pre">TCP</span></code> transport instead (see <a class="reference internal" href="serving.html"><span class="doc">Serving</span></a>, which also covers the network
-it needs).</p></li>
+it needs). The extras install Mooncake’s CUDA 12 wheel; next to a CUDA 13 torch
+(<code class="docutils literal notranslate"><span class="pre">+cu130</span></code>) swap in its CUDA 13 build, as the Docker images do (see
+<a class="reference internal" href="#mooncake-cuda13"><span class="std std-ref">libcudart.so.12: cannot open shared object file</span></a>).</p></li>
 </ul>
 <p>Apart from <code class="docutils literal notranslate"><span class="pre">flash-attn</span></code> and <code class="docutils literal notranslate"><span class="pre">flash-attn-4</span></code>, these are installed by the extras above. Your
 installed <code class="docutils literal notranslate"><span class="pre">torch</span></code> must match your system CUDA toolkit — <code class="docutils literal notranslate"><span class="pre">--torch-backend=auto</span></code> handles
@@ -936,44 +1073,40 @@ its dependencies:</p>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">qwen-tts</span></code> pins <code class="docutils literal notranslate"><span class="pre">transformers==4.57.3</span></code> and <code class="docutils literal notranslate"><span class="pre">accelerate==1.12.0</span></code>. Installed with
 them, it can’t share an environment with <code class="docutils literal notranslate"><span class="pre">diffusers&gt;=0.40</span></code> (Wan 2.2, Cosmos3,
-FLUX.2 [klein]), which needs <code class="docutils literal notranslate"><span class="pre">huggingface-hub&gt;=1.23</span></code>, or with OmniVoice, which needs
-<code class="docutils literal notranslate"><span class="pre">transformers&gt;=5.3</span></code>, and installing it after them downgrades their dependencies.
+FLUX.2 [klein]), which needs <code class="docutils literal notranslate"><span class="pre">huggingface-hub&gt;=1.23</span></code>, or with OmniVoice
+(<code class="docutils literal notranslate"><span class="pre">transformers&gt;=5.3</span></code>) or Qwen3-Omni (<code class="docutils literal notranslate"><span class="pre">transformers&gt;=5.18</span></code>). Installing it after them
+downgrades their dependencies.
 mstar reads only the speech-tokenizer source files and runs them under transformers
 4.57.3 or 5.x, so the package’s own requirements are not needed. <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">check</span></code> still
 lists them (<code class="docutils literal notranslate"><span class="pre">transformers==4.57.3</span></code>, <code class="docutils literal notranslate"><span class="pre">accelerate==1.12.0</span></code>, <code class="docutils literal notranslate"><span class="pre">gradio</span></code>, <code class="docutils literal notranslate"><span class="pre">sox</span></code> and
 others) as unmet for <code class="docutils literal notranslate"><span class="pre">qwen-tts</span></code>; that is expected.</p>
 </section>
-<section id="flash-attn-qwen3-omni-lingbot-world">
-<h2>flash-attn (Qwen3-Omni, LingBot-World)<a class="headerlink" href="#flash-attn-qwen3-omni-lingbot-world" title="Link to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">flash-attn</span></code> is only needed for <strong>Qwen3-Omni</strong> and <strong>LingBot-World</strong>, and it is <strong>not</strong> pulled in by
-<code class="docutils literal notranslate"><span class="pre">.[qwen3_omni]</span></code>, <code class="docutils literal notranslate"><span class="pre">.[lingbot_world]</span></code> or <code class="docutils literal notranslate"><span class="pre">.[all]</span></code> — you install it as a separate step. The reason: flash-attn
+<section id="flash-attn-lingbot-world">
+<h2>flash-attn (LingBot-World)<a class="headerlink" href="#flash-attn-lingbot-world" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">flash-attn</span></code> is only needed for <strong>LingBot-World</strong> with <code class="docutils literal notranslate"><span class="pre">reference_numerics:</span> <span class="pre">true</span></code>, and it is <strong>not</strong> pulled in by
+<code class="docutils literal notranslate"><span class="pre">.[lingbot_world]</span></code> or <code class="docutils literal notranslate"><span class="pre">.[all]</span></code> — you install it as a separate step. The reason: flash-attn
 publishes no wheels on PyPI, so <code class="docutils literal notranslate"><span class="pre">pip</span></code>/<code class="docutils literal notranslate"><span class="pre">uv</span></code> fall back to compiling it from source, which is
 slow. When a prebuilt GitHub wheel matches your stack, use it to skip the build; otherwise
 build from source (see <a class="reference internal" href="#no-matching-wheel-build-from-source">No matching wheel — build from source</a> below).</p>
 <p>The wheels live on flash-attn’s <a class="reference external" href="https://github.com/Dao-AILab/flash-attention/releases">GitHub releases</a>, named by CUDA major, torch
 <strong>minor</strong> version, Python tag, and C++ ABI. <code class="docutils literal notranslate"><span class="pre">mstar</span></code> no longer pins torch (floor
-<code class="docutils literal notranslate"><span class="pre">&gt;=2.9.1</span></code>), so the wheel’s <code class="docutils literal notranslate"><span class="pre">torchX.Y</span></code> tag must match <strong>whatever torch you actually
+<code class="docutils literal notranslate"><span class="pre">&gt;=2.10.0</span></code>), so the wheel’s <code class="docutils literal notranslate"><span class="pre">torchX.Y</span></code> tag must match <strong>whatever torch you actually
 installed</strong>, and its <code class="docutils literal notranslate"><span class="pre">cu1x</span></code> must match that torch’s CUDA build — not your system toolkit.
 Check both first:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">"import torch; print(torch.__version__, torch.version.cuda)"</span>
 <span class="c1"># e.g. 2.12.1+cu130 13.0  -&gt;  torch2.12 / cu13</span>
-<span class="c1">#      2.9.1+cu128  12.8  -&gt;  torch2.9  / cu12</span>
+<span class="c1">#      2.10.0+cu130 13.0  -&gt;  torch2.10 / cu13</span>
 </pre></div>
 </div>
 <p>Pick the release that has a wheel for your torch minor (each flash-attn release lists which
 <code class="docutils literal notranslate"><span class="pre">torchX.Y</span></code> tags it ships), then install it by <strong>direct URL</strong> (don’t use <code class="docutils literal notranslate"><span class="pre">--find-links</span></code> —
 uv sorts the <code class="docutils literal notranslate"><span class="pre">+cu13…</span></code> local version above <code class="docutils literal notranslate"><span class="pre">+cu12…</span></code> and will grab cu13 even on a CUDA 12
-box). The examples below are for <strong>torch 2.9</strong>; substitute the <code class="docutils literal notranslate"><span class="pre">torch2.9</span></code> segment with your
-own tag. Note the prebuilt wheels <strong>top out at</strong> <code class="docutils literal notranslate"><span class="pre">torch2.10</span></code> (<code class="docutils literal notranslate"><span class="pre">cu13</span></code>, in release
-<code class="docutils literal notranslate"><span class="pre">v2.8.3</span></code>) — there is <strong>no</strong> <code class="docutils literal notranslate"><span class="pre">torch2.11+</span></code> wheel, so on newer torch (e.g. 2.12) you must
-build from source instead:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># torch built for CUDA 12.x (cu12)</span>
+box). The example below is for <strong>torch 2.10</strong>, the floor. The prebuilt wheels <strong>top out at</strong>
+<code class="docutils literal notranslate"><span class="pre">torch2.10</span></code>, and only for <code class="docutils literal notranslate"><span class="pre">cu13</span></code> (release <code class="docutils literal notranslate"><span class="pre">v2.8.3</span></code>): on a cu12 torch, or on torch 2.11+,
+you must build from source instead:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># torch 2.10 built for CUDA 13.x (cu13)</span>
 uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="s2">"https://github.com/Dao-AILab/flash-attention/releases/download/v2.8.3/flash_attn-2.8.3+cu12torch2.9cxx11abiTRUE-cp312-cp312-linux_x86_64.whl"</span>
-
-<span class="c1"># torch built for CUDA 13.x (cu13)</span>
-uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="s2">"https://github.com/Dao-AILab/flash-attention/releases/download/v2.8.3/flash_attn-2.8.3+cu13torch2.9cxx11abiTRUE-cp312-cp312-linux_x86_64.whl"</span>
+<span class="w">  </span><span class="s2">"https://github.com/Dao-AILab/flash-attention/releases/download/v2.8.3/flash_attn-2.8.3+cu13torch2.10cxx11abiTRUE-cp312-cp312-linux_x86_64.whl"</span>
 </pre></div>
 </div>
 <p>Because it’s a binary wheel nothing compiles, so your <em>system</em> CUDA version is irrelevant —
@@ -1020,6 +1153,8 @@ default. That backend needs the <strong>flash-attn-4</strong> package, which pro
 <code class="docutils literal notranslate"><span class="pre">flash_attn.cute</span></code> — the CuTe DSL rewrite of flash-attn; on H100 it runs the
 FA3-style sm90 kernel with TMA and warpgroup specialisation. It is <strong>not on
 PyPI</strong> as of 2026-09-17, and it is <strong>not</strong> pulled in by any extra.</p>
+<p>Install it after <code class="docutils literal notranslate"><span class="pre">flash-attn</span></code> (FA2): the FA2 package ships an older
+<code class="docutils literal notranslate"><span class="pre">flash_attn/cute</span></code> that overwrites flash-attn-4’s.</p>
 <p>FLASH needs <strong>torch 2.11 or newer</strong>: older torch does not pass flash-attn-4 the
 block-sparse block size, and capture fails with <code class="docutils literal notranslate"><span class="pre">Block</span> <span class="pre">sparse</span> <span class="pre">tensors</span> <span class="pre">...</span>
 <span class="pre">require</span> <span class="pre">explicit</span> <span class="pre">sparse_block_size[0]</span></code>. Note this rules out the flash-attn
@@ -1058,30 +1193,27 @@ works unchanged across machines. (Needs a recent <code class="docutils literal n
 look for <code class="docutils literal notranslate"><span class="pre">--torch-backend</span></code> if unsure; <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">UV_TORCH_BACKEND=auto</span></code> is equivalent.)</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><strong>Mooncake on a CUDA 13 torch.</strong> The extras install <code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine</span></code>,
-Mooncake’s default wheel, which is built for CUDA 12 and links <code class="docutils literal notranslate"><span class="pre">libcudart.so.12</span></code>. An extra
-can’t choose a dependency by CUDA version, so it installs that wheel next to a cu130 torch
-too. A CUDA 13 torch doesn’t bring the CUDA 12 runtime, so <code class="docutils literal notranslate"><span class="pre">TCP</span></code> and <code class="docutils literal notranslate"><span class="pre">RDMA</span></code> transport
-fail at startup with <code class="docutils literal notranslate"><span class="pre">libcudart.so.12:</span> <span class="pre">cannot</span> <span class="pre">open</span> <span class="pre">shared</span> <span class="pre">object</span> <span class="pre">file</span></code>; <code class="docutils literal notranslate"><span class="pre">SHM</span></code> is not
-affected. Swap in Mooncake’s CUDA 13 build, which installs the same <code class="docutils literal notranslate"><span class="pre">mooncake</span></code> package:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>pip<span class="w"> </span>uninstall<span class="w"> </span>mooncake-transfer-engine
-uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--reinstall<span class="w"> </span>--no-deps<span class="w"> </span>mooncake-transfer-engine-cuda13
-</pre></div>
-</div>
-<p>Installing an extra again puts the CUDA 12 build back, so repeat the swap afterwards.</p>
+<p><strong>Mooncake on a CUDA 13 torch.</strong> The extras install Mooncake’s CUDA 12 wheel, which can’t
+load next to a cu130 torch, so <code class="docutils literal notranslate"><span class="pre">TCP</span></code> and <code class="docutils literal notranslate"><span class="pre">RDMA</span></code> transport fail at startup; <code class="docutils literal notranslate"><span class="pre">SHM</span></code> is
+not affected. Swap in its CUDA 13 build as described in <a class="reference internal" href="#mooncake-cuda13"><span class="std std-ref">libcudart.so.12: cannot open shared object file</span></a>.</p>
 </div>
 <p><strong>Manual fallback.</strong> If you can’t use the flag, install the pinned torch trio from the
 matching CUDA index <strong>first</strong>, then install <code class="docutils literal notranslate"><span class="pre">mstar</span></code> (the resolver then treats the
 requirement as already satisfied):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># pick the index for your CUDA toolkit: cu128 (CUDA 12.8), cu130 (CUDA 13.x), …</span>
-uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span><span class="nv">torch</span><span class="o">==</span><span class="m">2</span>.9.1<span class="w"> </span><span class="nv">torchvision</span><span class="o">==</span><span class="m">0</span>.24.1<span class="w"> </span><span class="nv">torchaudio</span><span class="o">==</span><span class="m">2</span>.9.1<span class="w"> </span><span class="se">\</span>
+uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span><span class="nv">torch</span><span class="o">==</span><span class="m">2</span>.10.0<span class="w"> </span><span class="nv">torchvision</span><span class="o">==</span><span class="m">0</span>.25.0<span class="w"> </span><span class="nv">torchaudio</span><span class="o">==</span><span class="m">2</span>.10.0<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--index-url<span class="w"> </span>https://download.pytorch.org/whl/cu128
-uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">".[all]"</span>
+uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">".[all]"</span><span class="w"> </span><span class="s2">"torchcodec==0.10.*"</span>
 </pre></div>
 </div>
 <p>Check your driver’s CUDA version with <code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code> and pick the closest build at
-<a class="reference external" href="https://pytorch.org/get-started/locally/">https://pytorch.org/get-started/locally/</a>. Keep all three packages on the same <code class="docutils literal notranslate"><span class="pre">2.9</span></code> /
-<code class="docutils literal notranslate"><span class="pre">0.24</span></code> line — <code class="docutils literal notranslate"><span class="pre">torchvision</span></code> and <code class="docutils literal notranslate"><span class="pre">torchaudio</span></code> are versioned in lockstep with <code class="docutils literal notranslate"><span class="pre">torch</span></code>.</p>
+<a class="reference external" href="https://pytorch.org/get-started/locally/">https://pytorch.org/get-started/locally/</a>. Keep all three packages on the same <code class="docutils literal notranslate"><span class="pre">2.10</span></code> /
+<code class="docutils literal notranslate"><span class="pre">0.25</span></code> line — <code class="docutils literal notranslate"><span class="pre">torchvision</span></code> and <code class="docutils literal notranslate"><span class="pre">torchaudio</span></code> are versioned in lockstep with <code class="docutils literal notranslate"><span class="pre">torch</span></code>.
+<code class="docutils literal notranslate"><span class="pre">torchcodec</span></code> doesn’t declare its <code class="docutils literal notranslate"><span class="pre">torch</span></code> version, so the resolver otherwise picks the
+newest release (0.17 at the time of writing), which fails to load next to torch 2.10; 0.10
+is the release built against it.
+The <code class="docutils literal notranslate"><span class="pre">[asr]</span></code> extra pins that set itself (<code class="docutils literal notranslate"><span class="pre">torch</span></code> 2.10 with <code class="docutils literal notranslate"><span class="pre">torchaudio</span></code> 2.10 and
+<code class="docutils literal notranslate"><span class="pre">torchcodec</span></code> 0.10, as in the Docker images), so installing it puts <code class="docutils literal notranslate"><span class="pre">torch</span></code> on 2.10.</p>
 </section>
 <section id="verify-the-install">
 <h2>Verify the install<a class="headerlink" href="#verify-the-install" title="Link to this heading">#</a></h2>
@@ -1091,78 +1223,125 @@ mstar-serve<span class="w"> </span>--help
 </pre></div>
 </div>
 </section>
-<section id="optional-rust-support">
-<h2>Optional: Rust support<a class="headerlink" href="#optional-rust-support" title="Link to this heading">#</a></h2>
-<p>Parts of the runtime can run on Rust components (vendored in <code class="docutils literal notranslate"><span class="pre">rust/</span></code>),
-each optional and selectable per process — without the extension everything
-runs on the pure-Python paths as before. Migrated so far (see
-<a class="reference internal" href="environment_variables.html"><span class="doc">Environment variables</span></a> for the flags):</p>
+<section id="rust-extension">
+<h2>Rust extension<a class="headerlink" href="#rust-extension" title="Link to this heading">#</a></h2>
+<p>Serving needs the <code class="docutils literal notranslate"><span class="pre">mstar_rust</span></code> extension (vendored in <code class="docutils literal notranslate"><span class="pre">rust/</span></code>): the graph
+runtime is Rust and every process sends on its ZeroMQ transport, so the
+conductor refuses to start without it. Importing <code class="docutils literal notranslate"><span class="pre">mstar</span></code> does not need it.
+The extension carries (see <a class="reference internal" href="environment_variables.html"><span class="doc">Environment variables</span></a> for the flags):</p>
 <ul class="simple">
-<li><p><strong>ZeroMQ control mesh</strong> — <code class="docutils literal notranslate"><span class="pre">MSTAR_RUST_ZMQ</span></code>: same endpoints, same wire
-format as pyzmq.</p></li>
-<li><p><strong>SHM tensor arena</strong> — <code class="docutils literal notranslate"><span class="pre">MSTAR_SHM_ARENA</span></code>: replaces the per-tensor file
-transport; requires the extension, interoperates on the same descriptor
-wire (and depends on the transport above only in the sense that both ship
-in the same extension).</p></li>
+<li><p><strong>Graph runtime</strong>: graph state, scheduling, routing and speculation, and the
+frames a worker sends. It holds a share of the Rust transport and of the Rust
+tensor bookkeeper, and needs the msgpack codec.</p></li>
+<li><p><strong>ZeroMQ control mesh</strong>: the transport every process sends its control
+messages on. Each process logs it at startup (<code class="docutils literal notranslate"><span class="pre">control</span> <span class="pre">mesh</span> <span class="pre">transport:</span>
+<span class="pre">rust</span> <span class="pre">&lt;version&gt;</span> <span class="pre">from</span> <span class="pre">&lt;path&gt;</span></code>) and refuses an extension of another version
+than the one its <code class="docutils literal notranslate"><span class="pre">mstar</span></code> expects.</p></li>
+<li><p><strong>SHM tensor arena</strong>: the SHM tensor transport on CUDA and CPU. Each
+process stages its tensors in <code class="docutils literal notranslate"><span class="pre">/dev/shm</span></code> segments sized from its free
+space (the <code class="docutils literal notranslate"><span class="pre">MSTAR_SHM_ARENA_*</span></code> knobs), and a tensor that does not fit
+spills to a per-tensor file. Other accelerators use the per-tensor files
+until the arena is measured there.</p></li>
 <li><p><strong>Message encoding</strong> — <code class="docutils literal notranslate"><span class="pre">MSTAR_WIRE_CODEC</span></code>: typed msgpack rather than
 pickle, which is what lets one end of an edge be Rust. On by default,
 extension or not. The legacy <code class="docutils literal notranslate"><span class="pre">pickle</span></code> codec is no longer supported.
 Loosely typed metadata uses data-only extensions; upgrade all deployment
 processes together, since legacy pickle frames are rejected.</p></li>
-<li><p><strong>Graph runtime</strong> — <code class="docutils literal notranslate"><span class="pre">MSTAR_RUST_GRAPH</span></code>: graph state, scheduling,
-routing and speculation, and the frames a worker sends. Unlike the others
-this is not free-standing — it holds a share of the Rust transport and of
-the Rust tensor bookkeeper, so it runs only where <code class="docutils literal notranslate"><span class="pre">MSTAR_RUST_ZMQ</span></code>
-resolved to Rust and the msgpack codec is in use. <code class="docutils literal notranslate"><span class="pre">AUTO</span></code> takes it
-wherever that holds, so on a machine with the extension built, installing
-it is what moves a worker onto the Rust runtime.</p></li>
 </ul>
-<p>Build the extension into your environment with <a class="reference external" href="https://www.maturin.rs">maturin</a> (needs a Rust toolchain; <code class="docutils literal notranslate"><span class="pre">rustup</span></code> works):</p>
+<p>There are two ways to get it. The Linux wheels of <code class="docutils literal notranslate"><span class="pre">mstar-ai</span></code> on PyPI (x86_64
+and aarch64, CPython 3.12 to 3.14) carry the extension, so <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span>
+<span class="pre">mstar-ai</span></code> there is all it takes; other platforms get a pure-Python wheel with
+no extension, which cannot serve. The extension statically links libzmq
+4.3.4, under LGPL-3.0-or-later with its static-linking exception; its source is
+the upstream <a class="reference external" href="https://github.com/zeromq/libzmq/releases/tag/v4.3.4">v4.3.4 release</a>.
+Elsewhere, or from a checkout (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.</span></code> does not compile it), build
+the extension into your environment with <a class="reference external" href="https://www.maturin.rs">maturin</a>
+(needs <a class="reference external" href="https://rustup.rs">rustup</a>, which installs the compiler version pinned
+in <code class="docutils literal notranslate"><span class="pre">rust-toolchain.toml</span></code>):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>maturin
 maturin<span class="w"> </span>develop<span class="w"> </span>--release<span class="w"> </span>-m<span class="w"> </span>rust/Cargo.toml
 </pre></div>
 </div>
-<p>Build with <code class="docutils literal notranslate"><span class="pre">--release</span></code> — an unoptimized debug build (maturin’s default)
-costs real latency on the hot receive path. Verify with:</p>
+<p>Rebuild whenever <code class="docutils literal notranslate"><span class="pre">rust/</span></code> changes, pulled or your own: in a checkout, the
+conductor and each worker refuse an extension built from other <code class="docutils literal notranslate"><span class="pre">rust/</span></code>
+sources (compared by content, <code class="docutils literal notranslate"><span class="pre">mstar_rust.BUILD_SOURCE_HASH</span></code>), which would
+otherwise import fine and fail mid-request. An installed wheel has no <code class="docutils literal notranslate"><span class="pre">rust/</span></code>
+beside <code class="docutils literal notranslate"><span class="pre">mstar</span></code> and is not checked.</p>
+<p>The CPU test suites build a graph runtime too, so contributors need it as well,
+Mac contributors included: install <code class="docutils literal notranslate"><span class="pre">cargo</span></code> through rustup and run the same
+command. Build with <code class="docutils literal notranslate"><span class="pre">--release</span></code> — an unoptimized debug build (maturin’s
+default) costs real latency on the hot receive path. If <code class="docutils literal notranslate"><span class="pre">mstar-ai</span></code> came from a Linux
+wheel that carries the extension, this build (a separate <code class="docutils literal notranslate"><span class="pre">mstar-rust</span></code>
+distribution) takes precedence over the wheel’s copy in the same environment;
+<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">uninstall</span> <span class="pre">mstar-rust</span></code> goes back to the wheel’s, and neither uninstall
+removes the other’s files. Verify with:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">"import mstar_rust; print('mstar_rust OK')"</span>
 pytest<span class="w"> </span>test/rust
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">test/rust</span></code> is skipped wholesale when the extension is not importable, so
 a green run there without the build above proves nothing.</p>
-<p>The Rust-side tests need one extra flag. The crate’s default features turn on
-<code class="docutils literal notranslate"><span class="pre">pyo3/extension-module</span></code>, which tells pyo3 <em>not</em> to link libpython — right
+<p>The Rust-side tests need different features. The crate’s default features turn
+on <code class="docutils literal notranslate"><span class="pre">pyo3/extension-module</span></code>, which tells pyo3 <em>not</em> to link libpython — right
 for the cdylib, which resolves CPython symbols from the interpreter that
 imports it, wrong for <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">test</span></code>, which is an executable and has to link
-it itself. Without this the link fails on <code class="docutils literal notranslate"><span class="pre">undefined</span> <span class="pre">symbol:</span>
-<span class="pre">PyEval_RestoreThread</span></code>:</p>
+it itself. Without <code class="docutils literal notranslate"><span class="pre">--no-default-features</span></code> the link fails on <code class="docutils literal notranslate"><span class="pre">undefined</span>
+<span class="pre">symbol:</span> <span class="pre">PyEval_RestoreThread</span></code>; <code class="docutils literal notranslate"><span class="pre">--features</span> <span class="pre">python</span></code> keeps the bindings and
+the graph runtime, whose tests need them:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>python<span class="w"> </span>-c<span class="w"> </span><span class="s1">'import sysconfig</span>
 <span class="s1">print(sysconfig.get_config_var("LIBDIR"))'</span><span class="k">)</span><span class="s2">"</span>
-cargo<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--release<span class="w"> </span>--no-default-features<span class="w"> </span>--manifest-path<span class="w"> </span>rust/Cargo.toml
+cargo<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--release<span class="w"> </span>--no-default-features<span class="w"> </span>--features<span class="w"> </span>python<span class="w"> </span>--manifest-path<span class="w"> </span>rust/Cargo.toml
 </pre></div>
 </div>
 </section>
-<section id="optional-the-rust-http-frontend">
-<h2>Optional: the Rust HTTP frontend<a class="headerlink" href="#optional-the-rust-http-frontend" title="Link to this heading">#</a></h2>
+<section id="the-rust-http-frontend">
+<h2>The Rust HTTP frontend<a class="headerlink" href="#the-rust-http-frontend" title="Link to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">mstar-server</span></code> (<code class="docutils literal notranslate"><span class="pre">rust/server/</span></code>) serves the HTTP surface — routes, OpenAI
 translation, SSE streaming, uploads — from Rust, with the Python process
-keeping preprocessing and the conductor protocol. Build and opt in:</p>
+keeping preprocessing, tokenization and the conductor protocol. It is
+<code class="docutils literal notranslate"><span class="pre">mstar</span> <span class="pre">serve</span></code>’s default frontend. A Linux wheel that carries
+the extension also installs the binary next to <code class="docutils literal notranslate"><span class="pre">mstar-serve</span></code>; from a checkout,
+build it:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cargo<span class="w"> </span>build<span class="w"> </span>--release<span class="w"> </span>--manifest-path<span class="w"> </span>rust/server/Cargo.toml
-mstar<span class="w"> </span>serve<span class="w"> </span>qwen3_omni<span class="w"> </span>--rust-frontend
-<span class="c1"># or, with an explicit config: mstar-serve --config &lt;model.yaml&gt; --rust-frontend</span>
+mstar<span class="w"> </span>serve<span class="w"> </span>qwen3_omni
+<span class="c1"># or, with an explicit config: mstar-serve --config &lt;model.yaml&gt;</span>
 </pre></div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">--python-frontend</span></code> serves from the uvicorn/FastAPI frontend instead. It is
+deprecated and will be removed (see “API surfaces land in the Rust frontend” in
+<code class="docutils literal notranslate"><span class="pre">AGENTS.md</span></code>); it takes no <code class="docutils literal notranslate"><span class="pre">--rust-frontend-bin</span></code>. Its output path costs
+about 18 µs of API-server CPU per streamed token against 8 µs for
+<code class="docutils literal notranslate"><span class="pre">mstar-server</span></code> (<code class="docutils literal notranslate"><span class="pre">benchmark/api_output_path</span></code>), so at high token rates the
+Python frontend, not the model, can be the limit.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">mstar-server</span></code> exits while serving (a crash, a kill, a lost race for the
+port), <code class="docutils literal notranslate"><span class="pre">mstar</span> <span class="pre">serve</span></code> exits with status 3; a port already taken is reported as
+<code class="docutils literal notranslate"><span class="pre">mstar-server:</span> <span class="pre">could</span> <span class="pre">not</span> <span class="pre">listen</span> <span class="pre">on</span> <span class="pre">http://…:</span> <span class="pre">Address</span> <span class="pre">already</span> <span class="pre">in</span> <span class="pre">use</span></code>.
+<code class="docutils literal notranslate"><span class="pre">mstar-server</span></code> exits when its launcher is killed, even by <code class="docutils literal notranslate"><span class="pre">SIGKILL</span></code>, and on
+shutdown <code class="docutils literal notranslate"><span class="pre">mstar</span> <span class="pre">serve</span></code> waits up to 5 s for it.</p>
 <p>The binary is resolved via <code class="docutils literal notranslate"><span class="pre">--rust-frontend-bin</span></code> / <code class="docutils literal notranslate"><span class="pre">MSTAR_SERVER_BIN</span></code> /
-<code class="docutils literal notranslate"><span class="pre">$PATH</span></code> / the in-repo build. Its knobs are listed in
-<a class="reference internal" href="environment_variables.html"><span class="doc">Environment variables</span></a>.</p>
+the environment’s scripts directory / <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> / the in-repo build. Its knobs
+are listed in <a class="reference internal" href="environment_variables.html"><span class="doc">Environment variables</span></a>. From a checkout, a binary built from
+other <code class="docutils literal notranslate"><span class="pre">rust/</span></code> or <code class="docutils literal notranslate"><span class="pre">rust/server/</span></code> sources is skipped, and if none is left
+<code class="docutils literal notranslate"><span class="pre">mstar</span> <span class="pre">serve</span></code> stops at startup with the command that rebuilds it; one named
+by the flag or the variable is used with a warning. A missing or stale binary’s
+error also points at <code class="docutils literal notranslate"><span class="pre">--python-frontend</span></code>. <code class="docutils literal notranslate"><span class="pre">mstar-server</span> <span class="pre">--source-hash</span></code>
+prints the hashes of the sources a build was made from.</p>
 <p>The OpenAI routes take the model’s adapter from the same registry as the Python
 frontend (<code class="docutils literal notranslate"><span class="pre">ADAPTER_REGISTRY</span></code> in <code class="docutils literal notranslate"><span class="pre">mstar/api_server/openai/adapters.py</span></code>):
 <code class="docutils literal notranslate"><span class="pre">mstar-server</span></code> ports adapter classes, not model names, so every model of a
-ported class is served. Chat is served for every model the Python frontend serves
-it for. Some speech, image and video adapters, and the transcription and realtime
-routes, are not ported yet (<code class="docutils literal notranslate"><span class="pre">NOT_PORTED</span></code> in
-<code class="docutils literal notranslate"><span class="pre">test/rust/test_rust_openai_adapters.py</span></code>); there <code class="docutils literal notranslate"><span class="pre">mstar-server</span></code> answers 404,
-logs a warning at startup, and <code class="docutils literal notranslate"><span class="pre">/generate</span></code> still works.</p>
+ported class is served. Chat, speech, images, videos and transcriptions are
+served for every model the Python frontend serves them for; a transcription’s
+upload is decoded and cut into windows by the API server’s <code class="docutils literal notranslate"><span class="pre">WindowPlanner</span></code>,
+over the bridge, so both frontends read the same formats; a PCM WAV of one
+window, which the planner would pass whole, is planned from its header without
+that round trip. The WebSocket
+routes are served too: <code class="docutils literal notranslate"><span class="pre">/generate/ws</span></code>, <code class="docutils literal notranslate"><span class="pre">/v1/realtime</span></code> (conversations with
+full-duplex models, and transcription, whose server turn detection runs Silero
+through the ONNX Runtime library <code class="docutils literal notranslate"><span class="pre">onnxruntime</span></code> ships; <code class="docutils literal notranslate"><span class="pre">semantic_vad</span></code> asks the
+API server’s Smart Turn), and openpi’s socket at
+<code class="docutils literal notranslate"><span class="pre">/</span></code> where the config has an <code class="docutils literal notranslate"><span class="pre">openpi:</span></code> block. <code class="docutils literal notranslate"><span class="pre">mstar-server</span></code> does not
+offer per-message deflate, so <code class="docutils literal notranslate"><span class="pre">ws_per_message_deflate</span></code> has no effect there:
+a client that asks for it gets uncompressed frames.</p>
 </section>
 <section id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
@@ -1187,7 +1366,7 @@ Boxes with no system cuDNN, or a matching one, are unaffected, as are CUDA 13 in
 <code class="docutils literal notranslate"><span class="pre">9.20.0.48</span></code>. cuDNN is ABI-compatible within the v9 series, so the newer patch runs fine.</p>
 </section>
 <section id="libcudart-so-12-cannot-open-shared-object-file">
-<h3><code class="docutils literal notranslate"><span class="pre">libcudart.so.12:</span> <span class="pre">cannot</span> <span class="pre">open</span> <span class="pre">shared</span> <span class="pre">object</span> <span class="pre">file</span></code><a class="headerlink" href="#libcudart-so-12-cannot-open-shared-object-file" title="Link to this heading">#</a></h3>
+<span id="mooncake-cuda13"></span><h3><code class="docutils literal notranslate"><span class="pre">libcudart.so.12:</span> <span class="pre">cannot</span> <span class="pre">open</span> <span class="pre">shared</span> <span class="pre">object</span> <span class="pre">file</span></code><a class="headerlink" href="#libcudart-so-12-cannot-open-shared-object-file" title="Link to this heading">#</a></h3>
 <p>Symptom: with <code class="docutils literal notranslate"><span class="pre">--tensor-comm-protocol</span> <span class="pre">TCP</span></code> or <code class="docutils literal notranslate"><span class="pre">RDMA</span></code>, startup fails with:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">RuntimeError</span><span class="p">:</span> <span class="n">Mooncake</span> <span class="n">TransferEngine</span> <span class="ow">is</span> <span class="n">required</span> <span class="k">for</span> <span class="n">RDMA</span><span class="o">/</span><span class="n">TCP</span> <span class="n">protocol</span><span class="o">.</span> <span class="n">Failed</span> <span class="n">to</span> <span class="n">load</span>
 <span class="n">mooncake</span><span class="p">:</span> <span class="ne">ImportError</span><span class="p">:</span> <span class="n">libcudart</span><span class="o">.</span><span class="n">so</span><span class="mf">.12</span><span class="p">:</span> <span class="n">cannot</span> <span class="nb">open</span> <span class="n">shared</span> <span class="nb">object</span> <span class="n">file</span><span class="p">:</span> <span class="o">...</span>
@@ -1264,15 +1443,15 @@ Repeat the swap afterwards.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu-libraries">GPU libraries</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#omnivoice-omnivoice">omnivoice (OmniVoice)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qwen-tts-qwen3-tts">qwen-tts (Qwen3-TTS)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flash-attn-qwen3-omni-lingbot-world">flash-attn (Qwen3-Omni, LingBot-World)</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flash-attn-lingbot-world">flash-attn (LingBot-World)</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#no-matching-wheel-build-from-source">No matching wheel — build from source</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flash-attn-4-waypoint-fa3-sm90-kernel">flash-attn-4 (Waypoint, FA3 sm90 kernel)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matching-your-cuda-toolkit">Matching your CUDA toolkit</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verify-the-install">Verify the install</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-rust-support">Optional: Rust support</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-the-rust-http-frontend">Optional: the Rust HTTP frontend</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rust-extension">Rust extension</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-rust-http-frontend">The Rust HTTP frontend</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cudnn-status-sublibrary-version-mismatch"><code class="docutils literal notranslate"><span class="pre">CUDNN_STATUS_SUBLIBRARY_VERSION_MISMATCH</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libcudart-so-12-cannot-open-shared-object-file"><code class="docutils literal notranslate"><span class="pre">libcudart.so.12:</span> <span class="pre">cannot</span> <span class="pre">open</span> <span class="pre">shared</span> <span class="pre">object</span> <span class="pre">file</span></code></a></li>
@@ -1311,7 +1490,7 @@ By M* Team
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Oct 25, 2026.
+  Last updated on Nov 22, 2026.
   <br/>
 </p>
   </div>

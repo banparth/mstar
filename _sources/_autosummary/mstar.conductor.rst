@@ -28,5 +28,9 @@
    :recursive:
 
    conductor
+   lora_ops
+   mps
    request_info
+   routing
+   workers
 

@@ -9,6 +9,12 @@ mstar.streaming.stream\_buffer
 
    
    
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      collate
+   
    
 
    
@@ -17,6 +23,7 @@ mstar.streaming.stream\_buffer
 
    .. autosummary::
    
+      InlineValue
       StreamBuffer
       StreamChunk
       StreamChunkInfo

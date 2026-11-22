@@ -18,14 +18,19 @@ mstar.utils.ipc\_format
    .. autosummary::
    
       AbortRequest
+      ClientStreamRoute
       ConductorMessage
       ConductorMessageType
       DrainRequest
+      EdgeItems
       EnableMetrics
       FailRequests
       InputSignals
+      LoadLoraAdapter
+      LoraAdapterAck
       MessageBody
       MessageSource
+      Move
       NewRequest
       NewRequestConductor
       OffloadDelta
@@ -37,6 +42,7 @@ mstar.utils.ipc\_format
       StopLoops
       TPNoSpeculation
       TensorReceived
+      UnloadLoraAdapter
       UnpersistTensors
       WorkerGraphsDone
       WorkerMessage

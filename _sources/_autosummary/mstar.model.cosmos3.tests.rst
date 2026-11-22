@@ -28,7 +28,10 @@ mstar.model.cosmos3.tests
    :recursive:
 
    pipeline
+   stubs
    test_action
+   test_conditioning
+   test_denoise_compile
    test_distilled
    test_dit_step_guard
    test_droid
@@ -38,12 +41,17 @@ mstar.model.cosmos3.tests
    test_edge_reasoner_parity
    test_edge_video_parity
    test_engine_cache
+   test_image_postprocess
    test_loader
+   test_loop_dtype
+   test_policy_state
+   test_rotary_table
    test_serving
    test_sessions
    test_sound
    test_t2i
    test_time_embedder
+   test_vae_encode_compile
    test_vae_encoder_clip
    test_video
    test_video_capture

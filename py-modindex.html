@@ -411,7 +411,7 @@ window.runMermaid = runMermaid;</script>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="0.2.1" />
-    <meta name="docbuild:last-update" content="Oct 25, 2026"/>
+    <meta name="docbuild:last-update" content="Nov 22, 2026"/>
   
     
     <script src="_static/searchtools.js"></script>
@@ -564,6 +564,7 @@ window.runMermaid = runMermaid;</script>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models.html">Supported Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asr.html">Speech recognition: Whisper and Qwen3-ASR</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="api.html">API Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.api_server.html">mstar.api_server</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.api_server.auth.html">mstar.api_server.auth</a></li>
@@ -581,12 +582,15 @@ window.runMermaid = runMermaid;</script>
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.api_server.request_types.html">mstar.api_server.request_types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.api_server.rust_frontend.html">mstar.api_server.rust_frontend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.api_server.streaming_response.html">mstar.api_server.streaming_response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.api_server.ws_frames.html">mstar.api_server.ws_frames</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.communication.html">mstar.communication</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.arena.html">mstar.communication.arena</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.codec.html">mstar.communication.codec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.communicator.html">mstar.communication.communicator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.edge_items.html">mstar.communication.edge_items</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.event.html">mstar.communication.event</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.rust_communicator.html">mstar.communication.rust_communicator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.tensor_store.html">mstar.communication.tensor_store</a></li>
@@ -596,22 +600,31 @@ window.runMermaid = runMermaid;</script>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.conductor.html">mstar.conductor</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.conductor.lora_ops.html">mstar.conductor.lora_ops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.conductor.mps.html">mstar.conductor.mps</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.conductor.request_info.html">mstar.conductor.request_info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.conductor.workers.html">mstar.conductor.workers</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.engine.html">mstar.engine</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.engine.accelerator_graph_backend.html">mstar.engine.accelerator_graph_backend</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.engine.accelerator_graph_config.html">mstar.engine.accelerator_graph_config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.engine.accelerator_graph_runner.html">mstar.engine.accelerator_graph_runner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.engine.chunking.html">mstar.engine.chunking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.engine.fp32_precision.html">mstar.engine.fp32_precision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.engine.node_dtype.html">mstar.engine.node_dtype</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.engine.resources.html">mstar.engine.resources</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.admission.html">mstar.engine.resources.admission</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.attn.html">mstar.engine.resources.attn</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.base.html">mstar.engine.resources.base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.context_parallel.html">mstar.engine.resources.context_parallel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.dsa.html">mstar.engine.resources.dsa</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.kv.html">mstar.engine.resources.kv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.lora.html">mstar.engine.resources.lora</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.position.html">mstar.engine.resources.position</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.recurrent.html">mstar.engine.resources.recurrent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.resident_hooks.html">mstar.engine.resources.resident_hooks</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.rms_norm.html">mstar.engine.resources.rms_norm</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.runner.html">mstar.engine.resources.runner</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.sampler.html">mstar.engine.resources.sampler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.sequence_shard.html">mstar.engine.resources.sequence_shard</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.spec.html">mstar.engine.resources.spec</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.step.html">mstar.engine.resources.step</a></li>
 </ul>
@@ -628,8 +641,17 @@ window.runMermaid = runMermaid;</script>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.model.html">mstar.model</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.audio_watermark.html">mstar.model.audio_watermark</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.canary.html">mstar.model.canary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.canary_qwen.html">mstar.model.canary_qwen</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.chatterbox.html">mstar.model.chatterbox</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.chatterbox.config.html">mstar.model.chatterbox.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.command_a_plus.html">mstar.model.command_a_plus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.command_a_plus.assets.html">mstar.model.command_a_plus.assets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.command_a_plus.components.html">mstar.model.command_a_plus.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.command_a_plus.config.html">mstar.model.command_a_plus.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.command_a_plus.tests.html">mstar.model.command_a_plus.tests</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.cosmos3.html">mstar.model.cosmos3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -638,12 +660,31 @@ window.runMermaid = runMermaid;</script>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.cosmos3.constants.html">mstar.model.cosmos3.constants</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.cosmos3.loader.html">mstar.model.cosmos3.loader</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.cosmos3.sessions.html">mstar.model.cosmos3.sessions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.cosmos3.submodules.html">mstar.model.cosmos3.submodules</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.cosmos3.tests.html">mstar.model.cosmos3.tests</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.cosyvoice3.html">mstar.model.cosyvoice3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.cosyvoice3.components.html">mstar.model.cosyvoice3.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.cosyvoice3.config.html">mstar.model.cosyvoice3.config</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.flux2_klein.html">mstar.model.flux2_klein</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.flux2_klein.components.html">mstar.model.flux2_klein.components</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.glm52.html">mstar.model.glm52</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.glm52.components.html">mstar.model.glm52.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.glm52.config.html">mstar.model.glm52.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.glm52.weight_loader.html">mstar.model.glm52.weight_loader</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.glm5_next.html">mstar.model.glm5_next</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.glm5_next.components.html">mstar.model.glm5_next.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.glm5_next.config.html">mstar.model.glm5_next.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.glm5_next.fused_decode.html">mstar.model.glm5_next.fused_decode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.glm5_next.mhc.html">mstar.model.glm5_next.mhc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.glm5_next.sinkhorn_kernel.html">mstar.model.glm5_next.sinkhorn_kernel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.glm5_next.weight_loader.html">mstar.model.glm5_next.weight_loader</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.higgs_audio.html">mstar.model.higgs_audio</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -651,6 +692,7 @@ window.runMermaid = runMermaid;</script>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.higgs_audio.config.html">mstar.model.higgs_audio.config</a></li>
 </ul>
 </details></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.keys.html">mstar.model.keys</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.kokoro.html">mstar.model.kokoro</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.kokoro.config.html">mstar.model.kokoro.config</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.kokoro.g2p.html">mstar.model.kokoro.g2p</a></li>
@@ -667,12 +709,24 @@ window.runMermaid = runMermaid;</script>
 </ul>
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.media_limits.html">mstar.model.media_limits</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.minicpm_o.html">mstar.model.minicpm_o</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.minicpm_o.components.html">mstar.model.minicpm_o.components</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.minimax_h3.html">mstar.model.minimax_h3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.minimax_h3.components.html">mstar.model.minimax_h3.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.minimax_h3.tests.html">mstar.model.minimax_h3.tests</a></li>
+</ul>
+</details></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.multimodal.html">mstar.model.multimodal</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.muse.html">mstar.model.muse</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.muse.components.html">mstar.model.muse.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.muse.config.html">mstar.model.muse.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.muse.processing.html">mstar.model.muse.processing</a></li>
+</ul>
+</details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.nemotron_duplex.html">mstar.model.nemotron_duplex</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.nemotron_duplex.components.html">mstar.model.nemotron_duplex.components</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.nemotron_duplex.config.html">mstar.model.nemotron_duplex.config</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.nemotron_duplex.realtime_api.html">mstar.model.nemotron_duplex.realtime_api</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.nemotron_duplex.submodules.html">mstar.model.nemotron_duplex.submodules</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.omnilingual_asr.html">mstar.model.omnilingual_asr</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -686,12 +740,17 @@ window.runMermaid = runMermaid;</script>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.omnivoice.html">mstar.model.omnivoice</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.omnivoice.components.html">mstar.model.omnivoice.components</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.omnivoice.config.html">mstar.model.omnivoice.config</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.omnivoice.submodules.html">mstar.model.omnivoice.submodules</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.orpheus.html">mstar.model.orpheus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.orpheus.components.html">mstar.model.orpheus.components</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.orpheus.config.html">mstar.model.orpheus.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.parakeet.html">mstar.model.parakeet</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.phi4mm.html">mstar.model.phi4mm</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.phi4mm.components.html">mstar.model.phi4mm.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.phi4mm.tests.html">mstar.model.phi4mm.tests</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.pi05.html">mstar.model.pi05</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -702,14 +761,29 @@ window.runMermaid = runMermaid;</script>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.qwen3_5.html">mstar.model.qwen3_5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.qwen3_5.components.html">mstar.model.qwen3_5.components</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.qwen3_5.config.html">mstar.model.qwen3_5.config</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.qwen3_5.video.html">mstar.model.qwen3_5.video</a></li>
 </ul>
 </details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.qwen3_asr.html">mstar.model.qwen3_asr</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.qwen3_asr.constants.html">mstar.model.qwen3_asr.constants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.qwen3_asr.repetition.html">mstar.model.qwen3_asr.repetition</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.rebuild.html">mstar.model.rebuild</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.ripple.html">mstar.model.ripple</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.ripple.config.html">mstar.model.ripple.config</a></li>
+</ul>
+</details></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.submodule_base.html">mstar.model.submodule_base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.utils.html">mstar.model.utils</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.vjepa2.html">mstar.model.vjepa2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.vjepa2.components.html">mstar.model.vjepa2.components</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.vjepa2.config.html">mstar.model.vjepa2.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.voxcpm2.html">mstar.model.voxcpm2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.voxcpm2.components.html">mstar.model.voxcpm2.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.voxcpm2.config.html">mstar.model.voxcpm2.config</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.wan22.html">mstar.model.wan22</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -721,7 +795,6 @@ window.runMermaid = runMermaid;</script>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.waypoint.components.html">mstar.model.waypoint.components</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.waypoint.config.html">mstar.model.waypoint.config</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.waypoint.ring_geometry.html">mstar.model.waypoint.ring_geometry</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.waypoint.submodules.html">mstar.model.waypoint.submodules</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.whisper.html">mstar.model.whisper</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -749,26 +822,46 @@ window.runMermaid = runMermaid;</script>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.utils.html">mstar.utils</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.adarms_norm.html">mstar.utils.adarms_norm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.cache_home.html">mstar.utils.cache_home</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.client_errors.html">mstar.utils.client_errors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.containers.html">mstar.utils.containers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.cpus.html">mstar.utils.cpus</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.device.html">mstar.utils.device</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.exitcode.html">mstar.utils.exitcode</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.fast_tokenize.html">mstar.utils.fast_tokenize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.fp8_block.html">mstar.utils.fp8_block</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.gc_freeze.html">mstar.utils.gc_freeze</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.generation_kwargs.html">mstar.utils.generation_kwargs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.h2d.html">mstar.utils.h2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.hf_snapshot.html">mstar.utils.hf_snapshot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.host_copy.html">mstar.utils.host_copy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.ipc_format.html">mstar.utils.ipc_format</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.knobs.html">mstar.utils.knobs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.logging_config.html">mstar.utils.logging_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.mla_latent_norm.html">mstar.utils.mla_latent_norm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.orphan.html">mstar.utils.orphan</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.profiler.html">mstar.utils.profiler</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.socket_prefix.html">mstar.utils.socket_prefix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.streams.html">mstar.utils.streams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.threads.html">mstar.utils.threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.utf8_stream.html">mstar.utils.utf8_stream</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.worker.html">mstar.worker</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.batch_builder.html">mstar.worker.batch_builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.chunk_loops.html">mstar.worker.chunk_loops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.host_copies.html">mstar.worker.host_copies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.host_pool.html">mstar.worker.host_pool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.lora_loads.html">mstar.worker.lora_loads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.node_manager_utils.html">mstar.worker.node_manager_utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.phase_timer.html">mstar.worker.phase_timer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.preemption.html">mstar.worker.preemption</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.rebuild.html">mstar.worker.rebuild</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.rid_table.html">mstar.worker.rid_table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.scheduled_batch.html">mstar.worker.scheduled_batch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.scheduling_policy.html">mstar.worker.scheduling_policy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.spec_rows.html">mstar.worker.spec_rows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.stream_buffers.html">mstar.worker.stream_buffers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.worker_metrics.html">mstar.worker.worker_metrics</a></li>
 </ul>
 </details></li>
@@ -1022,6 +1115,16 @@ window.runMermaid = runMermaid;</script>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.api_server.streaming_response.html#module-mstar.api_server.streaming_response"><code class="xref">mstar.api_server.streaming_response</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.api_server.ws_frames.html#module-mstar.api_server.ws_frames"><code class="xref">mstar.api_server.ws_frames</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.communication.html#module-mstar.communication"><code class="xref">mstar.communication</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
@@ -1038,6 +1141,11 @@ window.runMermaid = runMermaid;</script>
        <td></td>
        <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.communication.communicator.html#module-mstar.communication.communicator"><code class="xref">mstar.communication.communicator</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.communication.edge_items.html#module-mstar.communication.edge_items"><code class="xref">mstar.communication.edge_items</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1077,7 +1185,22 @@ window.runMermaid = runMermaid;</script>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.conductor.lora_ops.html#module-mstar.conductor.lora_ops"><code class="xref">mstar.conductor.lora_ops</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.conductor.mps.html#module-mstar.conductor.mps"><code class="xref">mstar.conductor.mps</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.conductor.request_info.html#module-mstar.conductor.request_info"><code class="xref">mstar.conductor.request_info</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.conductor.workers.html#module-mstar.conductor.workers"><code class="xref">mstar.conductor.workers</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1092,12 +1215,17 @@ window.runMermaid = runMermaid;</script>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.engine.accelerator_graph_config.html#module-mstar.engine.accelerator_graph_config"><code class="xref">mstar.engine.accelerator_graph_config</code></a></td><td>
+       <a href="_autosummary/mstar.engine.chunking.html#module-mstar.engine.chunking"><code class="xref">mstar.engine.chunking</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.engine.accelerator_graph_runner.html#module-mstar.engine.accelerator_graph_runner"><code class="xref">mstar.engine.accelerator_graph_runner</code></a></td><td>
+       <a href="_autosummary/mstar.engine.fp32_precision.html#module-mstar.engine.fp32_precision"><code class="xref">mstar.engine.fp32_precision</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.engine.node_dtype.html#module-mstar.engine.node_dtype"><code class="xref">mstar.engine.node_dtype</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1107,12 +1235,12 @@ window.runMermaid = runMermaid;</script>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.engine.resources.attn.html#module-mstar.engine.resources.attn"><code class="xref">mstar.engine.resources.attn</code></a></td><td>
+       <a href="_autosummary/mstar.engine.resources.admission.html#module-mstar.engine.resources.admission"><code class="xref">mstar.engine.resources.admission</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.engine.resources.attn.base.html#module-mstar.engine.resources.attn.base"><code class="xref">mstar.engine.resources.attn.base</code></a></td><td>
+       <a href="_autosummary/mstar.engine.resources.attn.html#module-mstar.engine.resources.attn"><code class="xref">mstar.engine.resources.attn</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1122,42 +1250,7 @@ window.runMermaid = runMermaid;</script>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.engine.resources.attn.cross.html#module-mstar.engine.resources.attn.cross"><code class="xref">mstar.engine.resources.attn.cross</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.engine.resources.attn.dense.html#module-mstar.engine.resources.attn.dense"><code class="xref">mstar.engine.resources.attn.dense</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.engine.resources.attn.flashinfer.html#module-mstar.engine.resources.attn.flashinfer"><code class="xref">mstar.engine.resources.attn.flashinfer</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.engine.resources.attn.flashinfer_mla.html#module-mstar.engine.resources.attn.flashinfer_mla"><code class="xref">mstar.engine.resources.attn.flashinfer_mla</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.engine.resources.attn.flex.html#module-mstar.engine.resources.attn.flex"><code class="xref">mstar.engine.resources.attn.flex</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.engine.resources.attn.ragged.html#module-mstar.engine.resources.attn.ragged"><code class="xref">mstar.engine.resources.attn.ragged</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.engine.resources.attn.ragged.base.html#module-mstar.engine.resources.attn.ragged.base"><code class="xref">mstar.engine.resources.attn.ragged.base</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.engine.resources.attn.ragged.block_causal.html#module-mstar.engine.resources.attn.ragged.block_causal"><code class="xref">mstar.engine.resources.attn.ragged.block_causal</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1167,27 +1260,32 @@ window.runMermaid = runMermaid;</script>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.engine.resources.attn.ragged.flashinfer.html#module-mstar.engine.resources.attn.ragged.flashinfer"><code class="xref">mstar.engine.resources.attn.ragged.flashinfer</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.engine.resources.attn.ragged.wrappers.html#module-mstar.engine.resources.attn.ragged.wrappers"><code class="xref">mstar.engine.resources.attn.ragged.wrappers</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.engine.resources.attn.wrappers.html#module-mstar.engine.resources.attn.wrappers"><code class="xref">mstar.engine.resources.attn.wrappers</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.engine.resources.attn.xpu.html#module-mstar.engine.resources.attn.xpu"><code class="xref">mstar.engine.resources.attn.xpu</code></a></td><td>
+       <a href="_autosummary/mstar.engine.resources.attn.workspace.html#module-mstar.engine.resources.attn.workspace"><code class="xref">mstar.engine.resources.attn.workspace</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.engine.resources.base.html#module-mstar.engine.resources.base"><code class="xref">mstar.engine.resources.base</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.engine.resources.context_parallel.html#module-mstar.engine.resources.context_parallel"><code class="xref">mstar.engine.resources.context_parallel</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.engine.resources.dsa.html#module-mstar.engine.resources.dsa"><code class="xref">mstar.engine.resources.dsa</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.engine.resources.dsa.config.html#module-mstar.engine.resources.dsa.config"><code class="xref">mstar.engine.resources.dsa.config</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.engine.resources.dsa.manager.html#module-mstar.engine.resources.dsa.manager"><code class="xref">mstar.engine.resources.dsa.manager</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1257,6 +1355,66 @@ window.runMermaid = runMermaid;</script>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.engine.resources.kv.rolling.html#module-mstar.engine.resources.kv.rolling"><code class="xref">mstar.engine.resources.kv.rolling</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.engine.resources.kv.rolling.config.html#module-mstar.engine.resources.kv.rolling.config"><code class="xref">mstar.engine.resources.kv.rolling.config</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.engine.resources.kv.rolling.manager.html#module-mstar.engine.resources.kv.rolling.manager"><code class="xref">mstar.engine.resources.kv.rolling.manager</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.engine.resources.lora.html#module-mstar.engine.resources.lora"><code class="xref">mstar.engine.resources.lora</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.engine.resources.lora.backend.html#module-mstar.engine.resources.lora.backend"><code class="xref">mstar.engine.resources.lora.backend</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.engine.resources.lora.checkpoint.html#module-mstar.engine.resources.lora.checkpoint"><code class="xref">mstar.engine.resources.lora.checkpoint</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.engine.resources.lora.config.html#module-mstar.engine.resources.lora.config"><code class="xref">mstar.engine.resources.lora.config</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.engine.resources.lora.identity.html#module-mstar.engine.resources.lora.identity"><code class="xref">mstar.engine.resources.lora.identity</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.engine.resources.lora.ops.html#module-mstar.engine.resources.lora.ops"><code class="xref">mstar.engine.resources.lora.ops</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.engine.resources.lora.pool.html#module-mstar.engine.resources.lora.pool"><code class="xref">mstar.engine.resources.lora.pool</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.engine.resources.lora.serving.html#module-mstar.engine.resources.lora.serving"><code class="xref">mstar.engine.resources.lora.serving</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.engine.resources.lora.store.html#module-mstar.engine.resources.lora.store"><code class="xref">mstar.engine.resources.lora.store</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.engine.resources.position.html#module-mstar.engine.resources.position"><code class="xref">mstar.engine.resources.position</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
@@ -1267,27 +1425,12 @@ window.runMermaid = runMermaid;</script>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.engine.resources.position.manager.html#module-mstar.engine.resources.position.manager"><code class="xref">mstar.engine.resources.position.manager</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.engine.resources.position.rope.html#module-mstar.engine.resources.position.rope"><code class="xref">mstar.engine.resources.position.rope</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.engine.resources.recurrent.html#module-mstar.engine.resources.recurrent"><code class="xref">mstar.engine.resources.recurrent</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.engine.resources.recurrent.config.html#module-mstar.engine.resources.recurrent.config"><code class="xref">mstar.engine.resources.recurrent.config</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.engine.resources.recurrent.pool.html#module-mstar.engine.resources.recurrent.pool"><code class="xref">mstar.engine.resources.recurrent.pool</code></a></td><td>
+       <a href="_autosummary/mstar.engine.resources.resident_hooks.html#module-mstar.engine.resources.resident_hooks"><code class="xref">mstar.engine.resources.resident_hooks</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1313,6 +1456,11 @@ window.runMermaid = runMermaid;</script>
        <td></td>
        <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.engine.resources.sampler.config.html#module-mstar.engine.resources.sampler.config"><code class="xref">mstar.engine.resources.sampler.config</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.engine.resources.sequence_shard.html#module-mstar.engine.resources.sequence_shard"><code class="xref">mstar.engine.resources.sequence_shard</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1367,12 +1515,62 @@ window.runMermaid = runMermaid;</script>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.canary.html#module-mstar.model.canary"><code class="xref">mstar.model.canary</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.canary_qwen.html#module-mstar.model.canary_qwen"><code class="xref">mstar.model.canary_qwen</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.model.chatterbox.html#module-mstar.model.chatterbox"><code class="xref">mstar.model.chatterbox</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.model.chatterbox.config.html#module-mstar.model.chatterbox.config"><code class="xref">mstar.model.chatterbox.config</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.command_a_plus.html#module-mstar.model.command_a_plus"><code class="xref">mstar.model.command_a_plus</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.command_a_plus.assets.html#module-mstar.model.command_a_plus.assets"><code class="xref">mstar.model.command_a_plus.assets</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.command_a_plus.components.html#module-mstar.model.command_a_plus.components"><code class="xref">mstar.model.command_a_plus.components</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.command_a_plus.components.vision.html#module-mstar.model.command_a_plus.components.vision"><code class="xref">mstar.model.command_a_plus.components.vision</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.command_a_plus.config.html#module-mstar.model.command_a_plus.config"><code class="xref">mstar.model.command_a_plus.config</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.command_a_plus.tests.html#module-mstar.model.command_a_plus.tests"><code class="xref">mstar.model.command_a_plus.tests</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.command_a_plus.tests.test_config.html#module-mstar.model.command_a_plus.tests.test_config"><code class="xref">mstar.model.command_a_plus.tests.test_config</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.command_a_plus.tests.test_vision.html#module-mstar.model.command_a_plus.tests.test_vision"><code class="xref">mstar.model.command_a_plus.tests.test_vision</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1407,11 +1605,6 @@ window.runMermaid = runMermaid;</script>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.model.cosmos3.components.vision.html#module-mstar.model.cosmos3.components.vision"><code class="xref">mstar.model.cosmos3.components.vision</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.model.cosmos3.config.html#module-mstar.model.cosmos3.config"><code class="xref">mstar.model.cosmos3.config</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
@@ -1432,11 +1625,6 @@ window.runMermaid = runMermaid;</script>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.model.cosmos3.submodules.html#module-mstar.model.cosmos3.submodules"><code class="xref">mstar.model.cosmos3.submodules</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.model.cosmos3.tests.html#module-mstar.model.cosmos3.tests"><code class="xref">mstar.model.cosmos3.tests</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
@@ -1447,17 +1635,32 @@ window.runMermaid = runMermaid;</script>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.model.cosmos3.tests.test_engine_cache.html#module-mstar.model.cosmos3.tests.test_engine_cache"><code class="xref">mstar.model.cosmos3.tests.test_engine_cache</code></a></td><td>
+       <a href="_autosummary/mstar.model.cosmos3.tests.stubs.html#module-mstar.model.cosmos3.tests.stubs"><code class="xref">mstar.model.cosmos3.tests.stubs</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.model.cosmos3.tests.test_sound.html#module-mstar.model.cosmos3.tests.test_sound"><code class="xref">mstar.model.cosmos3.tests.test_sound</code></a></td><td>
+       <a href="_autosummary/mstar.model.cosyvoice3.html#module-mstar.model.cosyvoice3"><code class="xref">mstar.model.cosyvoice3</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.model.cosmos3.tests.test_video_capture.html#module-mstar.model.cosmos3.tests.test_video_capture"><code class="xref">mstar.model.cosmos3.tests.test_video_capture</code></a></td><td>
+       <a href="_autosummary/mstar.model.cosyvoice3.components.html#module-mstar.model.cosyvoice3.components"><code class="xref">mstar.model.cosyvoice3.components</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.cosyvoice3.components.onnx_weights.html#module-mstar.model.cosyvoice3.components.onnx_weights"><code class="xref">mstar.model.cosyvoice3.components.onnx_weights</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.cosyvoice3.components.text.html#module-mstar.model.cosyvoice3.components.text"><code class="xref">mstar.model.cosyvoice3.components.text</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.cosyvoice3.config.html#module-mstar.model.cosyvoice3.config"><code class="xref">mstar.model.cosyvoice3.config</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1468,6 +1671,66 @@ window.runMermaid = runMermaid;</script>
        <td></td>
        <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.model.flux2_klein.components.html#module-mstar.model.flux2_klein.components"><code class="xref">mstar.model.flux2_klein.components</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.glm52.html#module-mstar.model.glm52"><code class="xref">mstar.model.glm52</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.glm52.components.html#module-mstar.model.glm52.components"><code class="xref">mstar.model.glm52.components</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.glm52.components.indexer.html#module-mstar.model.glm52.components.indexer"><code class="xref">mstar.model.glm52.components.indexer</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.glm52.config.html#module-mstar.model.glm52.config"><code class="xref">mstar.model.glm52.config</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.glm52.weight_loader.html#module-mstar.model.glm52.weight_loader"><code class="xref">mstar.model.glm52.weight_loader</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.glm5_next.html#module-mstar.model.glm5_next"><code class="xref">mstar.model.glm5_next</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.glm5_next.components.html#module-mstar.model.glm5_next.components"><code class="xref">mstar.model.glm5_next.components</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.glm5_next.config.html#module-mstar.model.glm5_next.config"><code class="xref">mstar.model.glm5_next.config</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.glm5_next.fused_decode.html#module-mstar.model.glm5_next.fused_decode"><code class="xref">mstar.model.glm5_next.fused_decode</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.glm5_next.mhc.html#module-mstar.model.glm5_next.mhc"><code class="xref">mstar.model.glm5_next.mhc</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.glm5_next.sinkhorn_kernel.html#module-mstar.model.glm5_next.sinkhorn_kernel"><code class="xref">mstar.model.glm5_next.sinkhorn_kernel</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.glm5_next.weight_loader.html#module-mstar.model.glm5_next.weight_loader"><code class="xref">mstar.model.glm5_next.weight_loader</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1483,6 +1746,11 @@ window.runMermaid = runMermaid;</script>
        <td></td>
        <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.model.higgs_audio.config.html#module-mstar.model.higgs_audio.config"><code class="xref">mstar.model.higgs_audio.config</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.keys.html#module-mstar.model.keys"><code class="xref">mstar.model.keys</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1542,7 +1810,52 @@ window.runMermaid = runMermaid;</script>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.minicpm_o.html#module-mstar.model.minicpm_o"><code class="xref">mstar.model.minicpm_o</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.minicpm_o.components.html#module-mstar.model.minicpm_o.components"><code class="xref">mstar.model.minicpm_o.components</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.minimax_h3.html#module-mstar.model.minimax_h3"><code class="xref">mstar.model.minimax_h3</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.minimax_h3.components.html#module-mstar.model.minimax_h3.components"><code class="xref">mstar.model.minimax_h3.components</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.minimax_h3.tests.html#module-mstar.model.minimax_h3.tests"><code class="xref">mstar.model.minimax_h3.tests</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.model.multimodal.html#module-mstar.model.multimodal"><code class="xref">mstar.model.multimodal</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.muse.html#module-mstar.model.muse"><code class="xref">mstar.model.muse</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.muse.components.html#module-mstar.model.muse.components"><code class="xref">mstar.model.muse.components</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.muse.config.html#module-mstar.model.muse.config"><code class="xref">mstar.model.muse.config</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.muse.processing.html#module-mstar.model.muse.processing"><code class="xref">mstar.model.muse.processing</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1553,36 +1866,6 @@ window.runMermaid = runMermaid;</script>
        <td></td>
        <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.model.nemotron_duplex.components.html#module-mstar.model.nemotron_duplex.components"><code class="xref">mstar.model.nemotron_duplex.components</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.model.nemotron_duplex.components.audio_codec.html#module-mstar.model.nemotron_duplex.components.audio_codec"><code class="xref">mstar.model.nemotron_duplex.components.audio_codec</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.model.nemotron_duplex.components.conformer.html#module-mstar.model.nemotron_duplex.components.conformer"><code class="xref">mstar.model.nemotron_duplex.components.conformer</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.model.nemotron_duplex.components.rnnt.html#module-mstar.model.nemotron_duplex.components.rnnt"><code class="xref">mstar.model.nemotron_duplex.components.rnnt</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.model.nemotron_duplex.config.html#module-mstar.model.nemotron_duplex.config"><code class="xref">mstar.model.nemotron_duplex.config</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.model.nemotron_duplex.realtime_api.html#module-mstar.model.nemotron_duplex.realtime_api"><code class="xref">mstar.model.nemotron_duplex.realtime_api</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.model.nemotron_duplex.submodules.html#module-mstar.model.nemotron_duplex.submodules"><code class="xref">mstar.model.nemotron_duplex.submodules</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1598,11 +1881,6 @@ window.runMermaid = runMermaid;</script>
        <td></td>
        <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.model.omnilingual_asr.components.html#module-mstar.model.omnilingual_asr.components"><code class="xref">mstar.model.omnilingual_asr.components</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.model.omnilingual_asr.components.wav2vec2.html#module-mstar.model.omnilingual_asr.components.wav2vec2"><code class="xref">mstar.model.omnilingual_asr.components.wav2vec2</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1632,12 +1910,12 @@ window.runMermaid = runMermaid;</script>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.model.omnivoice.components.backbone.html#module-mstar.model.omnivoice.components.backbone"><code class="xref">mstar.model.omnivoice.components.backbone</code></a></td><td>
+       <a href="_autosummary/mstar.model.omnivoice.components.codec.html#module-mstar.model.omnivoice.components.codec"><code class="xref">mstar.model.omnivoice.components.codec</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.model.omnivoice.components.codec.html#module-mstar.model.omnivoice.components.codec"><code class="xref">mstar.model.omnivoice.components.codec</code></a></td><td>
+       <a href="_autosummary/mstar.model.omnivoice.components.silence.html#module-mstar.model.omnivoice.components.silence"><code class="xref">mstar.model.omnivoice.components.silence</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1657,11 +1935,6 @@ window.runMermaid = runMermaid;</script>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.model.omnivoice.submodules.html#module-mstar.model.omnivoice.submodules"><code class="xref">mstar.model.omnivoice.submodules</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.model.orpheus.html#module-mstar.model.orpheus"><code class="xref">mstar.model.orpheus</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
@@ -1677,6 +1950,26 @@ window.runMermaid = runMermaid;</script>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.parakeet.html#module-mstar.model.parakeet"><code class="xref">mstar.model.parakeet</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.phi4mm.html#module-mstar.model.phi4mm"><code class="xref">mstar.model.phi4mm</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.phi4mm.components.html#module-mstar.model.phi4mm.components"><code class="xref">mstar.model.phi4mm.components</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.phi4mm.tests.html#module-mstar.model.phi4mm.tests"><code class="xref">mstar.model.phi4mm.tests</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.model.pi05.html#module-mstar.model.pi05"><code class="xref">mstar.model.pi05</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
@@ -1688,6 +1981,11 @@ window.runMermaid = runMermaid;</script>
        <td></td>
        <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.model.pi05.components.flow_matching.html#module-mstar.model.pi05.components.flow_matching"><code class="xref">mstar.model.pi05.components.flow_matching</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.pi05.components.normalization.html#module-mstar.model.pi05.components.normalization"><code class="xref">mstar.model.pi05.components.normalization</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1722,27 +2020,47 @@ window.runMermaid = runMermaid;</script>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.model.qwen3_5.components.rope.html#module-mstar.model.qwen3_5.components.rope"><code class="xref">mstar.model.qwen3_5.components.rope</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.model.qwen3_5.components.vision.html#module-mstar.model.qwen3_5.components.vision"><code class="xref">mstar.model.qwen3_5.components.vision</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.model.qwen3_5.config.html#module-mstar.model.qwen3_5.config"><code class="xref">mstar.model.qwen3_5.config</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.model.qwen3_5.video.html#module-mstar.model.qwen3_5.video"><code class="xref">mstar.model.qwen3_5.video</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.qwen3_asr.html#module-mstar.model.qwen3_asr"><code class="xref">mstar.model.qwen3_asr</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.qwen3_asr.constants.html#module-mstar.model.qwen3_asr.constants"><code class="xref">mstar.model.qwen3_asr.constants</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.qwen3_asr.repetition.html#module-mstar.model.qwen3_asr.repetition"><code class="xref">mstar.model.qwen3_asr.repetition</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.rebuild.html#module-mstar.model.rebuild"><code class="xref">mstar.model.rebuild</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.ripple.html#module-mstar.model.ripple"><code class="xref">mstar.model.ripple</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.ripple.config.html#module-mstar.model.ripple.config"><code class="xref">mstar.model.ripple.config</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.model.submodule_base.html#module-mstar.model.submodule_base"><code class="xref">mstar.model.submodule_base</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.utils.html#module-mstar.model.utils"><code class="xref">mstar.model.utils</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1778,6 +2096,21 @@ window.runMermaid = runMermaid;</script>
        <td></td>
        <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.model.vjepa2.config.html#module-mstar.model.vjepa2.config"><code class="xref">mstar.model.vjepa2.config</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.voxcpm2.html#module-mstar.model.voxcpm2"><code class="xref">mstar.model.voxcpm2</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.voxcpm2.components.html#module-mstar.model.voxcpm2.components"><code class="xref">mstar.model.voxcpm2.components</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.voxcpm2.config.html#module-mstar.model.voxcpm2.config"><code class="xref">mstar.model.voxcpm2.config</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1842,17 +2175,22 @@ window.runMermaid = runMermaid;</script>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
-       <a href="_autosummary/mstar.model.waypoint.submodules.html#module-mstar.model.waypoint.submodules"><code class="xref">mstar.model.waypoint.submodules</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.model.whisper.html#module-mstar.model.whisper"><code class="xref">mstar.model.whisper</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.model.whisper.components.html#module-mstar.model.whisper.components"><code class="xref">mstar.model.whisper.components</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.whisper.components.alignment.html#module-mstar.model.whisper.components.alignment"><code class="xref">mstar.model.whisper.components.alignment</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.whisper.components.timestamps.html#module-mstar.model.whisper.components.timestamps"><code class="xref">mstar.model.whisper.components.timestamps</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1868,6 +2206,11 @@ window.runMermaid = runMermaid;</script>
        <td></td>
        <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.model.z_image.components.html#module-mstar.model.z_image.components"><code class="xref">mstar.model.z_image.components</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.model.z_image.components.qk_norm_rope.html#module-mstar.model.z_image.components.qk_norm_rope"><code class="xref">mstar.model.z_image.components.qk_norm_rope</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1922,7 +2265,22 @@ window.runMermaid = runMermaid;</script>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.utils.cache_home.html#module-mstar.utils.cache_home"><code class="xref">mstar.utils.cache_home</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.utils.client_errors.html#module-mstar.utils.client_errors"><code class="xref">mstar.utils.client_errors</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.utils.containers.html#module-mstar.utils.containers"><code class="xref">mstar.utils.containers</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.utils.cpus.html#module-mstar.utils.cpus"><code class="xref">mstar.utils.cpus</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1938,6 +2296,11 @@ window.runMermaid = runMermaid;</script>
        <td></td>
        <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.utils.fast_tokenize.html#module-mstar.utils.fast_tokenize"><code class="xref">mstar.utils.fast_tokenize</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.utils.fp8_block.html#module-mstar.utils.fp8_block"><code class="xref">mstar.utils.fp8_block</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1962,6 +2325,11 @@ window.runMermaid = runMermaid;</script>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.utils.host_copy.html#module-mstar.utils.host_copy"><code class="xref">mstar.utils.host_copy</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.utils.ipc_format.html#module-mstar.utils.ipc_format"><code class="xref">mstar.utils.ipc_format</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
@@ -1973,6 +2341,11 @@ window.runMermaid = runMermaid;</script>
        <td></td>
        <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.utils.logging_config.html#module-mstar.utils.logging_config"><code class="xref">mstar.utils.logging_config</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.utils.mla_latent_norm.html#module-mstar.utils.mla_latent_norm"><code class="xref">mstar.utils.mla_latent_norm</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1997,6 +2370,16 @@ window.runMermaid = runMermaid;</script>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.utils.threads.html#module-mstar.utils.threads"><code class="xref">mstar.utils.threads</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.utils.utf8_stream.html#module-mstar.utils.utf8_stream"><code class="xref">mstar.utils.utf8_stream</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.worker.html#module-mstar.worker"><code class="xref">mstar.worker</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
@@ -2007,7 +2390,67 @@ window.runMermaid = runMermaid;</script>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.worker.chunk_loops.html#module-mstar.worker.chunk_loops"><code class="xref">mstar.worker.chunk_loops</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.worker.host_copies.html#module-mstar.worker.host_copies"><code class="xref">mstar.worker.host_copies</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.worker.host_pool.html#module-mstar.worker.host_pool"><code class="xref">mstar.worker.host_pool</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.worker.lora_loads.html#module-mstar.worker.lora_loads"><code class="xref">mstar.worker.lora_loads</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.worker.node_manager_utils.html#module-mstar.worker.node_manager_utils"><code class="xref">mstar.worker.node_manager_utils</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.worker.phase_timer.html#module-mstar.worker.phase_timer"><code class="xref">mstar.worker.phase_timer</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.worker.preemption.html#module-mstar.worker.preemption"><code class="xref">mstar.worker.preemption</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.worker.rebuild.html#module-mstar.worker.rebuild"><code class="xref">mstar.worker.rebuild</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
        <a href="_autosummary/mstar.worker.rid_table.html#module-mstar.worker.rid_table"><code class="xref">mstar.worker.rid_table</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.worker.scheduled_batch.html#module-mstar.worker.scheduled_batch"><code class="xref">mstar.worker.scheduled_batch</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.worker.scheduling_policy.html#module-mstar.worker.scheduling_policy"><code class="xref">mstar.worker.scheduling_policy</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.worker.spec_rows.html#module-mstar.worker.spec_rows"><code class="xref">mstar.worker.spec_rows</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="_autosummary/mstar.worker.stream_buffers.html#module-mstar.worker.stream_buffers"><code class="xref">mstar.worker.stream_buffers</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -2062,7 +2505,7 @@ By M* Team
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Oct 25, 2026.
+  Last updated on Nov 22, 2026.
   <br/>
 </p>
   </div>

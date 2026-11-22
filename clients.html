@@ -55,7 +55,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="0.2.1" />
-    <meta name="docbuild:last-update" content="Oct 25, 2026"/>
+    <meta name="docbuild:last-update" content="Nov 22, 2026"/>
   
     
     <script src="_static/searchtools.js"></script>
@@ -208,6 +208,7 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models.html">Supported Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asr.html">Speech recognition: Whisper and Qwen3-ASR</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="api.html">API Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.api_server.html">mstar.api_server</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.api_server.auth.html">mstar.api_server.auth</a></li>
@@ -225,12 +226,15 @@
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.api_server.request_types.html">mstar.api_server.request_types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.api_server.rust_frontend.html">mstar.api_server.rust_frontend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.api_server.streaming_response.html">mstar.api_server.streaming_response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.api_server.ws_frames.html">mstar.api_server.ws_frames</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.communication.html">mstar.communication</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.arena.html">mstar.communication.arena</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.codec.html">mstar.communication.codec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.communicator.html">mstar.communication.communicator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.edge_items.html">mstar.communication.edge_items</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.event.html">mstar.communication.event</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.rust_communicator.html">mstar.communication.rust_communicator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.communication.tensor_store.html">mstar.communication.tensor_store</a></li>
@@ -240,22 +244,31 @@
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.conductor.html">mstar.conductor</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.conductor.lora_ops.html">mstar.conductor.lora_ops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.conductor.mps.html">mstar.conductor.mps</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.conductor.request_info.html">mstar.conductor.request_info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.conductor.workers.html">mstar.conductor.workers</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.engine.html">mstar.engine</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.engine.accelerator_graph_backend.html">mstar.engine.accelerator_graph_backend</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.engine.accelerator_graph_config.html">mstar.engine.accelerator_graph_config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.engine.accelerator_graph_runner.html">mstar.engine.accelerator_graph_runner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.engine.chunking.html">mstar.engine.chunking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.engine.fp32_precision.html">mstar.engine.fp32_precision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.engine.node_dtype.html">mstar.engine.node_dtype</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.engine.resources.html">mstar.engine.resources</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.admission.html">mstar.engine.resources.admission</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.attn.html">mstar.engine.resources.attn</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.base.html">mstar.engine.resources.base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.context_parallel.html">mstar.engine.resources.context_parallel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.dsa.html">mstar.engine.resources.dsa</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.kv.html">mstar.engine.resources.kv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.lora.html">mstar.engine.resources.lora</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.position.html">mstar.engine.resources.position</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.recurrent.html">mstar.engine.resources.recurrent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.resident_hooks.html">mstar.engine.resources.resident_hooks</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.rms_norm.html">mstar.engine.resources.rms_norm</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.runner.html">mstar.engine.resources.runner</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.sampler.html">mstar.engine.resources.sampler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.sequence_shard.html">mstar.engine.resources.sequence_shard</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.spec.html">mstar.engine.resources.spec</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.engine.resources.step.html">mstar.engine.resources.step</a></li>
 </ul>
@@ -272,8 +285,17 @@
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.model.html">mstar.model</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.audio_watermark.html">mstar.model.audio_watermark</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.canary.html">mstar.model.canary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.canary_qwen.html">mstar.model.canary_qwen</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.chatterbox.html">mstar.model.chatterbox</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.chatterbox.config.html">mstar.model.chatterbox.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.command_a_plus.html">mstar.model.command_a_plus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.command_a_plus.assets.html">mstar.model.command_a_plus.assets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.command_a_plus.components.html">mstar.model.command_a_plus.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.command_a_plus.config.html">mstar.model.command_a_plus.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.command_a_plus.tests.html">mstar.model.command_a_plus.tests</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.cosmos3.html">mstar.model.cosmos3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -282,12 +304,31 @@
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.cosmos3.constants.html">mstar.model.cosmos3.constants</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.cosmos3.loader.html">mstar.model.cosmos3.loader</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.cosmos3.sessions.html">mstar.model.cosmos3.sessions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.cosmos3.submodules.html">mstar.model.cosmos3.submodules</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.cosmos3.tests.html">mstar.model.cosmos3.tests</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.cosyvoice3.html">mstar.model.cosyvoice3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.cosyvoice3.components.html">mstar.model.cosyvoice3.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.cosyvoice3.config.html">mstar.model.cosyvoice3.config</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.flux2_klein.html">mstar.model.flux2_klein</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.flux2_klein.components.html">mstar.model.flux2_klein.components</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.glm52.html">mstar.model.glm52</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.glm52.components.html">mstar.model.glm52.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.glm52.config.html">mstar.model.glm52.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.glm52.weight_loader.html">mstar.model.glm52.weight_loader</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.glm5_next.html">mstar.model.glm5_next</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.glm5_next.components.html">mstar.model.glm5_next.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.glm5_next.config.html">mstar.model.glm5_next.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.glm5_next.fused_decode.html">mstar.model.glm5_next.fused_decode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.glm5_next.mhc.html">mstar.model.glm5_next.mhc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.glm5_next.sinkhorn_kernel.html">mstar.model.glm5_next.sinkhorn_kernel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.glm5_next.weight_loader.html">mstar.model.glm5_next.weight_loader</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.higgs_audio.html">mstar.model.higgs_audio</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -295,6 +336,7 @@
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.higgs_audio.config.html">mstar.model.higgs_audio.config</a></li>
 </ul>
 </details></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.keys.html">mstar.model.keys</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.kokoro.html">mstar.model.kokoro</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.kokoro.config.html">mstar.model.kokoro.config</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.kokoro.g2p.html">mstar.model.kokoro.g2p</a></li>
@@ -311,12 +353,24 @@
 </ul>
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.media_limits.html">mstar.model.media_limits</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.minicpm_o.html">mstar.model.minicpm_o</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.minicpm_o.components.html">mstar.model.minicpm_o.components</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.minimax_h3.html">mstar.model.minimax_h3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.minimax_h3.components.html">mstar.model.minimax_h3.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.minimax_h3.tests.html">mstar.model.minimax_h3.tests</a></li>
+</ul>
+</details></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.multimodal.html">mstar.model.multimodal</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.muse.html">mstar.model.muse</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.muse.components.html">mstar.model.muse.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.muse.config.html">mstar.model.muse.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.muse.processing.html">mstar.model.muse.processing</a></li>
+</ul>
+</details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.nemotron_duplex.html">mstar.model.nemotron_duplex</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.nemotron_duplex.components.html">mstar.model.nemotron_duplex.components</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.nemotron_duplex.config.html">mstar.model.nemotron_duplex.config</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.nemotron_duplex.realtime_api.html">mstar.model.nemotron_duplex.realtime_api</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.nemotron_duplex.submodules.html">mstar.model.nemotron_duplex.submodules</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.omnilingual_asr.html">mstar.model.omnilingual_asr</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -330,12 +384,17 @@
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.omnivoice.html">mstar.model.omnivoice</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.omnivoice.components.html">mstar.model.omnivoice.components</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.omnivoice.config.html">mstar.model.omnivoice.config</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.omnivoice.submodules.html">mstar.model.omnivoice.submodules</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.orpheus.html">mstar.model.orpheus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.orpheus.components.html">mstar.model.orpheus.components</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.orpheus.config.html">mstar.model.orpheus.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.parakeet.html">mstar.model.parakeet</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.phi4mm.html">mstar.model.phi4mm</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.phi4mm.components.html">mstar.model.phi4mm.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.phi4mm.tests.html">mstar.model.phi4mm.tests</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.pi05.html">mstar.model.pi05</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -346,14 +405,29 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.qwen3_5.html">mstar.model.qwen3_5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.qwen3_5.components.html">mstar.model.qwen3_5.components</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.qwen3_5.config.html">mstar.model.qwen3_5.config</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.qwen3_5.video.html">mstar.model.qwen3_5.video</a></li>
 </ul>
 </details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.qwen3_asr.html">mstar.model.qwen3_asr</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.qwen3_asr.constants.html">mstar.model.qwen3_asr.constants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.qwen3_asr.repetition.html">mstar.model.qwen3_asr.repetition</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.rebuild.html">mstar.model.rebuild</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.ripple.html">mstar.model.ripple</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.ripple.config.html">mstar.model.ripple.config</a></li>
+</ul>
+</details></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.submodule_base.html">mstar.model.submodule_base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.model.utils.html">mstar.model.utils</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.vjepa2.html">mstar.model.vjepa2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.vjepa2.components.html">mstar.model.vjepa2.components</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.vjepa2.config.html">mstar.model.vjepa2.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.voxcpm2.html">mstar.model.voxcpm2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.voxcpm2.components.html">mstar.model.voxcpm2.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.voxcpm2.config.html">mstar.model.voxcpm2.config</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.wan22.html">mstar.model.wan22</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -365,7 +439,6 @@
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.waypoint.components.html">mstar.model.waypoint.components</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.waypoint.config.html">mstar.model.waypoint.config</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.waypoint.ring_geometry.html">mstar.model.waypoint.ring_geometry</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/mstar.model.waypoint.submodules.html">mstar.model.waypoint.submodules</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/mstar.model.whisper.html">mstar.model.whisper</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -393,26 +466,46 @@
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.utils.html">mstar.utils</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.adarms_norm.html">mstar.utils.adarms_norm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.cache_home.html">mstar.utils.cache_home</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.client_errors.html">mstar.utils.client_errors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.containers.html">mstar.utils.containers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.cpus.html">mstar.utils.cpus</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.device.html">mstar.utils.device</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.exitcode.html">mstar.utils.exitcode</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.fast_tokenize.html">mstar.utils.fast_tokenize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.fp8_block.html">mstar.utils.fp8_block</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.gc_freeze.html">mstar.utils.gc_freeze</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.generation_kwargs.html">mstar.utils.generation_kwargs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.h2d.html">mstar.utils.h2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.hf_snapshot.html">mstar.utils.hf_snapshot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.host_copy.html">mstar.utils.host_copy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.ipc_format.html">mstar.utils.ipc_format</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.knobs.html">mstar.utils.knobs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.logging_config.html">mstar.utils.logging_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.mla_latent_norm.html">mstar.utils.mla_latent_norm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.orphan.html">mstar.utils.orphan</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.profiler.html">mstar.utils.profiler</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.socket_prefix.html">mstar.utils.socket_prefix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.streams.html">mstar.utils.streams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.threads.html">mstar.utils.threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.utils.utf8_stream.html">mstar.utils.utf8_stream</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/mstar.worker.html">mstar.worker</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.batch_builder.html">mstar.worker.batch_builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.chunk_loops.html">mstar.worker.chunk_loops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.host_copies.html">mstar.worker.host_copies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.host_pool.html">mstar.worker.host_pool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.lora_loads.html">mstar.worker.lora_loads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.node_manager_utils.html">mstar.worker.node_manager_utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.phase_timer.html">mstar.worker.phase_timer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.preemption.html">mstar.worker.preemption</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.rebuild.html">mstar.worker.rebuild</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.rid_table.html">mstar.worker.rid_table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.scheduled_batch.html">mstar.worker.scheduled_batch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.scheduling_policy.html">mstar.worker.scheduling_policy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.spec_rows.html">mstar.worker.spec_rows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.stream_buffers.html">mstar.worker.stream_buffers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/mstar.worker.worker_metrics.html">mstar.worker.worker_metrics</a></li>
 </ul>
 </details></li>
@@ -641,6 +734,8 @@
                 <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#native-generate">Native <code class="docutils literal notranslate"><span class="pre">/generate</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#websocket-generate-ws">WebSocket <code class="docutils literal notranslate"><span class="pre">/generate/ws</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#openpi-websocket">openpi WebSocket <code class="docutils literal notranslate"><span class="pre">/</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generation-parameters">Generation parameters</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-sdk">Python SDK</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#openai-compatible-api">OpenAI-compatible API</a></li>
 </ul>
@@ -664,8 +759,8 @@ image models.</p>
 <h2>Native <code class="docutils literal notranslate"><span class="pre">/generate</span></code><a class="headerlink" href="#native-generate" title="Link to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/generate</span></code> takes a multipart form and returns either a single JSON document or an
 NDJSON stream.</p>
-<div class="pst-scrollable-table-container"><table class="table" id="id1">
-<caption><span class="caption-text">Form fields</span><a class="headerlink" href="#id1" title="Link to this table">#</a></caption>
+<div class="pst-scrollable-table-container"><table class="table" id="id2">
+<caption><span class="caption-text">Form fields</span><a class="headerlink" href="#id2" title="Link to this table">#</a></caption>
 <colgroup>
 <col style="width: 22.0%" />
 <col style="width: 14.0%" />
@@ -716,6 +811,10 @@ drops a stream can resubmit its id at once).</p></td>
 </tbody>
 </table>
 </div>
+<p>A client <code class="docutils literal notranslate"><span class="pre">request_id</span></code> is at most 128 characters from <code class="docutils literal notranslate"><span class="pre">[A-Za-z0-9._:-]</span></code>; any other is
+refused with <code class="docutils literal notranslate"><span class="pre">400</span></code> (on <code class="docutils literal notranslate"><span class="pre">/generate/ws</span></code>, with the in-band error below). An empty
+<code class="docutils literal notranslate"><span class="pre">request_id</span></code> counts as none: the server mints a fresh one, on both frontends and on
+<code class="docutils literal notranslate"><span class="pre">/generate/ws</span></code>.</p>
 <p>A non-streaming response groups outputs by modality, each payload base64-encoded:</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">"request_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"…"</span><span class="p">,</span>
@@ -733,6 +832,12 @@ length-framed binary chunks instead, which skips the base64 pass on multi-megaby
 <code class="docutils literal notranslate"><span class="pre">video_frame</span></code> payloads; a server without the framing keeps answering NDJSON, so a
 client must parse by the response <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code>. <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/health</span></code> returns
 <code class="docutils literal notranslate"><span class="pre">{&quot;status&quot;:</span> <span class="pre">&quot;healthy&quot;}</span></code>.</p>
+<p>Streamed <code class="docutils literal notranslate"><span class="pre">text</span></code> chunks (<code class="docutils literal notranslate"><span class="pre">/generate</span></code> and <code class="docutils literal notranslate"><span class="pre">/generate/ws</span></code>) are the raw UTF-8 bytes
+of each token, so one character can be split across two chunks. Decode the stream
+incrementally (<code class="docutils literal notranslate"><span class="pre">codecs.getincrementaldecoder(&quot;utf-8&quot;)</span></code>, as the Python SDK does)
+or join the chunks before decoding; decoding each chunk on its own with
+<code class="docutils literal notranslate"><span class="pre">errors=&quot;strict&quot;</span></code> raises on a split character, and with <code class="docutils literal notranslate"><span class="pre">&quot;replace&quot;</span></code> turns both
+halves into U+FFFD.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># text (non-streaming → JSON)</span>
 curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:8000/generate<span class="w"> </span>-F<span class="w"> </span><span class="s1">'text=Hello'</span><span class="w"> </span>-F<span class="w"> </span><span class="s1">'streaming=false'</span>
 
@@ -750,41 +855,291 @@ curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:8000/gene
 <h2>WebSocket <code class="docutils literal notranslate"><span class="pre">/generate/ws</span></code><a class="headerlink" href="#websocket-generate-ws" title="Link to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">/generate/ws</span></code> is the same request over one persistent WebSocket, for control loops
 that cannot afford an HTTP round trip per step (robot policies, streaming world models).
+The server negotiates per-message deflate on its WebSocket routes unless the deployment
+turns it off (<code class="docutils literal notranslate"><span class="pre">ws_per_message_deflate</span></code> in <a class="reference internal" href="serving.html"><span class="doc">Serving</span></a>, as the Nemotron VoiceChat
+configs do).
 Each message is one request with the <code class="docutils literal notranslate"><span class="pre">/generate</span></code> fields — <code class="docutils literal notranslate"><span class="pre">text</span></code>, <code class="docutils literal notranslate"><span class="pre">files</span></code> as
 <code class="docutils literal notranslate"><span class="pre">[{&quot;name&quot;:</span> <span class="pre">...,</span> <span class="pre">&quot;data&quot;:</span> <span class="pre">...}]</span></code>, <code class="docutils literal notranslate"><span class="pre">input_modalities</span></code>, <code class="docutils literal notranslate"><span class="pre">output_modalities</span></code>,
 <code class="docutils literal notranslate"><span class="pre">model_kwargs</span></code>, <code class="docutils literal notranslate"><span class="pre">request_id</span></code> — sent either as a JSON text frame (<code class="docutils literal notranslate"><span class="pre">data</span></code> base64) or
-as a msgpack binary frame (<code class="docutils literal notranslate"><span class="pre">data</span></code> raw bytes). Replies use the same encoding as the
+as a msgpack binary frame (<code class="docutils literal notranslate"><span class="pre">data</span></code> raw bytes); a field sent as <code class="docutils literal notranslate"><span class="pre">null</span></code> counts as
+absent. Replies use the same encoding as the
 message: one frame per result chunk, <code class="docutils literal notranslate"><span class="pre">{&quot;request_id&quot;,</span> <span class="pre">&quot;modality&quot;,</span> <span class="pre">&quot;data&quot;,</span> <span class="pre">&quot;metadata&quot;}</span></code>,
 then <code class="docutils literal notranslate"><span class="pre">{&quot;request_id&quot;,</span> <span class="pre">&quot;finish&quot;:</span> <span class="pre">true}</span></code>. A rejected message answers
-<code class="docutils literal notranslate"><span class="pre">{&quot;request_id&quot;,</span> <span class="pre">&quot;error&quot;:</span> <span class="pre">...}</span></code> and the socket stays open; a request that fails after it
-was accepted ends with one such reply. Both carry the HTTP <code class="docutils literal notranslate"><span class="pre">status</span></code> when there is one
-(<code class="docutils literal notranslate"><span class="pre">409</span></code> for a <code class="docutils literal notranslate"><span class="pre">request_id</span></code> still in flight, as on <code class="docutils literal notranslate"><span class="pre">/generate</span></code>), and no
-<code class="docutils literal notranslate"><span class="pre">finish</span></code> follows. Messages may be pipelined —
+<code class="docutils literal notranslate"><span class="pre">{&quot;request_id&quot;,</span> <span class="pre">&quot;error&quot;:</span> <span class="pre">...,</span> <span class="pre">&quot;status&quot;:</span> <span class="pre">...}</span></code> with the HTTP status <code class="docutils literal notranslate"><span class="pre">/generate</span></code> would
+have returned (<code class="docutils literal notranslate"><span class="pre">409</span></code> for a <code class="docutils literal notranslate"><span class="pre">request_id</span></code> still in flight), and the socket stays open; a
+request that fails after it was accepted ends the same way, and no <code class="docutils literal notranslate"><span class="pre">finish</span></code> follows.
+Messages may be pipelined —
 send the next observation before the current action chunk has returned — and the
 <code class="docutils literal notranslate"><span class="pre">request_id</span></code> tells the replies apart. Pipelined messages are submitted in the order
 they were sent, so of two under one <code class="docutils literal notranslate"><span class="pre">request_id</span></code> it is the later one that gets the
-<code class="docutils literal notranslate"><span class="pre">409</span></code> while the earlier one runs; their replies may interleave. Closing the socket aborts whatever is still in flight.</p>
+<code class="docutils literal notranslate"><span class="pre">409</span></code> while the earlier one runs; their replies may interleave. Closing the socket aborts whatever is still in flight.
+A JSON message over 1 MiB, or a msgpack one over 32 MiB, is parsed and its files decoded
+and saved in a separate process rather than on the server’s event loop. Taking the message
+in still runs on the loop, and every other request on the server waits for it: about
+2 ms per MiB as JSON and 1 as msgpack, and with deflate on about 9 and 2. Text and
+<code class="docutils literal notranslate"><span class="pre">model_kwargs</span></code> come back through the loop, so only <code class="docutils literal notranslate"><span class="pre">files</span></code> should be large. A
+deployment taking large messages should turn <code class="docutils literal notranslate"><span class="pre">ws_per_message_deflate</span></code> off.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">msgpack</span><span class="o">,</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span><span class="o">,</span><span class="w"> </span><span class="nn">websockets.sync.client</span>
 
 <span class="k">with</span> <span class="n">websockets</span><span class="o">.</span><span class="n">sync</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">"ws://localhost:8000/generate/ws"</span><span class="p">,</span> <span class="n">max_size</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="k">as</span> <span class="n">ws</span><span class="p">:</span>
     <span class="n">ws</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msgpack</span><span class="o">.</span><span class="n">packb</span><span class="p">({</span>
-        <span class="s2">"text"</span><span class="p">:</span> <span class="s2">"pick up the mug"</span><span class="p">,</span>
-        <span class="s2">"files"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"obs.jpg"</span><span class="p">,</span> <span class="s2">"data"</span><span class="p">:</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"obs.jpg"</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()}],</span>
+        <span class="s2">"text"</span><span class="p">:</span> <span class="n">prompt</span><span class="p">,</span>  <span class="c1"># task + view, duration and resolution text</span>
+        <span class="s2">"files"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"obs.png"</span><span class="p">,</span> <span class="s2">"data"</span><span class="p">:</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"obs.png"</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()}],</span>  <span class="c1"># 736x544 composite</span>
         <span class="s2">"output_modalities"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"action"</span><span class="p">],</span>
-        <span class="s2">"model_kwargs"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"action_mode"</span><span class="p">:</span> <span class="s2">"policy"</span><span class="p">,</span> <span class="s2">"domain_name"</span><span class="p">:</span> <span class="s2">"droid_lerobot"</span><span class="p">,</span>
-                         <span class="s2">"raw_action_dim"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">"action_chunk_size"</span><span class="p">:</span> <span class="mi">32</span><span class="p">},</span>
+        <span class="s2">"model_kwargs"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"size"</span><span class="p">:</span> <span class="s2">"736x544"</span><span class="p">,</span>
+                         <span class="s2">"robot_state"</span><span class="p">:</span> <span class="n">joints</span> <span class="o">+</span> <span class="p">[</span><span class="n">gripper</span><span class="p">]},</span>  <span class="c1"># current state, as DROID records it</span>
         <span class="s2">"request_id"</span><span class="p">:</span> <span class="s2">"step-0"</span><span class="p">,</span>
     <span class="p">},</span> <span class="n">use_bin_type</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">reply</span> <span class="o">=</span> <span class="n">msgpack</span><span class="o">.</span><span class="n">unpackb</span><span class="p">(</span><span class="n">ws</span><span class="o">.</span><span class="n">recv</span><span class="p">(),</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">reply</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"modality"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"action"</span><span class="p">:</span>
-            <span class="n">actions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="n">reply</span><span class="p">[</span><span class="s2">"data"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">actions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="n">reply</span><span class="p">[</span><span class="s2">"data"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)[:,</span> <span class="p">:</span><span class="mi">8</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">reply</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"finish"</span><span class="p">)</span> <span class="ow">or</span> <span class="n">reply</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"error"</span><span class="p">):</span>
             <span class="k">break</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">examples/cosmos3_action_ws_client.py</span></code> is a complete openpi-style client that runs this
-loop at a fixed observation rate and reports chunks/s, actions/s and latency percentiles.</p>
+<p>The chunk (32 rows), the fps and the domain come from the checkpoint, and the reply holds
+the predicted rows after the state, in the robot’s values. <code class="docutils literal notranslate"><span class="pre">examples/cosmos3_action_ws_client.py</span></code>
+is a complete openpi-style client that builds the observation image and prompt the way
+NVIDIA’s RoboLab server does for the DROID policies, runs this loop at a fixed observation
+rate and reports chunks/s, actions/s and latency percentiles.</p>
+<p><strong>Live input.</strong> A model that listens while it runs (a full-duplex speech model, or a TTS
+model fed text as it is written) can keep a request’s input open after the opening
+message: an opening with <code class="docutils literal notranslate"><span class="pre">&quot;end_input&quot;:</span> <span class="pre">false</span></code> opens a live call, and may then carry no
+media at all. An append feeds the running request more input, in order, while its output
+keeps streaming back:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{"request_id": ..., "append": {"text": ..., "files": [{"name": ..., "data": ..., "stream": ...}],
+                               "model_kwargs": {...}}}
+</pre></div>
+</div>
+<p>Every field of the record is optional, but an append needs text, files, <code class="docutils literal notranslate"><span class="pre">model_kwargs</span></code> or
+<code class="docutils literal notranslate"><span class="pre">end_input</span></code>.
+<code class="docutils literal notranslate"><span class="pre">stream</span></code> names the client stream a file is for (the model decides when it is absent; a
+name the model doesn’t have is rejected), and <code class="docutils literal notranslate"><span class="pre">model_kwargs</span></code> are this append’s own: they
+reach only the model’s <code class="docutils literal notranslate"><span class="pre">process_stream_chunk</span></code> (a model whose streams all declare their
+audio has none and ignores them), so they mean what that model reads from them, and the opening message’s still hold for the request (its sampling settings, say).
+<code class="docutils literal notranslate"><span class="pre">&quot;append&quot;:</span> <span class="pre">[files]</span></code> is short for <code class="docutils literal notranslate"><span class="pre">&quot;append&quot;:</span> <span class="pre">{&quot;files&quot;:</span> <span class="pre">[files]}</span></code>. What a model takes
+in an append is its own. An append of text alone, or of <code class="docutils literal notranslate"><span class="pre">model_kwargs</span></code> alone (a game
+controller’s actions, say) that ends no stream, that the model turns into no stream item is
+rejected; text sent with files reaches the model, and if it ignores the text, the text is
+dropped without an error. An append’s <code class="docutils literal notranslate"><span class="pre">model_kwargs</span></code> count toward the call’s
+<code class="docutils literal notranslate"><span class="pre">max_call_input_mb</span></code>, as JSON. <code class="docutils literal notranslate"><span class="pre">{&quot;request_id&quot;,</span> <span class="pre">&quot;end_input&quot;:</span> <span class="pre">true}</span></code>
+ends the input, alone or on an append. The request then finishes as usual. An opening
+without <code class="docutils literal notranslate"><span class="pre">end_input</span></code> is one-shot, as a request over <code class="docutils literal notranslate"><span class="pre">/generate</span></code> is: its input ends with
+the opening message. A model may take several client streams
+(audio and video, say); <code class="docutils literal notranslate"><span class="pre">end_input</span></code> may then name the ones it ends, as a list
+(<code class="docutils literal notranslate"><span class="pre">&quot;end_input&quot;:</span> <span class="pre">[&quot;video_in&quot;]</span></code>, on the opening too, which keeps the others open), and
+the call’s input has ended once every stream has.
+An append that names a stream already ended, as a file’s <code class="docutils literal notranslate"><span class="pre">stream</span></code> or in
+<code class="docutils literal notranslate"><span class="pre">end_input</span></code>, is answered as late, as one after <code class="docutils literal notranslate"><span class="pre">end_input:</span> <span class="pre">true</span></code> is (below). So is
+one whose files name no stream and that the model routes to a stream already ended:
+what it carried for that stream is dropped, uncounted, and the rest goes on. The opening
+message’s files may name a <code class="docutils literal notranslate"><span class="pre">stream</span></code> too, which is checked the same way (a name the
+model doesn’t have gets a 400), but the model routes the opening’s files itself.</p>
+<p>A live call needs a <code class="docutils literal notranslate"><span class="pre">request_id</span></code>; only the socket that opened it can append to it, and
+closing the socket aborts it. A message is an append if it carries <code class="docutils literal notranslate"><span class="pre">append</span></code> at its top
+level, or <code class="docutils literal notranslate"><span class="pre">end_input</span></code> (true or a list) and no <code class="docutils literal notranslate"><span class="pre">text</span></code> or <code class="docutils literal notranslate"><span class="pre">files</span></code>; the fields inside
+an append’s record never open a request, and a message that opens a request under the
+call’s id gets a 409 while the call goes on. An append carries its text, files and
+<code class="docutils literal notranslate"><span class="pre">model_kwargs</span></code> inside the record: beside it they are rejected. A <code class="docutils literal notranslate"><span class="pre">null</span></code> field counts as absent, inside
+the record too. Input resets the request timeout. A rejected append (an unknown file type,
+say) ends the call with its error (<code class="docutils literal notranslate"><span class="pre">status</span></code> 400), and no finish follows, since the input
+it carried is lost. So does an append the server then fails to load or process (a corrupt
+file, say), with that failure’s status, as for a request’s own files, and so does input
+past a limit the model or the deployment sets on how much a stream may carry over a call
+(<code class="docutils literal notranslate"><span class="pre">client_streams</span></code> in <a class="reference internal" href="serving.html"><span class="doc">Serving</span></a>), with a 400 that names the limit. An append after
+<code class="docutils literal notranslate"><span class="pre">end_input</span></code>, or after the model has ended the call, or to a request this socket has no
+live call under, gets <code class="docutils literal notranslate"><span class="pre">{&quot;request_id&quot;,</span> <span class="pre">&quot;append&quot;:</span> <span class="pre">true,</span> <span class="pre">&quot;error&quot;}</span></code>: a reply to that append,
+not the end of a request, and the call goes on. A live call that opens while the server
+is at <code class="docutils literal notranslate"><span class="pre">max_concurrent_requests</span></code> ends at once with <code class="docutils literal notranslate"><span class="pre">status</span></code> 503, rather than wait for a
+slot and start that far behind its input; a one-shot request waits in the queue. Other
+models ignore <code class="docutils literal notranslate"><span class="pre">end_input</span></code>, and an append to them is rejected.
+On either route, a model that declares its audio frame (Nemotron
+VoiceChat: 80 ms, 1280 samples at 16 kHz) gets a live call’s audio in whole frames: each
+whole frame of an append goes on as a step of its own and the rest waits for the next
+append, or goes with the stream’s end, so appends of any size keep the call on the steps
+Nemotron runs as one CUDA graph (see <a class="reference internal" href="models.html"><span class="doc">Supported Models</span></a>). The part of a frame that waits costs
+latency: with one call, 20 ms appends put a frame’s step about 60 ms later and 100 ms
+appends about 100 ms later (H200), while 80 ms appends, whole frames, cost nothing.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ws</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msgpack</span><span class="o">.</span><span class="n">packb</span><span class="p">({</span><span class="s2">"request_id"</span><span class="p">:</span> <span class="s2">"call"</span><span class="p">,</span> <span class="s2">"output_modalities"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"text"</span><span class="p">,</span> <span class="s2">"audio"</span><span class="p">],</span>
+                       <span class="s2">"end_input"</span><span class="p">:</span> <span class="kc">False</span><span class="p">}))</span>
+<span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">microphone_chunks</span><span class="p">():</span>  <span class="c1"># e.g. 80 ms WAV files</span>
+    <span class="n">ws</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msgpack</span><span class="o">.</span><span class="n">packb</span><span class="p">({</span><span class="s2">"request_id"</span><span class="p">:</span> <span class="s2">"call"</span><span class="p">,</span>
+                           <span class="s2">"append"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"chunk.wav"</span><span class="p">,</span> <span class="s2">"data"</span><span class="p">:</span> <span class="n">chunk</span><span class="p">}]}))</span>
+<span class="c1"># the record form: text, files aimed at a stream, and settings for this append,</span>
+<span class="c1"># which only the model's process_stream_chunk reads</span>
+<span class="n">ws</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msgpack</span><span class="o">.</span><span class="n">packb</span><span class="p">({</span><span class="s2">"request_id"</span><span class="p">:</span> <span class="s2">"call"</span><span class="p">,</span> <span class="s2">"append"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"text"</span><span class="p">:</span> <span class="s2">"and now in French"</span><span class="p">,</span>
+    <span class="s2">"files"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"chunk.wav"</span><span class="p">,</span> <span class="s2">"data"</span><span class="p">:</span> <span class="n">chunk</span><span class="p">,</span> <span class="s2">"stream"</span><span class="p">:</span> <span class="s2">"audio_in"</span><span class="p">}],</span>
+    <span class="s2">"model_kwargs"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"gain"</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">},</span>  <span class="c1"># what this model's hook reads, not a sampling setting</span>
+<span class="p">}}))</span>
+<span class="n">ws</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msgpack</span><span class="o">.</span><span class="n">packb</span><span class="p">({</span><span class="s2">"request_id"</span><span class="p">:</span> <span class="s2">"call"</span><span class="p">,</span> <span class="s2">"end_input"</span><span class="p">:</span> <span class="kc">True</span><span class="p">}))</span>
+</pre></div>
+</div>
+</section>
+<section id="openpi-websocket">
+<h2>openpi WebSocket <code class="docutils literal notranslate"><span class="pre">/</span></code><a class="headerlink" href="#openpi-websocket" title="Link to this heading">#</a></h2>
+<p>A deployment whose config has an <code class="docutils literal notranslate"><span class="pre">openpi:</span></code> block (<code class="docutils literal notranslate"><span class="pre">configs/pi05_droid.yaml</span></code>) also
+serves openpi’s policy protocol at the server’s root, so robot clients written against
+openpi’s <code class="docutils literal notranslate"><span class="pre">openpi_client.WebsocketClientPolicy</span></code> connect unchanged. Those include its
+DROID example and <code class="docutils literal notranslate"><span class="pre">examples/simple_client</span> <span class="pre">--env</span> <span class="pre">DROID</span></code>. openpi’s default port is 8000,
+as M*’s is. The protocol:</p>
+<ul class="simple">
+<li><p>On connect the server sends one msgpack frame, the block’s <code class="docutils literal notranslate"><span class="pre">metadata</span></code> (<code class="docutils literal notranslate"><span class="pre">{}</span></code> by
+default).</p></li>
+<li><p>The client then sends one observation and waits for one reply, and repeats. Arrays
+travel as <code class="docutils literal notranslate"><span class="pre">openpi_client.msgpack_numpy</span></code> encodes them, so camera frames arrive as raw
+pixels and reach the model with no PNG and no file in between.</p></li>
+<li><p>The reply is <code class="docutils literal notranslate"><span class="pre">{&quot;actions&quot;:</span> <span class="pre">float32</span> <span class="pre">[H,</span> <span class="pre">action_dims],</span> <span class="pre">&quot;server_timing&quot;:</span> <span class="pre">{&quot;infer_ms&quot;,</span>
+<span class="pre">&quot;prev_total_ms&quot;}}</span></code>. For <code class="docutils literal notranslate"><span class="pre">pi05_droid</span></code> that is <code class="docutils literal notranslate"><span class="pre">(15,</span> <span class="pre">8)</span></code>, as openpi’s own
+<code class="docutils literal notranslate"><span class="pre">pi05_droid</span></code> server returns. The DROID example’s <code class="docutils literal notranslate"><span class="pre">assert</span> <span class="pre">shape</span> <span class="pre">==</span> <span class="pre">(10,</span> <span class="pre">8)</span></code> was
+written for pi0-FAST.</p></li>
+<li><p>A call that fails is answered with a text frame holding the error, which the client
+raises, and the socket closes with <code class="docutils literal notranslate"><span class="pre">1011</span></code>.</p></li>
+<li><p>An observation may carry <code class="docutils literal notranslate"><span class="pre">seed</span></code> (an int), which openpi does not have. It pins the
+call’s noise, as <code class="docutils literal notranslate"><span class="pre">seed</span></code> in <code class="docutils literal notranslate"><span class="pre">/generate</span></code>’s <code class="docutils literal notranslate"><span class="pre">model_kwargs</span></code> does. Without it each call
+gets a fresh seed.</p></li>
+</ul>
+<p>On a server with the block, <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/healthz</span></code> answers <code class="docutils literal notranslate"><span class="pre">OK</span></code> without a key, as openpi’s
+server does, and with <code class="docutils literal notranslate"><span class="pre">--api-key</span></code> the handshake takes <code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">Api-Key</span> <span class="pre">&lt;key&gt;</span></code>
+(what the client sends for <code class="docutils literal notranslate"><span class="pre">api_key</span></code>) as well as <code class="docutils literal notranslate"><span class="pre">Bearer</span></code>. Every other route still
+takes only <code class="docutils literal notranslate"><span class="pre">Bearer</span></code>. A server without the block has none of this: it refuses the
+handshake and has no <code class="docutils literal notranslate"><span class="pre">/healthz</span></code>. Both of <code class="docutils literal notranslate"><span class="pre">mstar</span> <span class="pre">serve</span></code>’s frontends serve this
+route; the Dynamo worker logs a warning and serves without it.</p>
+<p><code class="docutils literal notranslate"><span class="pre">openpi_client</span></code> sets no size limit on its messages, but the server does:
+<code class="docutils literal notranslate"><span class="pre">ws_max_message_mb</span></code> (by default <code class="docutils literal notranslate"><span class="pre">MSTAR_MAX_BODY_MB</span></code>, see <a class="reference internal" href="serving.html"><span class="doc">Serving</span></a>). A larger
+observation closes the socket with <code class="docutils literal notranslate"><span class="pre">1009</span></code> and no error frame, so a deployment whose robots
+send several raw high-resolution cameras raises it. An observation is parsed on the server’s
+event loop, so a very large one holds up the server’s other requests while it is parsed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">openpi_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">websocket_client_policy</span>
+
+<span class="n">policy</span> <span class="o">=</span> <span class="n">websocket_client_policy</span><span class="o">.</span><span class="n">WebsocketClientPolicy</span><span class="p">(</span><span class="s2">"localhost"</span><span class="p">,</span> <span class="mi">8000</span><span class="p">)</span>
+<span class="n">actions</span> <span class="o">=</span> <span class="n">policy</span><span class="o">.</span><span class="n">infer</span><span class="p">({</span>
+    <span class="s2">"observation/exterior_image_1_left"</span><span class="p">:</span> <span class="n">exterior</span><span class="p">,</span>  <span class="c1"># uint8 [224, 224, 3]</span>
+    <span class="s2">"observation/wrist_image_left"</span><span class="p">:</span> <span class="n">wrist</span><span class="p">,</span>
+    <span class="s2">"observation/joint_position"</span><span class="p">:</span> <span class="n">joints</span><span class="p">,</span>           <span class="c1"># 7 floats</span>
+    <span class="s2">"observation/gripper_position"</span><span class="p">:</span> <span class="n">gripper</span><span class="p">,</span>        <span class="c1"># 1 float</span>
+    <span class="s2">"prompt"</span><span class="p">:</span> <span class="s2">"put the marker in the cup"</span><span class="p">,</span>
+<span class="p">})[</span><span class="s2">"actions"</span><span class="p">]</span>                                       <span class="c1"># float32 (15, 8)</span>
+</pre></div>
+</div>
+</section>
+<section id="generation-parameters">
+<span id="id1"></span><h2>Generation parameters<a class="headerlink" href="#generation-parameters" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">model_kwargs</span></code> knobs mean the same thing on every model, every endpoint, and every
+execution path (eager or CUDA graph). The server checks them once, before the request is
+queued; a value outside these rules is a <code class="docutils literal notranslate"><span class="pre">400</span></code> that names the knob and its range, and a
+streaming request gets that status instead of a <code class="docutils literal notranslate"><span class="pre">200</span></code> followed by an in-band error. A
+model may narrow a range further (CosyVoice3’s <code class="docutils literal notranslate"><span class="pre">top_k</span></code> is 1-128 and its <code class="docutils literal notranslate"><span class="pre">seed</span></code> at
+least 0; Chatterbox caps <code class="docutils literal notranslate"><span class="pre">temperature</span></code> at 5 and <code class="docutils literal notranslate"><span class="pre">repetition_penalty</span></code> at 2), and its
+notes in <a class="reference internal" href="models.html"><span class="doc">Supported Models</span></a> say so.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 30.0%" />
+<col style="width: 48.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Knob</p></th>
+<th class="head"><p>Allowed</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">temperature</span></code></p></td>
+<td><p>number <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code> is greedy (the most likely token; ties go to the lower id). Values below
+<code class="docutils literal notranslate"><span class="pre">1e-5</span></code> are greedy too. A greedy request ignores <code class="docutils literal notranslate"><span class="pre">top_k</span></code>, <code class="docutils literal notranslate"><span class="pre">top_p</span></code> and <code class="docutils literal notranslate"><span class="pre">min_p</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">top_k</span></code></p></td>
+<td><p>integer <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code> is off; so is any value at or above the vocabulary size.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">top_p</span></code></p></td>
+<td><p>number in <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">1]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code> is off. <code class="docutils literal notranslate"><span class="pre">0</span></code> is refused: ask for greedy with <code class="docutils literal notranslate"><span class="pre">temperature:</span> <span class="pre">0</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">min_p</span></code></p></td>
+<td><p>number in <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code> is off. A model whose sampler has no min-p filter refuses <code class="docutils literal notranslate"><span class="pre">min_p</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">repetition_penalty</span></code></p></td>
+<td><p>number <code class="docutils literal notranslate"><span class="pre">&gt;</span> <span class="pre">0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code> is off. Counts the prompt’s tokens as well as generated ones unless
+<code class="docutils literal notranslate"><span class="pre">penalize_prompt</span></code> is <code class="docutils literal notranslate"><span class="pre">false</span></code>. A model whose sampler has no penalty refuses
+any value other than <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">penalize_prompt</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code> / <code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td><p>Whether <code class="docutils literal notranslate"><span class="pre">repetition_penalty</span></code> also counts the prompt (default <code class="docutils literal notranslate"><span class="pre">true</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">seed</span></code></p></td>
+<td><p>signed 64-bit integer</p></td>
+<td><p>Seeds FlashInfer’s sampler. A seeded request repeats only when its batch
+repeats: the draw also depends on its batch position and on the batch’s
+first request, so under continuous batching the same seed can give different
+tokens. Absent, the server derives a seed from the request id.
+Each sampler of a multi-stage model draws its own stream from it.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">max_output_tokens</span></code></p></td>
+<td><p>integer <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">1</span></code></p></td>
+<td><p>In the model’s output unit (text tokens, codec frames). <code class="docutils literal notranslate"><span class="pre">max_tokens</span></code>,
+<code class="docutils literal notranslate"><span class="pre">max_completion_tokens</span></code> and <code class="docutils literal notranslate"><span class="pre">max_new_tokens</span></code> are accepted as aliases, in
+that order of increasing precedence below <code class="docutils literal notranslate"><span class="pre">max_output_tokens</span></code> itself. A value
+above the model’s limit is refused rather than cut short.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ignore_eos</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code> / <code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">num_inference_steps</span></code></p></td>
+<td><p>integer <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">1</span></code></p></td>
+<td><p>Denoising steps of an image or video model. Past the denoise loop’s <code class="docutils literal notranslate"><span class="pre">max_iters</span></code>
+is a 400.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">num_step</span></code></p></td>
+<td><p>integer <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">1</span></code></p></td>
+<td><p>OmniVoice’s unmask steps. Past the unmask loop’s <code class="docutils literal notranslate"><span class="pre">max_iters</span></code> is a 400.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rollout_horizon</span></code></p></td>
+<td><p>integer <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">0</span></code></p></td>
+<td><p>V-JEPA2’s rollout length. Past the rollout loop’s <code class="docutils literal notranslate"><span class="pre">max_iters</span></code> is a 400.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">height</span></code>, <code class="docutils literal notranslate"><span class="pre">width</span></code>, <code class="docutils literal notranslate"><span class="pre">num_frames</span></code></p></td>
+<td><p>integer <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">1</span></code></p></td>
+<td><p>Output size of an image or video model, which may refuse sizes its VAE cannot tile.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fps</span></code></p></td>
+<td><p>number <code class="docutils literal notranslate"><span class="pre">&gt;</span> <span class="pre">0</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">guidance_scale</span></code></p></td>
+<td><p>number</p></td>
+<td><p>Classifier-free guidance strength.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">speed</span></code></p></td>
+<td><p>number <code class="docutils literal notranslate"><span class="pre">&gt;</span> <span class="pre">0</span></code></p></td>
+<td><p>Speech rate, for a model that reads it (Kokoro, OmniVoice); any other model logs it
+as ignored. Only a sent <code class="docutils literal notranslate"><span class="pre">speed</span></code> is forwarded, not the OpenAI default of 1.0.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A string that spells a number is read as that number, since some JSON clients send
+numbers as strings: <code class="docutils literal notranslate"><span class="pre">&quot;0.7&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;</span> <span class="pre">0.7</span> <span class="pre">&quot;</span></code> for a real-valued knob, <code class="docutils literal notranslate"><span class="pre">&quot;5&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;5.0&quot;</span></code>
+for an integer one (<code class="docutils literal notranslate"><span class="pre">&quot;5e0&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;5.5&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;0x1&quot;</span></code> are not integers and are a 400).
+Booleans stay strict: <code class="docutils literal notranslate"><span class="pre">&quot;false&quot;</span></code> is not a boolean, and <code class="docutils literal notranslate"><span class="pre">true</span></code> is not a number. <code class="docutils literal notranslate"><span class="pre">null</span></code>
+is the same as leaving the knob out: the model’s default applies, which is the
+checkpoint’s own <code class="docutils literal notranslate"><span class="pre">generation_config.json</span></code> value where it ships one. BAGEL and Orpheus
+are the exception: their files are the backbone’s chat presets, so only their
+<code class="docutils literal notranslate"><span class="pre">do_sample:</span> <span class="pre">false</span></code> is read and the models’ own defaults stay. MiniCPM-o keeps
+upstream <code class="docutils literal notranslate"><span class="pre">chat</span></code>’s defaults over its file. Multi-stage models
+take a stage prefix (<code class="docutils literal notranslate"><span class="pre">talker_temperature</span></code>, <code class="docutils literal notranslate"><span class="pre">code_predictor_top_k</span></code>) with the same
+rules; an unprefixed knob sets the primary stage (the thinker of Qwen3-Omni, the talker
+of Qwen3-TTS), and a prefixed one wins over it for its stage.</p>
+<p>A knob the model does not read is not an error: the request is served, and the server
+logs its name as ignored, on the first request that sends that set of names (check the server log
+for typos such as <code class="docutils literal notranslate"><span class="pre">temprature</span></code>).</p>
 </section>
 <section id="python-sdk">
 <h2>Python SDK<a class="headerlink" href="#python-sdk" title="Link to this heading">#</a></h2>
@@ -900,33 +1255,58 @@ that key, which the client sends as <code class="docutils literal notranslate"><
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/v1/models</span></code></p></td>
 <td><p>all</p></td>
-<td><p>Lists the served model.</p></td>
+<td><p>Lists the served model, and any LoRA adapters it serves (each with <code class="docutils literal notranslate"><span class="pre">parent</span></code>
+naming the base model; see the Qwen3.5 notes in <a class="reference internal" href="models.html"><span class="doc">Supported Models</span></a>).</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v1/chat/completions</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">bagel</span></code>, <code class="docutils literal notranslate"><span class="pre">qwen3_omni</span></code></p></td>
-<td><p>Text chat (streaming + non-streaming). Qwen3-Omni can also emit speech.</p></td>
+<td><p>Text chat (streaming + non-streaming). Qwen3-Omni can also emit speech, in
+<code class="docutils literal notranslate"><span class="pre">audio.format</span></code> <code class="docutils literal notranslate"><span class="pre">wav</span></code> (default), <code class="docutils literal notranslate"><span class="pre">pcm16</span></code>, or <code class="docutils literal notranslate"><span class="pre">mp3</span></code> / <code class="docutils literal notranslate"><span class="pre">flac</span></code> / <code class="docutils literal notranslate"><span class="pre">opus</span></code> with
+the <code class="docutils literal notranslate"><span class="pre">audio</span></code> extra; streamed audio is <code class="docutils literal notranslate"><span class="pre">pcm16</span></code>. <code class="docutils literal notranslate"><span class="pre">n</span></code> or
+<code class="docutils literal notranslate"><span class="pre">best_of</span></code> above 1, <code class="docutils literal notranslate"><span class="pre">stop</span></code>, <code class="docutils literal notranslate"><span class="pre">stop_token_ids</span></code>, <code class="docutils literal notranslate"><span class="pre">logprobs</span></code>, <code class="docutils literal notranslate"><span class="pre">top_logprobs</span></code>,
+<code class="docutils literal notranslate"><span class="pre">logit_bias</span></code>, <code class="docutils literal notranslate"><span class="pre">presence_penalty</span></code> / <code class="docutils literal notranslate"><span class="pre">frequency_penalty</span></code> and a <code class="docutils literal notranslate"><span class="pre">response_format</span></code>
+other than text are refused. <code class="docutils literal notranslate"><span class="pre">stream_options</span></code>, <code class="docutils literal notranslate"><span class="pre">parallel_tool_calls</span></code>, <code class="docutils literal notranslate"><span class="pre">user</span></code>,
+<code class="docutils literal notranslate"><span class="pre">store</span></code>, <code class="docutils literal notranslate"><span class="pre">metadata</span></code> and <code class="docutils literal notranslate"><span class="pre">service_tier</span></code> are accepted and have no effect; a stream
+sends no usage chunk.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v1/audio/speech</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v1/load_lora_adapter</span></code>, <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v1/unload_lora_adapter</span></code></p></td>
+<td><p>any LoRA model whose <code class="docutils literal notranslate"><span class="pre">resources:</span> <span class="pre">lora:</span></code> block sets <code class="docutils literal notranslate"><span class="pre">runtime_updates:</span> <span class="pre">true</span></code>;
+404 otherwise</p></td>
+<td><p>Load or unload a LoRA adapter while serving, with vLLM’s bodies
+(<code class="docutils literal notranslate"><span class="pre">{&quot;lora_name&quot;,</span> <span class="pre">&quot;lora_path&quot;}</span></code> / <code class="docutils literal notranslate"><span class="pre">{&quot;lora_name&quot;}</span></code>; a missing field is a 400). See
+the Qwen3.5 notes in <a class="reference internal" href="models.html"><span class="doc">Supported Models</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v1/audio/speech</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">kokoro</span></code>, <code class="docutils literal notranslate"><span class="pre">orpheus</span></code>, <code class="docutils literal notranslate"><span class="pre">qwen3_omni</span></code></p></td>
 <td><p>Text-to-speech (<code class="docutils literal notranslate"><span class="pre">kokoro</span></code> streams sentence by sentence with <code class="docutils literal notranslate"><span class="pre">stream=True</span></code>).</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/v1/audio/voices</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/v1/audio/voices</span></code></p></td>
 <td><p>speech models that publish a voice list through their speech adapter (<code class="docutils literal notranslate"><span class="pre">kokoro</span></code>, <code class="docutils literal notranslate"><span class="pre">orpheus</span></code>; 404 otherwise)</p></td>
 <td><p>The <code class="docutils literal notranslate"><span class="pre">voice</span></code> ids the served model accepts, plus its default.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v1/audio/transcriptions</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">whisper_large</span></code>, <code class="docutils literal notranslate"><span class="pre">higgs_audio</span></code>, <code class="docutils literal notranslate"><span class="pre">omnilingual_asr_ctc_*</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v1/audio/transcriptions</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">whisper_large</span></code>, <code class="docutils literal notranslate"><span class="pre">whisper_large_v3_turbo</span></code>, <code class="docutils literal notranslate"><span class="pre">qwen3_asr</span></code>, <code class="docutils literal notranslate"><span class="pre">qwen3_asr_realtime</span></code>, <code class="docutils literal notranslate"><span class="pre">higgs_audio</span></code>, <code class="docutils literal notranslate"><span class="pre">omnilingual_asr_ctc_*</span></code>, <code class="docutils literal notranslate"><span class="pre">canary</span></code>, <code class="docutils literal notranslate"><span class="pre">canary_qwen</span></code>, <code class="docutils literal notranslate"><span class="pre">parakeet</span></code>,
+<code class="docutils literal notranslate"><span class="pre">nemotron_asr</span></code></p></td>
 <td><p>Speech-to-text (multipart upload; <code class="docutils literal notranslate"><span class="pre">json</span></code> / <code class="docutils literal notranslate"><span class="pre">text</span></code> / <code class="docutils literal notranslate"><span class="pre">verbose_json</span></code> /
 <code class="docutils literal notranslate"><span class="pre">srt</span></code> / <code class="docutils literal notranslate"><span class="pre">vtt</span></code>; streaming via <code class="docutils literal notranslate"><span class="pre">transcript.text.delta</span></code> events).</p></td>
 </tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">WS</span> <span class="pre">/v1/realtime</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nemotron_duplex</span></code> (full-duplex models)</p></td>
+<td><p>A spoken conversation in OpenAI’s GA Realtime events: microphone audio in,
+each agent reply out as one response (audio and its transcript). The model
+decides when to speak; see below.</p></td>
+</tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">WS</span> <span class="pre">/v1/realtime?intent=transcription</span></code></p></td>
 <td><p>models whose adapter can continue a hypothesis</p></td>
-<td><p>Streaming speech-to-text: <code class="docutils literal notranslate"><span class="pre">input_audio_buffer.append</span></code> PCM16 chunks in,
+<td><p>Streaming speech-to-text: <code class="docutils literal notranslate"><span class="pre">input_audio_buffer.append</span></code> chunks in,
 <code class="docutils literal notranslate"><span class="pre">conversation.item.input_audio_transcription.delta</span></code> (append-only) and
 <code class="docutils literal notranslate"><span class="pre">mstar.transcription.partial</span></code> (whole current hypothesis) out; <code class="docutils literal notranslate"><span class="pre">commit</span></code>
-finishes the utterance. Input is <code class="docutils literal notranslate"><span class="pre">pcm16</span></code> at 16 kHz (the default) or
-<code class="docutils literal notranslate"><span class="pre">{&quot;type&quot;:</span> <span class="pre">&quot;audio/pcm&quot;,</span> <span class="pre">&quot;rate&quot;:</span> <span class="pre">24000}</span></code>, resampled to 16 kHz. Turn
-detection is null (client commits) or <code class="docutils literal notranslate"><span class="pre">server_vad</span></code>; see below.</p></td>
+finishes the utterance. <code class="docutils literal notranslate"><span class="pre">input_audio_format</span></code> is <code class="docutils literal notranslate"><span class="pre">&quot;pcm16&quot;</span></code> (PCM16 at 16 kHz,
+the default; OpenAI reads it as 24 kHz, so an OpenAI client at 24 kHz declares
+<code class="docutils literal notranslate"><span class="pre">{&quot;type&quot;:</span> <span class="pre">&quot;audio/pcm&quot;,</span> <span class="pre">&quot;rate&quot;:</span> <span class="pre">24000}</span></code>), <code class="docutils literal notranslate"><span class="pre">&quot;g711_ulaw&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;g711_alaw&quot;</span></code> or
+a GA format object at the rates a conversation takes (below). Audio is
+resampled to 16 kHz. Turn
+detection is null (client commits), <code class="docutils literal notranslate"><span class="pre">server_vad</span></code> or <code class="docutils literal notranslate"><span class="pre">semantic_vad</span></code>; see below.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v1/images/generations</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">bagel</span></code></p></td>
@@ -934,11 +1314,14 @@ detection is null (client commits) or <code class="docutils literal notranslate"
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v1/images/edits</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">bagel</span></code></p></td>
-<td><p>Image editing (image + prompt → image).</p></td>
+<td><p>Image editing (image + prompt → image). One <code class="docutils literal notranslate"><span class="pre">image</span></code> (or <code class="docutils literal notranslate"><span class="pre">image[]</span></code>), edited
+whole: a <code class="docutils literal notranslate"><span class="pre">mask</span></code>, a second image and <code class="docutils literal notranslate"><span class="pre">n</span></code> &gt; 1 are refused.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<p>Image and video results come back inline as <code class="docutils literal notranslate"><span class="pre">b64_json</span></code>; <code class="docutils literal notranslate"><span class="pre">response_format:</span> <span class="pre">&quot;url&quot;</span></code> is
+refused (there is no media store to serve one from).</p>
 <p>Models without an OpenAI surface (<code class="docutils literal notranslate"><span class="pre">pi05</span></code>, <code class="docutils literal notranslate"><span class="pre">vjepa2</span></code>, <code class="docutils literal notranslate"><span class="pre">vjepa2_ac</span></code>, <code class="docutils literal notranslate"><span class="pre">waypoint</span></code>)
 return <code class="docutils literal notranslate"><span class="pre">404</span></code> on <code class="docutils literal notranslate"><span class="pre">/v1/*</span></code>; use <code class="docutils literal notranslate"><span class="pre">/generate</span></code> or the SDK for them. In particular,
 Waypoint emits live RGB frame chunks and is not routed through the encoded-video
@@ -962,47 +1345,122 @@ Waypoint emits live RGB frame chunks and is not routed through the encoded-video
 <p>Per-model notes:</p>
 <ul class="simple">
 <li><p><strong>BAGEL</strong> — chat returns text only; use <code class="docutils literal notranslate"><span class="pre">/v1/images/generations</span></code> and
-<code class="docutils literal notranslate"><span class="pre">/v1/images/edits</span></code> for image output.</p></li>
+<code class="docutils literal notranslate"><span class="pre">/v1/images/edits</span></code> for image output, with <code class="docutils literal notranslate"><span class="pre">output_format</span></code>, <code class="docutils literal notranslate"><span class="pre">output_compression</span></code>
+and <code class="docutils literal notranslate"><span class="pre">png_compress_level</span></code> via <code class="docutils literal notranslate"><span class="pre">extra_body</span></code> as for FLUX.2 klein below.</p></li>
 <li><p><strong>FLUX.2 klein / Z-Image</strong> — <code class="docutils literal notranslate"><span class="pre">/v1/images/generations</span></code> (and <code class="docutils literal notranslate"><span class="pre">/v1/images/edits</span></code> for
 klein) only: <code class="docutils literal notranslate"><span class="pre">size</span></code> as <code class="docutils literal notranslate"><span class="pre">WxH</span></code> (multiples of 16); <code class="docutils literal notranslate"><span class="pre">seed</span></code>; <code class="docutils literal notranslate"><span class="pre">num_inference_steps</span></code>,
 <code class="docutils literal notranslate"><span class="pre">output_format</span></code> (<code class="docutils literal notranslate"><span class="pre">png</span></code> default, <code class="docutils literal notranslate"><span class="pre">jpeg</span></code>, <code class="docutils literal notranslate"><span class="pre">webp</span></code>), <code class="docutils literal notranslate"><span class="pre">output_compression</span></code> (JPEG /
-WebP quality) and <code class="docutils literal notranslate"><span class="pre">png_compress_level</span></code> (0-9, default 1) via <code class="docutils literal notranslate"><span class="pre">extra_body</span></code>.</p></li>
-<li><p><strong>Qwen3-Omni</strong> — text sampling uses <code class="docutils literal notranslate"><span class="pre">thinker_*</span></code> keys, speech uses <code class="docutils literal notranslate"><span class="pre">talker_*</span></code>, and the
-residual codec groups use <code class="docutils literal notranslate"><span class="pre">code_predictor_*</span></code>; set the speaker with <code class="docutils literal notranslate"><span class="pre">voice</span></code> (default
-<code class="docutils literal notranslate"><span class="pre">Ethan</span></code>) and request audio output by including <code class="docutils literal notranslate"><span class="pre">&quot;audio&quot;</span></code> in <code class="docutils literal notranslate"><span class="pre">modalities</span></code>.
+WebP quality, 0-100) and <code class="docutils literal notranslate"><span class="pre">png_compress_level</span></code> (0-9, default 1) via <code class="docutils literal notranslate"><span class="pre">extra_body</span></code>; a
+value of the chosen format’s knob that is not a whole number in range (<code class="docutils literal notranslate"><span class="pre">90</span></code>, <code class="docutils literal notranslate"><span class="pre">90.0</span></code>
+and <code class="docutils literal notranslate"><span class="pre">&quot;90&quot;</span></code> are; <code class="docutils literal notranslate"><span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">50.9</span></code> are not) is a 400, the other format’s knob is
+ignored, and <code class="docutils literal notranslate"><span class="pre">null</span></code> means the default. The PNG writer favours
+speed (no scanline filters, zlib level 1), so its files are ~30% larger than PIL’s
+defaults; a higher <code class="docutils literal notranslate"><span class="pre">png_compress_level</span></code> shrinks them.</p></li>
+<li><p><strong>Qwen3-Omni</strong> — text sampling uses plain or <code class="docutils literal notranslate"><span class="pre">thinker_*</span></code> keys (a <code class="docutils literal notranslate"><span class="pre">thinker_*</span></code> key wins),
+speech uses <code class="docutils literal notranslate"><span class="pre">talker_*</span></code> (on <code class="docutils literal notranslate"><span class="pre">/v1/audio/speech</span></code> the plain <code class="docutils literal notranslate"><span class="pre">temperature</span></code> / <code class="docutils literal notranslate"><span class="pre">top_p</span></code>
+set the Talker), and the residual codec groups use <code class="docutils literal notranslate"><span class="pre">code_predictor_*</span></code>; set the
+speaker with <code class="docutils literal notranslate"><span class="pre">voice</span></code> (<code class="docutils literal notranslate"><span class="pre">Ethan</span></code> default, <code class="docutils literal notranslate"><span class="pre">Chelsie</span></code>, <code class="docutils literal notranslate"><span class="pre">Aiden</span></code>; any other is a 400) and
+request audio output by including <code class="docutils literal notranslate"><span class="pre">&quot;audio&quot;</span></code> in <code class="docutils literal notranslate"><span class="pre">modalities</span></code>. <code class="docutils literal notranslate"><span class="pre">max_output_tokens</span></code>
+defaults to 2048 and <code class="docutils literal notranslate"><span class="pre">talker_max_output_tokens</span></code> to 4096 (the checkpoint’s value).
 Non-OpenAI knobs (e.g. <code class="docutils literal notranslate"><span class="pre">talker_top_k</span></code>, <code class="docutils literal notranslate"><span class="pre">code_predictor_top_p</span></code>) go through
 <code class="docutils literal notranslate"><span class="pre">extra_body</span></code>.</p></li>
-<li><p><strong>Whisper / Higgs-Audio</strong> — <code class="docutils literal notranslate"><span class="pre">language</span></code> (ISO-639-1) skips language detection,
-<code class="docutils literal notranslate"><span class="pre">prompt</span></code> conditions the decoder on prior text (it reaches the model as
-<code class="docutils literal notranslate"><span class="pre">initial_prompt</span></code>), and <code class="docutils literal notranslate"><span class="pre">response_format</span></code>
-<code class="docutils literal notranslate"><span class="pre">verbose_json</span></code> / <code class="docutils literal notranslate"><span class="pre">srt</span></code> / <code class="docutils literal notranslate"><span class="pre">vtt</span></code> (or <code class="docutils literal notranslate"><span class="pre">timestamp_granularities[]</span></code>) asks the
-model for timestamps. Whisper’s language and timestamp tokens travel in the
-text stream and are lifted into <code class="docutils literal notranslate"><span class="pre">language</span></code> / <code class="docutils literal notranslate"><span class="pre">segments</span></code> by the server; a
-streaming client receives only the spoken words. Uploads longer than the
-model’s clip (30 s for Whisper) are served as consecutive windows. By default
-they run in order, openai-whisper style: each window gets the transcript so
-far as <code class="docutils literal notranslate"><span class="pre">initial_prompt</span></code> and the first window’s detected language, is decoded
-with timestamps so the next window can start where its last closed segment
-ended (no word is split by a boundary), and is decoded again when its text is
-a repetition loop (gzip compression ratio above 2.4): first without the
-conditioning text, then at rising temperatures — after which the transcript
-so far stops conditioning later windows.
-Leave <code class="docutils literal notranslate"><span class="pre">temperature</span></code> at 0 to get that fallback; a pinned temperature is used
-as is. <code class="docutils literal notranslate"><span class="pre">long_form=&quot;parallel&quot;</span></code> in <code class="docutils literal notranslate"><span class="pre">extra_body</span></code> submits fixed windows all at
-once, each cut at the quietest moment before its boundary. Segment timestamps
-are offset to the whole file. For Whisper, <code class="docutils literal notranslate"><span class="pre">window_seconds</span></code> in <code class="docutils literal notranslate"><span class="pre">extra_body</span></code>
-(5 to 30) sets the window length for one request, and an upload longer than it
-is windowed. An upload, like any audio a request attaches, is refused once it
-decodes past 30 min, whatever its header says (a 413 here, a 400 from the data
-worker). The decode up to that point still runs, so this bounds memory, not
-time: refusing a 31 min file takes about as long as decoding it.</p></li>
+<li><p><strong>Whisper / Higgs-Audio</strong> — for Whisper, <code class="docutils literal notranslate"><span class="pre">language</span></code> (ISO-639-1) skips language
+detection and <code class="docutils literal notranslate"><span class="pre">prompt</span></code> conditions the decoder on prior text (it reaches the model
+as <code class="docutils literal notranslate"><span class="pre">initial_prompt</span></code>); for Higgs-Audio, <code class="docutils literal notranslate"><span class="pre">prompt</span></code> is the transcription instruction
+(the model has a default) and <code class="docutils literal notranslate"><span class="pre">language</span></code> does not reach the decoder: nothing
+detects the language, and <code class="docutils literal notranslate"><span class="pre">verbose_json</span></code>’s <code class="docutils literal notranslate"><span class="pre">language</span></code> is the request’s
+<code class="docutils literal notranslate"><span class="pre">language</span></code> as given, or null. <code class="docutils literal notranslate"><span class="pre">response_format</span></code> <code class="docutils literal notranslate"><span class="pre">verbose_json</span></code> / <code class="docutils literal notranslate"><span class="pre">srt</span></code> /
+<code class="docutils literal notranslate"><span class="pre">vtt</span></code> (or <code class="docutils literal notranslate"><span class="pre">timestamp_granularities[]</span></code>) asks the model for timestamps. Whisper’s
+language and timestamp tokens travel in the text stream and are lifted into
+<code class="docutils literal notranslate"><span class="pre">language</span></code> / <code class="docutils literal notranslate"><span class="pre">segments</span></code> by the server; Higgs-Audio emits no timestamps, so its
+<code class="docutils literal notranslate"><span class="pre">verbose_json</span></code> / <code class="docutils literal notranslate"><span class="pre">srt</span></code> / <code class="docutils literal notranslate"><span class="pre">vtt</span></code> get one segment per window, timed to the
+windows. A streaming client receives only the spoken words. Uploads longer than 30 s
+are cut into fixed windows, each at the quietest moment before its boundary, and
+submitted at once. <code class="docutils literal notranslate"><span class="pre">long_form=&quot;sequential&quot;</span></code> in <code class="docutils literal notranslate"><span class="pre">extra_body</span></code> runs them in order
+instead; Whisper’s then run openai-whisper style: each window gets the transcript so
+far as <code class="docutils literal notranslate"><span class="pre">initial_prompt</span></code> and the first window’s detected language, is decoded with
+timestamps so the next window can start where its last closed segment ended (no word
+is split by a boundary), and is decoded again when its text is a repetition loop
+(gzip compression ratio above 2.4): first without the conditioning text, then at
+rising temperatures, after which the transcript so far stops conditioning later
+windows. Higgs-Audio’s windows run at fixed cuts with no conditioning text, but get
+the same retry at rising temperatures. Leave <code class="docutils literal notranslate"><span class="pre">temperature</span></code> at 0 to get that
+fallback; a pinned temperature is used as is. Sequential mode is several times
+slower, and only it has that repetition guard.
+Segment timestamps are offset to the whole file. <code class="docutils literal notranslate"><span class="pre">window_seconds</span></code> in
+<code class="docutils literal notranslate"><span class="pre">extra_body</span></code> (5 to 30) sets the window length for one request, and an upload
+longer than it is windowed. An upload, like any audio a request attaches, is refused
+once it decodes past 30 min, whatever its header says (a 413 here, a 400 from the
+data worker). The decode up to that point still runs, so this bounds memory, not
+time: refusing a 31 min file takes about as long as decoding it.
+Whisper also reads <code class="docutils literal notranslate"><span class="pre">task</span></code> (<code class="docutils literal notranslate"><span class="pre">transcribe</span></code>, the default, or <code class="docutils literal notranslate"><span class="pre">translate</span></code> into
+English). Its <code class="docutils literal notranslate"><span class="pre">max_output_tokens</span></code> is at most 444, the 448-position table less the
+forced prompt; more is a 400. Higgs-Audio’s default is 1024. A key the model does not
+read is logged as ignored, on the first request that sends that set of keys.</p></li>
 <li><p><strong>Omnilingual ASR</strong> (<code class="docutils literal notranslate"><span class="pre">omnilingual_asr_ctc_*</span></code>): no language code is needed for any of
 its 1,600+ languages, and <code class="docutils literal notranslate"><span class="pre">language</span></code> / <code class="docutils literal notranslate"><span class="pre">prompt</span></code> / <code class="docutils literal notranslate"><span class="pre">temperature</span></code> have no effect. A
 clip of up to 20 s is one request; a longer upload is cut into windows of about equal
 length, at most 16 s, at quiet points and transcribed in parallel (<code class="docutils literal notranslate"><span class="pre">window_seconds</span></code>
 in <code class="docutils literal notranslate"><span class="pre">extra_body</span></code>, 5 to 40, sets both lengths). There are no timestamps: <code class="docutils literal notranslate"><span class="pre">srt</span></code> / <code class="docutils literal notranslate"><span class="pre">vtt</span></code>
-get one cue spanning the file. Nothing detects the language: <code class="docutils literal notranslate"><span class="pre">verbose_json</span></code>’s
+get one cue per window, timed to the windows. Nothing detects the language: <code class="docutils literal notranslate"><span class="pre">verbose_json</span></code>’s
 <code class="docutils literal notranslate"><span class="pre">language</span></code> is the request’s <code class="docutils literal notranslate"><span class="pre">language</span></code> as given, or null.</p></li>
+<li><p><strong>Canary / Canary-Qwen / Parakeet / Nemotron ASR</strong> — no conditioning text (<code class="docutils literal notranslate"><span class="pre">prompt</span></code> is
+dropped) and no timestamps: <code class="docutils literal notranslate"><span class="pre">timestamp_granularities</span></code> is a 400, and <code class="docutils literal notranslate"><span class="pre">srt</span></code> / <code class="docutils literal notranslate"><span class="pre">vtt</span></code> /
+<code class="docutils literal notranslate"><span class="pre">verbose_json</span></code> get one segment per window. Canary takes <code class="docutils literal notranslate"><span class="pre">language</span></code> (the speech’s,
+English by default) and, through <code class="docutils literal notranslate"><span class="pre">extra_body</span></code>, <code class="docutils literal notranslate"><span class="pre">target_language</span></code> or
+<code class="docutils literal notranslate"><span class="pre">task=&quot;translate&quot;</span></code> (into English) and <code class="docutils literal notranslate"><span class="pre">punctuation</span></code>; the other three only transcribe,
+and refuse a <code class="docutils literal notranslate"><span class="pre">task</span></code> other than <code class="docutils literal notranslate"><span class="pre">transcribe</span></code>. Canary-Qwen is English only. Parakeet detects the language itself and refuses a <code class="docutils literal notranslate"><span class="pre">language</span></code> outside the 25 it knows;
+Nemotron takes a locale (<code class="docutils literal notranslate"><span class="pre">en-US</span></code>), a bare code or <code class="docutils literal notranslate"><span class="pre">auto</span></code>. Uploads longer than the
+model’s clip (40 s for Canary and Canary-Qwen, 10 min for Parakeet and Nemotron) run as
+parallel windows.</p></li>
+<li><p><strong>Realtime conversation</strong> (<code class="docutils literal notranslate"><span class="pre">WS</span> <span class="pre">/v1/realtime</span></code>, a model that declares an audio client
+stream, such as <code class="docutils literal notranslate"><span class="pre">nemotron_duplex</span></code>) speaks OpenAI’s GA Realtime events, not the beta
+ones. The whole call is one engine request, opened by the first append the client
+sends (an <code class="docutils literal notranslate"><span class="pre">input_audio_buffer.append</span></code>, or a <code class="docutils literal notranslate"><span class="pre">conversation.item.create</span></code> of
+<code class="docutils literal notranslate"><span class="pre">input_audio</span></code> parts) with the session’s <code class="docutils literal notranslate"><span class="pre">instructions</span></code> as its prompt; the
+instructions, audio formats and voice are fixed from then on. <code class="docutils literal notranslate"><span class="pre">audio.input.format</span></code>
+and <code class="docutils literal notranslate"><span class="pre">audio.output.format</span></code> are <code class="docutils literal notranslate"><span class="pre">{&quot;type&quot;:</span> <span class="pre">&quot;audio/pcm&quot;,</span> <span class="pre">&quot;rate&quot;:</span> <span class="pre">N}</span></code> (24 kHz when left
+out; 8, 11.025, 16, 22.05, 32, 44.1 or 48 kHz too, an mstar extension, since OpenAI
+takes only 24 kHz), <code class="docutils literal notranslate"><span class="pre">{&quot;type&quot;:</span> <span class="pre">&quot;audio/pcmu&quot;}</span></code> or <code class="docutils literal notranslate"><span class="pre">{&quot;type&quot;:</span> <span class="pre">&quot;audio/pcma&quot;}</span></code> (G.711,
+8 kHz). Input is resampled to the model’s rate and sent on in its frames (80 ms for
+Nemotron); a partial frame waits for the next append, and one append (or one item’s
+parts together) holds at most 300 s. The model hears and answers frame by frame, so the
+server keeps time: once a client’s audio falls more than 200 ms (an allowance for
+network jitter) and a frame behind real time (a muted mic, a client waiting for the
+reply), whole frames of silence are appended for it, at most 30 s a pause and
+counted against the call’s length cap, so a client that stops sending past that stops
+the agent. A client that stops sending hears the reply about 0.35 s later (the
+allowance, a frame and the clock’s tick; measured on H200); one that streams its mic,
+silence included, doesn’t. Each reply
+is one response, <code class="docutils literal notranslate"><span class="pre">response.created</span></code> through <code class="docutils literal notranslate"><span class="pre">response.done</span></code>, with
+<code class="docutils literal notranslate"><span class="pre">response.output_audio.delta</span></code> and <code class="docutils literal notranslate"><span class="pre">response.output_audio_transcript.delta</span></code> in
+between; audio between replies is silence and is not sent. A reply ends at the
+model’s end mark, where the next reply starts, or, for a model that declares
+<code class="docutils literal notranslate"><span class="pre">turn_idle_steps</span></code>, once that long has passed with neither text nor audible audio
+(Nemotron: 2 s, since it often sends no end mark and its audio runs behind its text).
+The count follows the audio: text that arrives before a pause’s audio has played stays
+in the open reply, so where two replies split depends on how far the text runs ahead,
+and text after the reply ended opens the next one. <code class="docutils literal notranslate"><span class="pre">turn_detection</span></code> <code class="docutils literal notranslate"><span class="pre">server_vad</span></code>
+and <code class="docutils literal notranslate"><span class="pre">semantic_vad</span></code> both mean “the model decides”, and their knobs are not used;
+null, or <code class="docutils literal notranslate"><span class="pre">create_response</span></code> / <code class="docutils literal notranslate"><span class="pre">interrupt_response</span></code> false, are refused.
+<code class="docutils literal notranslate"><span class="pre">input_audio_buffer.commit</span></code> is acknowledged and flushes nothing; <code class="docutils literal notranslate"><span class="pre">clear</span></code> drops only
+what the server holds before the model (half a PCM16 sample, the resampler’s few
+milliseconds), since the model hears audio as it comes; and <code class="docutils literal notranslate"><span class="pre">conversation.item.create</span></code> takes a user message of <code class="docutils literal notranslate"><span class="pre">input_audio</span></code>
+parts, all of them or none. <code class="docutils literal notranslate"><span class="pre">response.create</span></code>, <code class="docutils literal notranslate"><span class="pre">response.cancel</span></code>,
+<code class="docutils literal notranslate"><span class="pre">output_audio_buffer.clear</span></code> and the item-editing events are answered with an
+<code class="docutils literal notranslate"><span class="pre">unsupported</span></code> error, and the call goes on. Input transcription and tools are not
+supported, nor are <code class="docutils literal notranslate"><span class="pre">max_output_tokens</span></code> and <code class="docutils literal notranslate"><span class="pre">audio.output.speed</span></code> other than their
+defaults. <code class="docutils literal notranslate"><span class="pre">voice</span></code> is the model’s own (Nemotron: <code class="docutils literal notranslate"><span class="pre">Aria</span></code>). A <code class="docutils literal notranslate"><span class="pre">session.update</span></code>
+asking for one of these gets an <code class="docutils literal notranslate"><span class="pre">unsupported</span></code> error for it, keeps the served value,
+and applies the rest, as <code class="docutils literal notranslate"><span class="pre">session.updated</span></code> shows. One response is in
+progress at a time: a reply that starts while the previous one is still speaking is
+its own response, sent once that one is done. If the call ends (its length cap, say),
+the server sends an <code class="docutils literal notranslate"><span class="pre">error</span></code>, ends a reply still in progress with <code class="docutils literal notranslate"><span class="pre">response.done</span></code>
+(<code class="docutils literal notranslate"><span class="pre">failed</span></code>, or <code class="docutils literal notranslate"><span class="pre">incomplete</span></code> when the call ended without an error), and closes the
+socket; events sent after that get no answer. Over <code class="docutils literal notranslate"><span class="pre">/generate</span></code>, the same models
+mark the text chunk where a reply starts or ends with <code class="docutils literal notranslate"><span class="pre">metadata.turn</span></code> (<code class="docutils literal notranslate"><span class="pre">[&quot;start&quot;]</span></code>
+/ <code class="docutils literal notranslate"><span class="pre">[&quot;end&quot;]</span></code>, every turn token’s mark in order), and each text and audio chunk with
+<code class="docutils literal notranslate"><span class="pre">metadata.step</span></code>, the model step it came from.</p></li>
 <li><p><strong>Realtime transcription</strong> — every <code class="docutils literal notranslate"><span class="pre">chunk_seconds</span></code> (default 2 s) of new audio the
 session re-transcribes everything heard so far as one engine request whose assistant
 turn is prefilled with the previous hypothesis minus its last <code class="docutils literal notranslate"><span class="pre">unfixed_tokens</span></code>
@@ -1033,19 +1491,37 @@ starts with that frame. A client <code class="docutils literal notranslate"><spa
 drops what the VAD has not put in a turn yet. <code class="docutils literal notranslate"><span class="pre">create_response</span></code> and
 <code class="docutils literal notranslate"><span class="pre">interrupt_response</span></code> are accepted and echoed but do nothing in a transcription
 session; <code class="docutils literal notranslate"><span class="pre">idle_timeout_ms</span></code> and other types are refused. With 24 kHz input each
-decision waits 3 ms more for the resampler. Install <code class="docutils literal notranslate"><span class="pre">mstar[vad]</span></code> (Silero VAD, MIT,
+decision waits 3 ms more for the resampler. Install <code class="docutils literal notranslate"><span class="pre">mstar-ai[vad]</span></code> (Silero VAD, MIT,
 bundled 2 MB ONNX weights, run by onnxruntime on one CPU thread) or point
 <code class="docutils literal notranslate"><span class="pre">MSTAR_SILERO_VAD_PATH</span></code> at the ONNX file (<code class="docutils literal notranslate"><span class="pre">silero_vad.onnx</span></code>; the package’s other
 exports take other inputs, and with one of them <code class="docutils literal notranslate"><span class="pre">server_vad</span></code> is refused); weights are
 never downloaded. The Dynamo bridge has no turn detection yet and
 refuses it.</p></li>
+<li><p><strong>Semantic turn detection</strong> — <code class="docutils literal notranslate"><span class="pre">&quot;turn_detection&quot;:</span> <span class="pre">{&quot;type&quot;:</span> <span class="pre">&quot;semantic_vad&quot;,</span> <span class="pre">&quot;eagerness&quot;:</span>
+<span class="pre">&quot;auto&quot;}</span></code> ends a turn when the speaker sounds finished rather than after a fixed
+silence, as OpenAI’s semantic VAD does. When a pause reaches the eagerness’ pause
+(high 200 ms, medium and auto 300 ms, low 400 ms; all shorter than server_vad’s
+500 ms), Pipecat’s Smart Turn v3 judges the turn’s last 8 s of audio once; a
+probability of at least 0.3, 0.5 or 0.7 (high, medium/auto, low) commits there, and
+otherwise the server keeps listening. A silence of 2, 4 or 8 s always ends the turn.
+Speech starts on Silero’s 0.5 with 300 ms of prefix padding; the events are the same
+as server_vad’s. Smart Turn (BSD-2, 8 MB int8 ONNX, about 45 ms per pause on one CPU
+thread) runs off the event loop. It needs <code class="docutils literal notranslate"><span class="pre">onnxruntime</span></code> and <code class="docutils literal notranslate"><span class="pre">transformers</span></code>
+(<code class="docutils literal notranslate"><span class="pre">mstar-ai[vad]</span></code>) and its weights at <code class="docutils literal notranslate"><span class="pre">MSTAR_SMART_TURN_PATH</span></code> or in the local Hugging
+Face cache (<code class="docutils literal notranslate"><span class="pre">hf</span> <span class="pre">download</span> <span class="pre">pipecat-ai/smart-turn-v3</span> <span class="pre">smart-turn-v3.2-cpu.onnx</span></code>). Without
+them, or with an ONNX file whose inputs or outputs differ, the server warns at startup
+and refuses <code class="docutils literal notranslate"><span class="pre">semantic_vad</span></code> with an <code class="docutils literal notranslate"><span class="pre">error</span></code> event that says why (no weights, a
+missing package, or a file that is not the model), as <code class="docutils literal notranslate"><span class="pre">server_vad</span></code> is refused
+without Silero. The session goes on with its previous settings, so the client can
+choose <code class="docutils literal notranslate"><span class="pre">server_vad</span></code> or manual commits instead. See OpenAI’s <a class="reference external" href="https://platform.openai.com/docs/guides/realtime-vad">realtime VAD guide</a>.</p></li>
 <li><p><strong>Kokoro</strong> — <code class="docutils literal notranslate"><span class="pre">voice</span></code> is one of the 54 bundled voices (default <code class="docutils literal notranslate"><span class="pre">af_heart</span></code>) or a
 blend such as <code class="docutils literal notranslate"><span class="pre">af_bella+af_sky</span></code> or <code class="docutils literal notranslate"><span class="pre">af_bella(2)+af_sky(1)</span></code>; <code class="docutils literal notranslate"><span class="pre">speed</span></code> scales the
 speaking rate (0.25-4.0). <code class="docutils literal notranslate"><span class="pre">lang_code</span></code> and <code class="docutils literal notranslate"><span class="pre">phonemes</span></code> go through <code class="docutils literal notranslate"><span class="pre">extra_body</span></code>.
 <code class="docutils literal notranslate"><span class="pre">temperature</span></code> / <code class="docutils literal notranslate"><span class="pre">top_p</span></code> are ignored: Kokoro does not sample.</p></li>
 <li><p><strong>Orpheus</strong> — set the speaker with <code class="docutils literal notranslate"><span class="pre">voice</span></code> — one of <code class="docutils literal notranslate"><span class="pre">tara</span></code> (default), <code class="docutils literal notranslate"><span class="pre">zoe</span></code>,
 <code class="docutils literal notranslate"><span class="pre">zac</span></code>, <code class="docutils literal notranslate"><span class="pre">jess</span></code>, <code class="docutils literal notranslate"><span class="pre">leo</span></code>, <code class="docutils literal notranslate"><span class="pre">mia</span></code>, <code class="docutils literal notranslate"><span class="pre">julia</span></code>, <code class="docutils literal notranslate"><span class="pre">leah</span></code> (the <code class="docutils literal notranslate"><span class="pre">available_voices</span></code> list
-in the Orpheus config).</p></li>
+in the Orpheus config); an empty or unknown voice is a 400. <code class="docutils literal notranslate"><span class="pre">max_output_tokens</span></code>
+defaults to 2048.</p></li>
 </ul>
 </section>
 </section>
@@ -1099,6 +1575,8 @@ in the Orpheus config).</p></li>
     <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#native-generate">Native <code class="docutils literal notranslate"><span class="pre">/generate</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#websocket-generate-ws">WebSocket <code class="docutils literal notranslate"><span class="pre">/generate/ws</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#openpi-websocket">openpi WebSocket <code class="docutils literal notranslate"><span class="pre">/</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generation-parameters">Generation parameters</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-sdk">Python SDK</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#openai-compatible-api">OpenAI-compatible API</a></li>
 </ul>
@@ -1134,7 +1612,7 @@ By M* Team
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Oct 25, 2026.
+  Last updated on Nov 22, 2026.
   <br/>
 </p>
   </div>

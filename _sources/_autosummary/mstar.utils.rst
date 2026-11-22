@@ -28,23 +28,34 @@
    :recursive:
 
    adarms_norm
+   add_layernorm
    attention
+   cache_home
    causal_conv1d
+   client_errors
    containers
+   cpus
+   dense_fp8
    device
    exitcode
    fast_tokenize
+   fp8_block
    fused_moe
    gc_freeze
    generation_kwargs
    h2d
    hf_snapshot
+   host_copy
    ipc_format
    knobs
    logging_config
+   mla_latent_norm
+   mla_prep
    orphan
    profiler
    quant_fp8
    socket_prefix
    streams
+   threads
+   utf8_stream
 

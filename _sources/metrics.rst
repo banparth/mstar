@@ -35,7 +35,7 @@ reflects depends on where it was measured:
   second, and the conductor adds them to its next status message, so worker families
   can be up to two seconds old. A lost or reordered message cannot corrupt a counter:
   every message carries totals, not increments, and the API server keeps the latest.
-- **Rust frontend.** With ``--rust-frontend``, ``mstar-server`` serves ``/metrics`` by
+- **Rust frontend.** ``mstar-server``, the default frontend, serves ``/metrics`` by
   asking the API server for the rendered text over the bridge, so both frontends show
   the same families. It answers ``503`` if the bridge does not reply within two
   seconds. ``mstar-server`` counts its own HTTP refusals and sends the totals with each
@@ -212,8 +212,8 @@ Exported by the API server, counted by whichever frontend serves the deployment.
    field or request), ``409`` (a ``request_id`` in flight), ``404`` (unknown route, or
    a model without the endpoint), ``405`` (wrong method), and ``503`` when the Rust
    frontend's ``MSTAR_MAX_CONCURRENT_REQUESTS`` cap turns a request away. WebSocket
-   handshakes are not counted. With ``--rust-frontend``, the values are the totals
-   ``mstar-server`` sent with the latest ``/metrics`` request.
+   handshakes are not counted. Unless ``--python-frontend`` is set, the values are the
+   totals ``mstar-server`` sent with the latest ``/metrics`` request.
 
 Conductor
 ---------
@@ -232,6 +232,14 @@ From the conductor's status message, sent every second while metrics are on.
    conductor dispatched and has not heard back from. The conductor sees whole passes,
    so a node running a request's decode loop counts it once for the loop.
 
+``mstar_routing_predicted_saving_total{model_name, term}``
+   Counter, up to a second old. Per term of the data-parallel replica cost (see
+   "Data-parallel routing" in :doc:`serving`), the saving predicted on the replica each
+   request was sent to, in request-equivalents, unweighted. For ``prefix``, each request
+   adds the share of its prompt predicted cached there, so its rate over the request rate
+   is a mean of per-request shares, not the token ratio the workers' prefix-cache counters
+   give.
+
 ``mstar_conductor_status_age_seconds{model_name}``
    Gauge, seconds, computed at scrape time. Time since the API server received the
    conductor's last status message, or since metrics were enabled if none arrived yet.
@@ -243,7 +251,7 @@ Engine workers
 
 From the workers' numbers, forwarded in the conductor's status message, so up to two
 seconds old. A node with replicas on several workers shows their sum. The ranks of a
-tensor or sequence parallel instance count once: the instance's first rank reports.
+TP, SP or CFG instance count once: the instance's first rank reports.
 
 ``mstar_kv_pages_used{model_name, component, resource}``
    Gauge. Pages of a paged KV cache not on its free list: held by requests, or kept by
@@ -258,6 +266,21 @@ tensor or sequence parallel instance count once: the instance's first rank repor
    Gauge. Pages the prefix cache names. Running requests may also hold some of them;
    the cache frees the others when a request needs the room.
 
+``mstar_kv_pages_lent{model_name, component, resource}``
+   Gauge. Pages guaranteed requests lent that aren't free: what preemptible requests
+   borrowed, and a guaranteed request's own cache hits until its walk takes them over.
+   A guaranteed request takes a borrowed page back by moving a borrower when it needs
+   the page and none is free.
+
+``mstar_rebuild_host_bytes_used{model_name, component}``
+   Gauge. Bytes of the worker's rebuild host pool that hold kept prompt ids and host
+   copies, which a request dropped from the KV cache is rebuilt from. A prompt the pool has no room for
+   keeps no ids, so its request is never dropped. One pool serves every node of a worker
+   that declares a rebuild policy, and shows under each.
+
+``mstar_rebuild_host_bytes_total{model_name, component}``
+   Gauge. Bytes of the rebuild host pool, the serving config's ``rebuild_host_mb``.
+
 ``mstar_step_seconds{model_name, component, graph_walk}``
    Histogram, seconds, engine steps that ran a forward. From when the worker hands the
    step to its GPU thread, or from the end of the previous step if that was later, to
@@ -271,13 +294,47 @@ tensor or sequence parallel instance count once: the instance's first rank repor
 
 ``mstar_prefix_cache_query_tokens_total{model_name, component}``
    Counter. Prompt tokens looked up in the prefix cache, once per request (its whole
-   keyed prompt). Only models that key their prompts for prefix reuse count (BAGEL and
-   Orpheus). Under tensor parallelism only rank 0 counts a lookup.
+   keyed prompt). Only models that key their prompts for prefix reuse count (BAGEL,
+   Orpheus and Qwen3.5). Under tensor parallelism only rank 0 counts a lookup.
 
 ``mstar_prefix_cache_hit_tokens_total{model_name, component}``
    Counter. Tokens the prefix cache already held at that lookup. The hit rate is
    ``rate(mstar_prefix_cache_hit_tokens_total[5m])`` divided by
-   ``rate(mstar_prefix_cache_query_tokens_total[5m])``.
+   ``rate(mstar_prefix_cache_query_tokens_total[5m])``. For Qwen3.5 these are the KV
+   cache's tokens before the recurrent pool cuts the hit to a snapshot, so a hit the pool
+   cuts to 0 still counts.
+
+``mstar_kv_preemptions_total{model_name, component}``
+   Counter. Requests chosen to move to the host or drop because a request's grant ran short of KV pages, on a
+   single rank: past its reservation, or for a guaranteed request into pages it lent. Their pages go to the
+   request that ran short, which counts too when it moves itself to the host to wait.
+
+``mstar_kv_drops_total{model_name, component}``
+   Counter. Chosen requests whose KV was dropped. A request leaves before its drop when
+   its client goes away.
+
+``mstar_kv_rebuild_tokens_total{model_name, component}``
+   Counter. Tokens the rebuild rows prefilled, cache hits included.
+
+``mstar_kv_rebuild_cached_pages_total{model_name, component}``
+   Counter. Pages a rebuild row found in the prefix cache.
+
+``mstar_kv_preempted_again_total{model_name, component}``
+   Counter. Requests preempted a second time. A steady rate means the pool is too small
+   for the load, and more pages or fewer concurrent requests stop it.
+
+``mstar_kv_returns_preempted_total{model_name, component}``
+   Counter. Requests preempted again before they sampled a token since they were last preempted. Only
+   requests that keep a rebuild log are counted. A request moved to the host again before its next step,
+   or that gave back an allotment it never wrote into, counts too, though neither move cost it a token.
+
+``mstar_kv_take_backs_total{model_name, component}``
+   Counter. Preempted requests that moved so a guaranteed request could take back pages
+   it lent. They count in ``mstar_kv_preemptions_total`` too.
+
+``mstar_kv_take_back_waits_total{model_name, component}``
+   Counter. Waits by guaranteed requests to take back pages they lent, since no request
+   holding them could move yet. Each wait holds up a stream that can't pause.
 
 ``mstar_component_pending_steps{model_name, component}``
    Gauge. Requests whose next step on the node is ready (its inputs arrived) and not
@@ -292,8 +349,7 @@ producer. Workers report through the conductor (up to two seconds old); the API 
 adds what its data worker read since metrics were enabled, which the data worker
 publishes once a second. ``src`` is the node that produced the tensors, ``dst``
 the node that reads them, and ``api_server`` stands for the request's inputs (as
-``src``) and its results (as ``dst``). The Python and Rust runtimes report the same
-series.
+``src``) and its results (as ``dst``).
 
 ``mstar_transfer_bytes_total{model_name, src, dst, transport}``
    Counter, bytes. Tensor bytes read over the edge.
@@ -398,5 +454,5 @@ To scrape from an existing Prometheus, add a job for the server's address:
          - targets: ["localhost:8000"]
 
 The conductor and workers report once a second, so a scrape interval under a second
-only repeats values. Keep the scrape timeout above two seconds with
-``--rust-frontend``, which waits that long for the bridge before answering ``503``.
+only repeats values. Keep the scrape timeout above two seconds: ``mstar-server``
+waits that long for the bridge before answering ``503``.

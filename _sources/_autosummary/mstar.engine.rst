@@ -13,8 +13,10 @@
 
    .. autosummary::
    
+      apply_dynamo_config
       apply_torch_config
       recompile_limit
+      with_recompile_limit
    
    
 
@@ -37,7 +39,11 @@
    accelerator_graph_backend
    accelerator_graph_config
    accelerator_graph_runner
+   chunking
    engine
+   fp32_precision
+   node_dtype
    resources
+   state
    windowing
 

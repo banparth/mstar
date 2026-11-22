@@ -28,6 +28,7 @@ mstar.engine.resources.attn
    :recursive:
 
    base
+   block_causal
    config
    cross
    dense
@@ -35,6 +36,7 @@ mstar.engine.resources.attn
    flashinfer_mla
    flex
    ragged
+   workspace
    wrappers
    xpu
 

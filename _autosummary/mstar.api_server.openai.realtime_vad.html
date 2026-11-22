@@ -55,7 +55,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="0.2.1" />
-    <meta name="docbuild:last-update" content="Oct 25, 2026"/>
+    <meta name="docbuild:last-update" content="Nov 22, 2026"/>
   
     
     <script src="../_static/searchtools.js"></script>
@@ -208,6 +208,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../models.html">Supported Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../asr.html">Speech recognition: Whisper and Qwen3-ASR</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../api.html">API Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="mstar.api_server.html">mstar.api_server</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="mstar.api_server.auth.html">mstar.api_server.auth</a></li>
@@ -225,12 +226,15 @@
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="mstar.api_server.request_types.html">mstar.api_server.request_types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mstar.api_server.rust_frontend.html">mstar.api_server.rust_frontend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.api_server.streaming_response.html">mstar.api_server.streaming_response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.api_server.ws_frames.html">mstar.api_server.ws_frames</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="mstar.communication.html">mstar.communication</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="mstar.communication.arena.html">mstar.communication.arena</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mstar.communication.codec.html">mstar.communication.codec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mstar.communication.communicator.html">mstar.communication.communicator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.communication.edge_items.html">mstar.communication.edge_items</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mstar.communication.event.html">mstar.communication.event</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mstar.communication.rust_communicator.html">mstar.communication.rust_communicator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mstar.communication.tensor_store.html">mstar.communication.tensor_store</a></li>
@@ -240,22 +244,31 @@
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="mstar.conductor.html">mstar.conductor</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="mstar.conductor.lora_ops.html">mstar.conductor.lora_ops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.conductor.mps.html">mstar.conductor.mps</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mstar.conductor.request_info.html">mstar.conductor.request_info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.conductor.workers.html">mstar.conductor.workers</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="mstar.engine.html">mstar.engine</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="mstar.engine.accelerator_graph_backend.html">mstar.engine.accelerator_graph_backend</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mstar.engine.accelerator_graph_config.html">mstar.engine.accelerator_graph_config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mstar.engine.accelerator_graph_runner.html">mstar.engine.accelerator_graph_runner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.engine.chunking.html">mstar.engine.chunking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.engine.fp32_precision.html">mstar.engine.fp32_precision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.engine.node_dtype.html">mstar.engine.node_dtype</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="mstar.engine.resources.html">mstar.engine.resources</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="mstar.engine.resources.admission.html">mstar.engine.resources.admission</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mstar.engine.resources.attn.html">mstar.engine.resources.attn</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mstar.engine.resources.base.html">mstar.engine.resources.base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mstar.engine.resources.context_parallel.html">mstar.engine.resources.context_parallel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mstar.engine.resources.dsa.html">mstar.engine.resources.dsa</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mstar.engine.resources.kv.html">mstar.engine.resources.kv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mstar.engine.resources.lora.html">mstar.engine.resources.lora</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mstar.engine.resources.position.html">mstar.engine.resources.position</a></li>
-<li class="toctree-l4"><a class="reference internal" href="mstar.engine.resources.recurrent.html">mstar.engine.resources.recurrent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mstar.engine.resources.resident_hooks.html">mstar.engine.resources.resident_hooks</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mstar.engine.resources.rms_norm.html">mstar.engine.resources.rms_norm</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mstar.engine.resources.runner.html">mstar.engine.resources.runner</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mstar.engine.resources.sampler.html">mstar.engine.resources.sampler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mstar.engine.resources.sequence_shard.html">mstar.engine.resources.sequence_shard</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mstar.engine.resources.spec.html">mstar.engine.resources.spec</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mstar.engine.resources.step.html">mstar.engine.resources.step</a></li>
 </ul>
@@ -272,8 +285,17 @@
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="mstar.model.html">mstar.model</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="mstar.model.audio_watermark.html">mstar.model.audio_watermark</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.model.canary.html">mstar.model.canary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.model.canary_qwen.html">mstar.model.canary_qwen</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="mstar.model.chatterbox.html">mstar.model.chatterbox</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="mstar.model.chatterbox.config.html">mstar.model.chatterbox.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="mstar.model.command_a_plus.html">mstar.model.command_a_plus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="mstar.model.command_a_plus.assets.html">mstar.model.command_a_plus.assets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mstar.model.command_a_plus.components.html">mstar.model.command_a_plus.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mstar.model.command_a_plus.config.html">mstar.model.command_a_plus.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mstar.model.command_a_plus.tests.html">mstar.model.command_a_plus.tests</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="mstar.model.cosmos3.html">mstar.model.cosmos3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -282,12 +304,31 @@
 <li class="toctree-l4"><a class="reference internal" href="mstar.model.cosmos3.constants.html">mstar.model.cosmos3.constants</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mstar.model.cosmos3.loader.html">mstar.model.cosmos3.loader</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mstar.model.cosmos3.sessions.html">mstar.model.cosmos3.sessions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="mstar.model.cosmos3.submodules.html">mstar.model.cosmos3.submodules</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mstar.model.cosmos3.tests.html">mstar.model.cosmos3.tests</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="mstar.model.cosyvoice3.html">mstar.model.cosyvoice3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="mstar.model.cosyvoice3.components.html">mstar.model.cosyvoice3.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mstar.model.cosyvoice3.config.html">mstar.model.cosyvoice3.config</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="mstar.model.flux2_klein.html">mstar.model.flux2_klein</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="mstar.model.flux2_klein.components.html">mstar.model.flux2_klein.components</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="mstar.model.glm52.html">mstar.model.glm52</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="mstar.model.glm52.components.html">mstar.model.glm52.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mstar.model.glm52.config.html">mstar.model.glm52.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mstar.model.glm52.weight_loader.html">mstar.model.glm52.weight_loader</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="mstar.model.glm5_next.html">mstar.model.glm5_next</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="mstar.model.glm5_next.components.html">mstar.model.glm5_next.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mstar.model.glm5_next.config.html">mstar.model.glm5_next.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mstar.model.glm5_next.fused_decode.html">mstar.model.glm5_next.fused_decode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mstar.model.glm5_next.mhc.html">mstar.model.glm5_next.mhc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mstar.model.glm5_next.sinkhorn_kernel.html">mstar.model.glm5_next.sinkhorn_kernel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mstar.model.glm5_next.weight_loader.html">mstar.model.glm5_next.weight_loader</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="mstar.model.higgs_audio.html">mstar.model.higgs_audio</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -295,6 +336,7 @@
 <li class="toctree-l4"><a class="reference internal" href="mstar.model.higgs_audio.config.html">mstar.model.higgs_audio.config</a></li>
 </ul>
 </details></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.model.keys.html">mstar.model.keys</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="mstar.model.kokoro.html">mstar.model.kokoro</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="mstar.model.kokoro.config.html">mstar.model.kokoro.config</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mstar.model.kokoro.g2p.html">mstar.model.kokoro.g2p</a></li>
@@ -311,12 +353,24 @@
 </ul>
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="mstar.model.media_limits.html">mstar.model.media_limits</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="mstar.model.minicpm_o.html">mstar.model.minicpm_o</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="mstar.model.minicpm_o.components.html">mstar.model.minicpm_o.components</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="mstar.model.minimax_h3.html">mstar.model.minimax_h3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="mstar.model.minimax_h3.components.html">mstar.model.minimax_h3.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mstar.model.minimax_h3.tests.html">mstar.model.minimax_h3.tests</a></li>
+</ul>
+</details></li>
 <li class="toctree-l3"><a class="reference internal" href="mstar.model.multimodal.html">mstar.model.multimodal</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="mstar.model.muse.html">mstar.model.muse</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="mstar.model.muse.components.html">mstar.model.muse.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mstar.model.muse.config.html">mstar.model.muse.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mstar.model.muse.processing.html">mstar.model.muse.processing</a></li>
+</ul>
+</details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="mstar.model.nemotron_duplex.html">mstar.model.nemotron_duplex</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="mstar.model.nemotron_duplex.components.html">mstar.model.nemotron_duplex.components</a></li>
-<li class="toctree-l4"><a class="reference internal" href="mstar.model.nemotron_duplex.config.html">mstar.model.nemotron_duplex.config</a></li>
-<li class="toctree-l4"><a class="reference internal" href="mstar.model.nemotron_duplex.realtime_api.html">mstar.model.nemotron_duplex.realtime_api</a></li>
-<li class="toctree-l4"><a class="reference internal" href="mstar.model.nemotron_duplex.submodules.html">mstar.model.nemotron_duplex.submodules</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="mstar.model.omnilingual_asr.html">mstar.model.omnilingual_asr</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -330,12 +384,17 @@
 <li class="toctree-l3 has-children"><a class="reference internal" href="mstar.model.omnivoice.html">mstar.model.omnivoice</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="mstar.model.omnivoice.components.html">mstar.model.omnivoice.components</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mstar.model.omnivoice.config.html">mstar.model.omnivoice.config</a></li>
-<li class="toctree-l4"><a class="reference internal" href="mstar.model.omnivoice.submodules.html">mstar.model.omnivoice.submodules</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="mstar.model.orpheus.html">mstar.model.orpheus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="mstar.model.orpheus.components.html">mstar.model.orpheus.components</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mstar.model.orpheus.config.html">mstar.model.orpheus.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.model.parakeet.html">mstar.model.parakeet</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="mstar.model.phi4mm.html">mstar.model.phi4mm</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="mstar.model.phi4mm.components.html">mstar.model.phi4mm.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mstar.model.phi4mm.tests.html">mstar.model.phi4mm.tests</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="mstar.model.pi05.html">mstar.model.pi05</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -346,14 +405,29 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="mstar.model.qwen3_5.html">mstar.model.qwen3_5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="mstar.model.qwen3_5.components.html">mstar.model.qwen3_5.components</a></li>
-<li class="toctree-l4"><a class="reference internal" href="mstar.model.qwen3_5.config.html">mstar.model.qwen3_5.config</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mstar.model.qwen3_5.video.html">mstar.model.qwen3_5.video</a></li>
 </ul>
 </details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="mstar.model.qwen3_asr.html">mstar.model.qwen3_asr</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="mstar.model.qwen3_asr.constants.html">mstar.model.qwen3_asr.constants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mstar.model.qwen3_asr.repetition.html">mstar.model.qwen3_asr.repetition</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.model.rebuild.html">mstar.model.rebuild</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="mstar.model.ripple.html">mstar.model.ripple</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="mstar.model.ripple.config.html">mstar.model.ripple.config</a></li>
+</ul>
+</details></li>
 <li class="toctree-l3"><a class="reference internal" href="mstar.model.submodule_base.html">mstar.model.submodule_base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.model.utils.html">mstar.model.utils</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="mstar.model.vjepa2.html">mstar.model.vjepa2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="mstar.model.vjepa2.components.html">mstar.model.vjepa2.components</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mstar.model.vjepa2.config.html">mstar.model.vjepa2.config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="mstar.model.voxcpm2.html">mstar.model.voxcpm2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="mstar.model.voxcpm2.components.html">mstar.model.voxcpm2.components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mstar.model.voxcpm2.config.html">mstar.model.voxcpm2.config</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="mstar.model.wan22.html">mstar.model.wan22</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -365,7 +439,6 @@
 <li class="toctree-l4"><a class="reference internal" href="mstar.model.waypoint.components.html">mstar.model.waypoint.components</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mstar.model.waypoint.config.html">mstar.model.waypoint.config</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mstar.model.waypoint.ring_geometry.html">mstar.model.waypoint.ring_geometry</a></li>
-<li class="toctree-l4"><a class="reference internal" href="mstar.model.waypoint.submodules.html">mstar.model.waypoint.submodules</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="mstar.model.whisper.html">mstar.model.whisper</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -393,26 +466,46 @@
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="mstar.utils.html">mstar.utils</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="mstar.utils.adarms_norm.html">mstar.utils.adarms_norm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.utils.cache_home.html">mstar.utils.cache_home</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.utils.client_errors.html">mstar.utils.client_errors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mstar.utils.containers.html">mstar.utils.containers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.utils.cpus.html">mstar.utils.cpus</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mstar.utils.device.html">mstar.utils.device</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mstar.utils.exitcode.html">mstar.utils.exitcode</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mstar.utils.fast_tokenize.html">mstar.utils.fast_tokenize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.utils.fp8_block.html">mstar.utils.fp8_block</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mstar.utils.gc_freeze.html">mstar.utils.gc_freeze</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mstar.utils.generation_kwargs.html">mstar.utils.generation_kwargs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mstar.utils.h2d.html">mstar.utils.h2d</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mstar.utils.hf_snapshot.html">mstar.utils.hf_snapshot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.utils.host_copy.html">mstar.utils.host_copy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mstar.utils.ipc_format.html">mstar.utils.ipc_format</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mstar.utils.knobs.html">mstar.utils.knobs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mstar.utils.logging_config.html">mstar.utils.logging_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.utils.mla_latent_norm.html">mstar.utils.mla_latent_norm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mstar.utils.orphan.html">mstar.utils.orphan</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mstar.utils.profiler.html">mstar.utils.profiler</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mstar.utils.socket_prefix.html">mstar.utils.socket_prefix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mstar.utils.streams.html">mstar.utils.streams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.utils.threads.html">mstar.utils.threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.utils.utf8_stream.html">mstar.utils.utf8_stream</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="mstar.worker.html">mstar.worker</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="mstar.worker.batch_builder.html">mstar.worker.batch_builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.worker.chunk_loops.html">mstar.worker.chunk_loops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.worker.host_copies.html">mstar.worker.host_copies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.worker.host_pool.html">mstar.worker.host_pool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.worker.lora_loads.html">mstar.worker.lora_loads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.worker.node_manager_utils.html">mstar.worker.node_manager_utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.worker.phase_timer.html">mstar.worker.phase_timer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.worker.preemption.html">mstar.worker.preemption</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.worker.rebuild.html">mstar.worker.rebuild</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mstar.worker.rid_table.html">mstar.worker.rid_table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.worker.scheduled_batch.html">mstar.worker.scheduled_batch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.worker.scheduling_policy.html">mstar.worker.scheduling_policy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.worker.spec_rows.html">mstar.worker.spec_rows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mstar.worker.stream_buffers.html">mstar.worker.stream_buffers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mstar.worker.worker_metrics.html">mstar.worker.worker_metrics</a></li>
 </ul>
 </details></li>
@@ -639,6 +732,13 @@
             </div>
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.SemanticVAD"><code class="docutils literal notranslate"><span class="pre">SemanticVAD</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.SemanticVAD.create_response"><code class="docutils literal notranslate"><span class="pre">SemanticVAD.create_response</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.SemanticVAD.eagerness"><code class="docutils literal notranslate"><span class="pre">SemanticVAD.eagerness</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.SemanticVAD.interrupt_response"><code class="docutils literal notranslate"><span class="pre">SemanticVAD.interrupt_response</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.SemanticVAD.view"><code class="docutils literal notranslate"><span class="pre">SemanticVAD.view()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.ServerVAD"><code class="docutils literal notranslate"><span class="pre">ServerVAD</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.ServerVAD.create_response"><code class="docutils literal notranslate"><span class="pre">ServerVAD.create_response</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.ServerVAD.interrupt_response"><code class="docutils literal notranslate"><span class="pre">ServerVAD.interrupt_response</span></code></a></li>
@@ -653,6 +753,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.SileroVAD.reset"><code class="docutils literal notranslate"><span class="pre">SileroVAD.reset()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.SmartTurn"><code class="docutils literal notranslate"><span class="pre">SmartTurn</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.SpeechProbability"><code class="docutils literal notranslate"><span class="pre">SpeechProbability</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.SpeechProbability.reset"><code class="docutils literal notranslate"><span class="pre">SpeechProbability.reset()</span></code></a></li>
 </ul>
@@ -666,9 +767,13 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.TurnSegmenter.unscored"><code class="docutils literal notranslate"><span class="pre">TurnSegmenter.unscored()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.report_availability"><code class="docutils literal notranslate"><span class="pre">report_availability()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.samples_to_ms"><code class="docutils literal notranslate"><span class="pre">samples_to_ms()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.silero_factory"><code class="docutils literal notranslate"><span class="pre">silero_factory()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.silero_weights"><code class="docutils literal notranslate"><span class="pre">silero_weights()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.smart_turn"><code class="docutils literal notranslate"><span class="pre">smart_turn()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.smart_turn_problem"><code class="docutils literal notranslate"><span class="pre">smart_turn_problem()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.smart_turn_weights"><code class="docutils literal notranslate"><span class="pre">smart_turn_weights()</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -682,7 +787,8 @@
                   
   <section id="module-mstar.api_server.openai.realtime_vad">
 <span id="mstar-api-server-openai-realtime-vad"></span><h1>mstar.api_server.openai.realtime_vad<a class="headerlink" href="#module-mstar.api_server.openai.realtime_vad" title="Link to this heading">#</a></h1>
-<p>Server turn detection for <code class="docutils literal notranslate"><span class="pre">/v1/realtime</span></code> (OpenAI’s <code class="docutils literal notranslate"><span class="pre">server_vad</span></code>).</p>
+<p>Server turn detection for <code class="docutils literal notranslate"><span class="pre">/v1/realtime</span></code> (OpenAI’s <code class="docutils literal notranslate"><span class="pre">server_vad</span></code> and
+<code class="docutils literal notranslate"><span class="pre">semantic_vad</span></code>).</p>
 <p><code class="docutils literal notranslate"><span class="pre">TurnSegmenter</span></code> cuts a 16 kHz stream into turns from a per-frame speech
 probability, and returns what to do in stream order: start a turn, add audio
 to it, stop it, commit it. A commit covers exactly the frames up to the end
@@ -692,18 +798,33 @@ drops the start of the next utterance, and each sample is committed exactly once
 <p>The probability comes from Silero VAD (MIT), its 2 MB ONNX export run by
 onnxruntime on one CPU thread, about 0.15 ms per 32 ms frame. Its weights are
 read from disk only: <code class="docutils literal notranslate"><span class="pre">MSTAR_SILERO_VAD_PATH</span></code>, else the copy bundled with
-the <code class="docutils literal notranslate"><span class="pre">silero-vad</span></code> package (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">'mstar[vad]'</span></code>).</p>
+the <code class="docutils literal notranslate"><span class="pre">silero-vad</span></code> package (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">'mstar-ai[vad]'</span></code>). <code class="docutils literal notranslate"><span class="pre">semantic_vad</span></code> adds
+Pipecat’s Smart Turn v3 (BSD-2), an 8 MB ONNX model that judges from the audio
+whether a pause ends the turn; without it (or onnxruntime), or with a file
+that is not that model, <code class="docutils literal notranslate"><span class="pre">semantic_vad</span></code> is refused with an error event.</p>
 <p class="rubric">Functions</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#mstar.api_server.openai.realtime_vad.samples_to_ms" title="mstar.api_server.openai.realtime_vad.samples_to_ms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">samples_to_ms</span></code></a>(n)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mstar.api_server.openai.realtime_vad.report_availability" title="mstar.api_server.openai.realtime_vad.report_availability"><code class="xref py py-obj docutils literal notranslate"><span class="pre">report_availability</span></code></a>()</p></td>
+<td><p>Load the turn detection models once at startup, so a missing one is a startup warning rather than a surprise in the first session.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mstar.api_server.openai.realtime_vad.samples_to_ms" title="mstar.api_server.openai.realtime_vad.samples_to_ms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">samples_to_ms</span></code></a>(n)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#mstar.api_server.openai.realtime_vad.silero_factory" title="mstar.api_server.openai.realtime_vad.silero_factory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">silero_factory</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mstar.api_server.openai.realtime_vad.silero_factory" title="mstar.api_server.openai.realtime_vad.silero_factory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">silero_factory</span></code></a>()</p></td>
 <td><p>Make one SileroVAD per session over a model loaded once, or return None (with one warning) when the weights or onnxruntime are missing.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#mstar.api_server.openai.realtime_vad.silero_weights" title="mstar.api_server.openai.realtime_vad.silero_weights"><code class="xref py py-obj docutils literal notranslate"><span class="pre">silero_weights</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#mstar.api_server.openai.realtime_vad.silero_weights" title="mstar.api_server.openai.realtime_vad.silero_weights"><code class="xref py py-obj docutils literal notranslate"><span class="pre">silero_weights</span></code></a>()</p></td>
 <td><p>The Silero ONNX file this server uses, or None.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mstar.api_server.openai.realtime_vad.smart_turn" title="mstar.api_server.openai.realtime_vad.smart_turn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smart_turn</span></code></a>()</p></td>
+<td><p>The shared end-of-turn model, or None (with one warning, and the reason in <code class="docutils literal notranslate"><span class="pre">smart_turn_problem</span></code>): semantic_vad is then refused.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mstar.api_server.openai.realtime_vad.smart_turn_problem" title="mstar.api_server.openai.realtime_vad.smart_turn_problem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smart_turn_problem</span></code></a>()</p></td>
+<td><p>Why <code class="docutils literal notranslate"><span class="pre">smart_turn()</span></code> gave None, in words safe to send a client (no paths).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mstar.api_server.openai.realtime_vad.smart_turn_weights" title="mstar.api_server.openai.realtime_vad.smart_turn_weights"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smart_turn_weights</span></code></a>()</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MSTAR_SMART_TURN_PATH</span></code>, else the file in the local Hugging Face cache (<code class="docutils literal notranslate"><span class="pre">hf</span> <span class="pre">download</span> <span class="pre">pipecat-ai/smart-turn-v3</span> <span class="pre">smart-turn-v3.2-cpu.onnx</span></code>); never downloaded here.</p></td>
 </tr>
 </tbody>
 </table>
@@ -711,21 +832,70 @@ the <code class="docutils literal notranslate"><span class="pre">silero-vad</spa
 <p class="rubric">Classes</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#mstar.api_server.openai.realtime_vad.ServerVAD" title="mstar.api_server.openai.realtime_vad.ServerVAD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ServerVAD</span></code></a>([threshold, prefix_padding_ms, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mstar.api_server.openai.realtime_vad.SemanticVAD" title="mstar.api_server.openai.realtime_vad.SemanticVAD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SemanticVAD</span></code></a>([eagerness, create_response, ...])</p></td>
+<td><p>OpenAI's <code class="docutils literal notranslate"><span class="pre">semantic_vad</span></code>: a pause asks an end-of-turn model whether the speaker is done; <code class="docutils literal notranslate"><span class="pre">eagerness</span></code> sets the pause, the confidence needed and the longest silence that ends a turn regardless (<code class="docutils literal notranslate"><span class="pre">EAGERNESS</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mstar.api_server.openai.realtime_vad.ServerVAD" title="mstar.api_server.openai.realtime_vad.ServerVAD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ServerVAD</span></code></a>([threshold, prefix_padding_ms, ...])</p></td>
 <td><p>OpenAI's <code class="docutils literal notranslate"><span class="pre">server_vad</span></code> settings.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#mstar.api_server.openai.realtime_vad.SileroVAD" title="mstar.api_server.openai.realtime_vad.SileroVAD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SileroVAD</span></code></a>(session)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mstar.api_server.openai.realtime_vad.SileroVAD" title="mstar.api_server.openai.realtime_vad.SileroVAD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SileroVAD</span></code></a>(session)</p></td>
 <td><p>Silero VAD for one stream.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mstar.api_server.openai.realtime_vad.SmartTurn" title="mstar.api_server.openai.realtime_vad.SmartTurn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SmartTurn</span></code></a>(path)</p></td>
+<td><p>Pipecat Smart Turn v3 (BSD-2, 8 MB int8 ONNX on CPU): P(the speaker has finished) from the last 8 s of a turn, about 45 ms a call on one thread.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#mstar.api_server.openai.realtime_vad.SpeechProbability" title="mstar.api_server.openai.realtime_vad.SpeechProbability"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SpeechProbability</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Per-session speech probability of one FRAME of 16 kHz audio; stateful.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#mstar.api_server.openai.realtime_vad.TurnSegmenter" title="mstar.api_server.openai.realtime_vad.TurnSegmenter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TurnSegmenter</span></code></a>(vad, cfg, max_turn_samples[, pos])</p></td>
-<td><p>Splits a 16 kHz stream into turns (OpenAI <code class="docutils literal notranslate"><span class="pre">server_vad</span></code> semantics).</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#mstar.api_server.openai.realtime_vad.TurnSegmenter" title="mstar.api_server.openai.realtime_vad.TurnSegmenter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TurnSegmenter</span></code></a>(vad, cfg, max_turn_samples[, ...])</p></td>
+<td><p>Splits a 16 kHz stream into turns (OpenAI <code class="docutils literal notranslate"><span class="pre">server_vad</span></code> and <code class="docutils literal notranslate"><span class="pre">semantic_vad</span></code> semantics).</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<dl class="py class">
+<dt class="sig sig-object py" id="mstar.api_server.openai.realtime_vad.SemanticVAD">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mstar.api_server.openai.realtime_vad.</span></span><span class="sig-name descname"><span class="pre">SemanticVAD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eagerness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">create_response</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interrupt_response</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mstar/api_server/openai/realtime_vad.html#SemanticVAD"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mstar.api_server.openai.realtime_vad.SemanticVAD" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.12/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>OpenAI’s <code class="docutils literal notranslate"><span class="pre">semantic_vad</span></code>: a pause asks an end-of-turn model whether
+the speaker is done; <code class="docutils literal notranslate"><span class="pre">eagerness</span></code> sets the pause, the confidence needed
+and the longest silence that ends a turn regardless (<code class="docutils literal notranslate"><span class="pre">EAGERNESS</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>eagerness</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>create_response</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>)</p></li>
+<li><p><strong>interrupt_response</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mstar.api_server.openai.realtime_vad.SemanticVAD.create_response">
+<span class="sig-name descname"><span class="pre">create_response</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></span><a class="headerlink" href="#mstar.api_server.openai.realtime_vad.SemanticVAD.create_response" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mstar.api_server.openai.realtime_vad.SemanticVAD.eagerness">
+<span class="sig-name descname"><span class="pre">eagerness</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'auto'</span></span><a class="headerlink" href="#mstar.api_server.openai.realtime_vad.SemanticVAD.eagerness" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mstar.api_server.openai.realtime_vad.SemanticVAD.interrupt_response">
+<span class="sig-name descname"><span class="pre">interrupt_response</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></span><a class="headerlink" href="#mstar.api_server.openai.realtime_vad.SemanticVAD.interrupt_response" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mstar.api_server.openai.realtime_vad.SemanticVAD.view">
+<span class="sig-name descname"><span class="pre">view</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mstar/api_server/openai/realtime_vad.html#SemanticVAD.view"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mstar.api_server.openai.realtime_vad.SemanticVAD.view" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="mstar.api_server.openai.realtime_vad.ServerVAD">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mstar.api_server.openai.realtime_vad.</span></span><span class="sig-name descname"><span class="pre">ServerVAD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix_padding_ms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">silence_duration_ms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">create_response</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interrupt_response</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mstar/api_server/openai/realtime_vad.html#ServerVAD"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mstar.api_server.openai.realtime_vad.ServerVAD" title="Link to this definition">#</a></dt>
@@ -806,6 +976,20 @@ samples, which the model reads before each frame.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="mstar.api_server.openai.realtime_vad.SmartTurn">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mstar.api_server.openai.realtime_vad.</span></span><span class="sig-name descname"><span class="pre">SmartTurn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mstar/api_server/openai/realtime_vad.html#SmartTurn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mstar.api_server.openai.realtime_vad.SmartTurn" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.12/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Pipecat Smart Turn v3 (BSD-2, 8 MB int8 ONNX on CPU): P(the speaker
+has finished) from the last 8 s of a turn, about 45 ms a call on one
+thread. Stateless, so one instance serves every session.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>Path</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="mstar.api_server.openai.realtime_vad.SpeechProbability">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mstar.api_server.openai.realtime_vad.</span></span><span class="sig-name descname"><span class="pre">SpeechProbability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mstar/api_server/openai/realtime_vad.html#SpeechProbability"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mstar.api_server.openai.realtime_vad.SpeechProbability" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Protocol" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Protocol</span></code></a></p>
@@ -824,19 +1008,25 @@ samples, which the model reads before each frame.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="mstar.api_server.openai.realtime_vad.TurnSegmenter">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mstar.api_server.openai.realtime_vad.</span></span><span class="sig-name descname"><span class="pre">TurnSegmenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_turn_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mstar/api_server/openai/realtime_vad.html#TurnSegmenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mstar.api_server.openai.realtime_vad.TurnSegmenter" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mstar.api_server.openai.realtime_vad.</span></span><span class="sig-name descname"><span class="pre">TurnSegmenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_turn_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_of_turn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mstar/api_server/openai/realtime_vad.html#TurnSegmenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mstar.api_server.openai.realtime_vad.TurnSegmenter" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.12/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>Splits a 16 kHz stream into turns (OpenAI <code class="docutils literal notranslate"><span class="pre">server_vad</span></code> semantics).</p>
+<p>Splits a 16 kHz stream into turns (OpenAI <code class="docutils literal notranslate"><span class="pre">server_vad</span></code> and
+<code class="docutils literal notranslate"><span class="pre">semantic_vad</span></code> semantics).</p>
 <p><code class="docutils literal notranslate"><span class="pre">feed</span></code> takes audio of any length and returns operations in stream
 order: <code class="docutils literal notranslate"><span class="pre">(&quot;speech_started&quot;,</span> <span class="pre">audio_start_ms)</span></code>, <code class="docutils literal notranslate"><span class="pre">(&quot;audio&quot;,</span> <span class="pre">samples)</span></code> for
-the open turn, <code class="docutils literal notranslate"><span class="pre">(&quot;speech_stopped&quot;,</span> <span class="pre">audio_end_ms)</span></code>, <code class="docutils literal notranslate"><span class="pre">(&quot;commit&quot;,)</span></code>.
+the open turn, <code class="docutils literal notranslate"><span class="pre">(&quot;speech_stopped&quot;,</span> <span class="pre">audio_end_ms)</span></code>, <code class="docutils literal notranslate"><span class="pre">(&quot;commit&quot;,)</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">(&quot;end_of_turn_failed&quot;,</span> <span class="pre">exc)</span></code> when the end-of-turn model raises.
 Times are milliseconds from the start of the session’s audio. A turn
 starts on a frame at or above <code class="docutils literal notranslate"><span class="pre">threshold</span></code> and takes up to
 <code class="docutils literal notranslate"><span class="pre">prefix_padding_ms</span></code> of the audio before it; it ends after the frame
 that brings <code class="docutils literal notranslate"><span class="pre">silence_duration_ms</span></code> of whole frames, counted from a frame
 below <code class="docutils literal notranslate"><span class="pre">threshold</span> <span class="pre">-</span> <span class="pre">HYSTERESIS</span></code> (included) with none at or above
 <code class="docutils literal notranslate"><span class="pre">threshold</span></code> since, whatever that last frame’s probability (the frames
-belong to the turn). A turn holds at most <code class="docutils literal notranslate"><span class="pre">max_turn_samples</span></code>: it is
+belong to the turn). With <code class="docutils literal notranslate"><span class="pre">semantic_vad</span></code> the silence that always ends
+a turn is the eagerness’ longest, and each pause that reaches the
+eagerness’ shorter pause asks <code class="docutils literal notranslate"><span class="pre">end_of_turn</span></code> (once per pause) over the
+turn’s last 8 s; a probability at or above the eagerness’ threshold ends
+the turn there. A turn holds at most <code class="docutils literal notranslate"><span class="pre">max_turn_samples</span></code>: it is
 committed before the frame that would pass that, and in mid-speech the
 next turn starts with that frame. Audio between turns, beyond the
 prefix, is in no turn. A partial frame waits for the next <code class="docutils literal notranslate"><span class="pre">feed</span></code>.</p>
@@ -844,9 +1034,10 @@ prefix, is in no turn. A partial frame waits for the next <code class="docutils 
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>vad</strong> (<a class="reference internal" href="#mstar.api_server.openai.realtime_vad.SpeechProbability" title="mstar.api_server.openai.realtime_vad.SpeechProbability"><em>SpeechProbability</em></a>)</p></li>
-<li><p><strong>cfg</strong> (<a class="reference internal" href="#mstar.api_server.openai.realtime_vad.ServerVAD" title="mstar.api_server.openai.realtime_vad.ServerVAD"><em>ServerVAD</em></a>)</p></li>
+<li><p><strong>cfg</strong> (<a class="reference internal" href="#mstar.api_server.openai.realtime_vad.ServerVAD" title="mstar.api_server.openai.realtime_vad.ServerVAD"><em>ServerVAD</em></a><em> | </em><a class="reference internal" href="#mstar.api_server.openai.realtime_vad.SemanticVAD" title="mstar.api_server.openai.realtime_vad.SemanticVAD"><em>SemanticVAD</em></a>)</p></li>
 <li><p><strong>max_turn_samples</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>)</p></li>
 <li><p><strong>pos</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>)</p></li>
+<li><p><strong>end_of_turn</strong> (<em>Callable</em><em>[</em><em>[</em><em>np.ndarray</em><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>] </em><em>| </em><em>None</em>)</p></li>
 </ul>
 </dd>
 </dl>
@@ -935,6 +1126,18 @@ position, its partial frame, not scored yet, and its prefix padding.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mstar.api_server.openai.realtime_vad.report_availability">
+<span class="sig-prename descclassname"><span class="pre">mstar.api_server.openai.realtime_vad.</span></span><span class="sig-name descname"><span class="pre">report_availability</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mstar/api_server/openai/realtime_vad.html#report_availability"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mstar.api_server.openai.realtime_vad.report_availability" title="Link to this definition">#</a></dt>
+<dd><p>Load the turn detection models once at startup, so a missing one is a
+startup warning rather than a surprise in the first session.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mstar.api_server.openai.realtime_vad.samples_to_ms">
 <span class="sig-prename descclassname"><span class="pre">mstar.api_server.openai.realtime_vad.</span></span><span class="sig-name descname"><span class="pre">samples_to_ms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mstar/api_server/openai/realtime_vad.html#samples_to_ms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mstar.api_server.openai.realtime_vad.samples_to_ms" title="Link to this definition">#</a></dt>
 <dd><dl class="field-list simple">
@@ -963,6 +1166,42 @@ None (with one warning) when the weights or onnxruntime are missing.</p>
 <dt class="sig sig-object py" id="mstar.api_server.openai.realtime_vad.silero_weights">
 <span class="sig-prename descclassname"><span class="pre">mstar.api_server.openai.realtime_vad.</span></span><span class="sig-name descname"><span class="pre">silero_weights</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mstar/api_server/openai/realtime_vad.html#silero_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mstar.api_server.openai.realtime_vad.silero_weights" title="Link to this definition">#</a></dt>
 <dd><p>The Silero ONNX file this server uses, or None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.12/library/pathlib.html#pathlib.Path" title="(in Python v3.12)"><em>Path</em></a> | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mstar.api_server.openai.realtime_vad.smart_turn">
+<span class="sig-prename descclassname"><span class="pre">mstar.api_server.openai.realtime_vad.</span></span><span class="sig-name descname"><span class="pre">smart_turn</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mstar/api_server/openai/realtime_vad.html#smart_turn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mstar.api_server.openai.realtime_vad.smart_turn" title="Link to this definition">#</a></dt>
+<dd><p>The shared end-of-turn model, or None (with one warning, and the
+reason in <code class="docutils literal notranslate"><span class="pre">smart_turn_problem</span></code>): semantic_vad is then refused.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Callable" title="(in Python v3.12)"><em>Callable</em></a>[[<em>ndarray</em>], <a class="reference external" href="https://docs.python.org/3.12/library/functions.html#float" title="(in Python v3.12)">float</a>] | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mstar.api_server.openai.realtime_vad.smart_turn_problem">
+<span class="sig-prename descclassname"><span class="pre">mstar.api_server.openai.realtime_vad.</span></span><span class="sig-name descname"><span class="pre">smart_turn_problem</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mstar/api_server/openai/realtime_vad.html#smart_turn_problem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mstar.api_server.openai.realtime_vad.smart_turn_problem" title="Link to this definition">#</a></dt>
+<dd><p>Why <code class="docutils literal notranslate"><span class="pre">smart_turn()</span></code> gave None, in words safe to send a client (no paths).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mstar.api_server.openai.realtime_vad.smart_turn_weights">
+<span class="sig-prename descclassname"><span class="pre">mstar.api_server.openai.realtime_vad.</span></span><span class="sig-name descname"><span class="pre">smart_turn_weights</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mstar/api_server/openai/realtime_vad.html#smart_turn_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mstar.api_server.openai.realtime_vad.smart_turn_weights" title="Link to this definition">#</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">MSTAR_SMART_TURN_PATH</span></code>, else the file in the local Hugging Face
+cache (<code class="docutils literal notranslate"><span class="pre">hf</span> <span class="pre">download</span> <span class="pre">pipecat-ai/smart-turn-v3</span> <span class="pre">smart-turn-v3.2-cpu.onnx</span></code>);
+never downloaded here.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.12/library/pathlib.html#pathlib.Path" title="(in Python v3.12)"><em>Path</em></a> | None</p>
@@ -1019,6 +1258,13 @@ None (with one warning) when the weights or onnxruntime are missing.</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.SemanticVAD"><code class="docutils literal notranslate"><span class="pre">SemanticVAD</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.SemanticVAD.create_response"><code class="docutils literal notranslate"><span class="pre">SemanticVAD.create_response</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.SemanticVAD.eagerness"><code class="docutils literal notranslate"><span class="pre">SemanticVAD.eagerness</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.SemanticVAD.interrupt_response"><code class="docutils literal notranslate"><span class="pre">SemanticVAD.interrupt_response</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.SemanticVAD.view"><code class="docutils literal notranslate"><span class="pre">SemanticVAD.view()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.ServerVAD"><code class="docutils literal notranslate"><span class="pre">ServerVAD</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.ServerVAD.create_response"><code class="docutils literal notranslate"><span class="pre">ServerVAD.create_response</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.ServerVAD.interrupt_response"><code class="docutils literal notranslate"><span class="pre">ServerVAD.interrupt_response</span></code></a></li>
@@ -1033,6 +1279,7 @@ None (with one warning) when the weights or onnxruntime are missing.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.SileroVAD.reset"><code class="docutils literal notranslate"><span class="pre">SileroVAD.reset()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.SmartTurn"><code class="docutils literal notranslate"><span class="pre">SmartTurn</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.SpeechProbability"><code class="docutils literal notranslate"><span class="pre">SpeechProbability</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.SpeechProbability.reset"><code class="docutils literal notranslate"><span class="pre">SpeechProbability.reset()</span></code></a></li>
 </ul>
@@ -1046,9 +1293,13 @@ None (with one warning) when the weights or onnxruntime are missing.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.TurnSegmenter.unscored"><code class="docutils literal notranslate"><span class="pre">TurnSegmenter.unscored()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.report_availability"><code class="docutils literal notranslate"><span class="pre">report_availability()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.samples_to_ms"><code class="docutils literal notranslate"><span class="pre">samples_to_ms()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.silero_factory"><code class="docutils literal notranslate"><span class="pre">silero_factory()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.silero_weights"><code class="docutils literal notranslate"><span class="pre">silero_weights()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.smart_turn"><code class="docutils literal notranslate"><span class="pre">smart_turn()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.smart_turn_problem"><code class="docutils literal notranslate"><span class="pre">smart_turn_problem()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mstar.api_server.openai.realtime_vad.smart_turn_weights"><code class="docutils literal notranslate"><span class="pre">smart_turn_weights()</span></code></a></li>
 </ul>
   </nav></div>
 
@@ -1082,7 +1333,7 @@ By M* Team
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Oct 25, 2026.
+  Last updated on Nov 22, 2026.
   <br/>
 </p>
   </div>

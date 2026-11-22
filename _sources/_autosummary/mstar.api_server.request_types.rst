@@ -18,14 +18,17 @@ mstar.api\_server.request\_types
    .. autosummary::
    
       APIServerMessage
+      ClientAppend
       ConductorStatus
       DataWorkerProfile
+      LoraAdapterResult
       PreprocessInput
       RequestComplete
       RequestFailed
       ResultChunk
       ResultTensors
       ResultTokens
+      WorkersReady
    
    
 

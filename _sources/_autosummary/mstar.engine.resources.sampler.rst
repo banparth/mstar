@@ -28,6 +28,8 @@ mstar.engine.resources.sampler
    :recursive:
 
    config
+   fused_draw
+   resident
    resource
    utils
 
